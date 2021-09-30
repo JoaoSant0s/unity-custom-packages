@@ -1,0 +1,19 @@
+{
+  "name": "com.joaosantos.package-services",
+  "version": "1.0.0",
+  "displayName": "Services",
+  "description": "Package with a wrapper of auxiliar services",
+  "unity": "2020.3",
+  "documentationUrl": "",
+  "changelogUrl": "",
+  "licensesUrl": "",
+  "keywords": [
+    "Services",
+    "Package"
+  ],
+  "author": {
+    "name": "JoaoSant0s",
+    "email": "ricardoelric@gmail.com",
+    "url": ""
+  }
+}
