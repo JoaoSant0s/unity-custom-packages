@@ -14,6 +14,18 @@
       "dependencies": {},
       "url": "https://package.openupm.com"
     },
+    "com.joaosantos.package-common-wrapper": {
+      "version": "file:com.joaosantos.package-common-wrapper",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
+    "com.joaosantos.package-services": {
+      "version": "file:com.joaosantos.package-services",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
     "com.unity.2d.animation": {
       "version": "5.0.6",
       "depth": 0,
