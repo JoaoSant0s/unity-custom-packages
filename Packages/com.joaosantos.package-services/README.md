@@ -3,4 +3,6 @@
 
 Dependencies:
 
-- https://github.com/JoaoSant0s/unity-custom-packages/tree/main/Packages/com.joaosantos.package-common-wrapper
+- https://openupm.com/packages/com.dbrizov.naughtyattributes/
+- https://openupm.com/packages/com.demigiant.dotween/
+- https://openupm.com/packages/com.joaosantos.package-common-wrapper

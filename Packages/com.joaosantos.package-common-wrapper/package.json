@@ -1,8 +1,8 @@
 {
   "name": "com.joaosantos.package-common-wrapper",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "displayName": "Common Wrapper",
-  "description": "Package with a wrapper of auxiliar scripts",
+  "description": "Package with a wrapper of auxiliar scripts.\n\nDependencies:\n\n- Naughtyattributes",
   "unity": "2020.3",
   "documentationUrl": "",
   "changelogUrl": "",
