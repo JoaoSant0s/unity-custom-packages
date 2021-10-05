@@ -1,8 +1,8 @@
 {
   "name": "com.joaosantos.package-services",
-  "version": "1.0.1",
-  "displayName": "Services",
-  "description": "Package with a wrapper of auxiliar services",
+  "version": "1.0.2",
+  "displayName": "Services Wrapper",
+  "description": "Package with set of services",
   "unity": "2020.3",
   "documentationUrl": "",
   "changelogUrl": "",

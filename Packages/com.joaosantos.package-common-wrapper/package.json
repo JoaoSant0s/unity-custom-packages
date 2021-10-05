@@ -1,15 +1,15 @@
 {
   "name": "com.joaosantos.package-common-wrapper",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "displayName": "Common Wrapper",
-  "description": "Package with a wrapper of auxiliar commons scripts",
+  "description": "Package with a wrapper of auxiliar scripts",
   "unity": "2020.3",
   "documentationUrl": "",
   "changelogUrl": "",
   "licensesUrl": "",
   "keywords": [
     "Pacakge",
-    "Common Wrapper"    
+    "Common Wrapper"
   ],
   "author": {
     "name": "JoaoSant0s",
