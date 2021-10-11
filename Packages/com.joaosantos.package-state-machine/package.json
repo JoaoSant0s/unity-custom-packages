@@ -1,0 +1,19 @@
+{
+  "name": "com.joaosantos.package-state-machine",
+  "version": "1.0.0",
+  "displayName": "JS State Machine",
+  "description": "Package with a state machine scripts",
+  "unity": "2020.3",
+  "documentationUrl": "",
+  "changelogUrl": "",
+  "licensesUrl": "",
+  "keywords": [
+    "Package",
+    "Services"
+  ],
+  "author": {
+    "name": "JoaoSant0s",
+    "email": "ricardoelric@gmail.com",
+    "url": ""
+  }
+}

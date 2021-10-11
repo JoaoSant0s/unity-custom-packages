@@ -26,6 +26,12 @@
       "source": "embedded",
       "dependencies": {}
     },
+    "com.joaosantos.package-state-machine": {
+      "version": "file:com.joaosantos.package-state-machine",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
     "com.unity.2d.animation": {
       "version": "5.0.6",
       "depth": 0,
