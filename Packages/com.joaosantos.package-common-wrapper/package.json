@@ -1,6 +1,6 @@
 {
   "name": "com.joaosantos.package-common-wrapper",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "displayName": "JS Common Wrapper",
   "description": "Package with a wrapper of auxiliar scripts.\n\nDependencies:\n\n- Naughtyattributes",
   "unity": "2020.3",
