@@ -10,11 +10,11 @@ namespace Main.Scene
     public class MainScene : MonoBehaviour
     {
         [SerializeField]
-        private SceneComponent[] initializeComponents;
+        protected SceneComponent[] initializeComponents;
 
         #region Unity Methids
 
-        private void Start()
+        protected virtual void Start()
         {
             var size = FindObjectsOfType<MainScene>().Length;
             Debug.Assert(size == 1, "Should only count one instance of the class");
@@ -25,7 +25,7 @@ namespace Main.Scene
 
         #region Private Methods
 
-        private void InitComponents()
+        protected void InitComponents()
         {
             for (int i = 0; i < initializeComponents.Length; i++)
             {
