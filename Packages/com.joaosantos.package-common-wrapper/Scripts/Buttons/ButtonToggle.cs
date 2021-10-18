@@ -22,7 +22,7 @@ namespace JoaoSant0s.CommonWrapper
         private bool toggleState;
 
         #region Unity Methods
-        private void Awake()
+        protected virtual void Awake()
         {
             this.button = GetComponent<Button>();
             this.button.onClick.AddListener(OnToggleButton);

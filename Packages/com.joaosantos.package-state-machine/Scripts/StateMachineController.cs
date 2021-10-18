@@ -25,7 +25,7 @@ namespace JoaoSant0s.StateMachine
             currentState.OnBeging();
         }
 
-        private void Update()
+        protected virtual void Update()
         {
             currentState.OnUpdate();
         }

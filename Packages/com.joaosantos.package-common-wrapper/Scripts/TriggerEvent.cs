@@ -12,7 +12,7 @@ namespace JoaoSant0s.CommonWrapper
 
         #region Events Methods
 
-        public void OnTrigger()
+        public virtual void OnTrigger()
         {
             events?.Invoke();
         }

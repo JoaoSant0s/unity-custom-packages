@@ -8,11 +8,14 @@ namespace JoaoSant0s.ServicePackage.Flag
 {
     public class EnableByFlag : MonoBehaviour
     {
+        [Header("Config")]
         [SerializeField]
-        private FlagAsset enableHudFlag;
+        private FlagAsset enableFlag;
 
         [SerializeField]
         private FlagState startState;
+
+        [Header("Events")]
 
         [SerializeField]
         private UnityEvent raiseEvent;
@@ -26,20 +29,20 @@ namespace JoaoSant0s.ServicePackage.Flag
         {
             flagService = Services.Get<FlagService>();
 
-            flagService.AddListening(enableHudFlag, raiseEvent, lowerEvent);
+            flagService.AddListening(enableFlag, raiseEvent, lowerEvent);
             if (startState == FlagState.Lower)
             {
-                flagService.Lower(enableHudFlag);
+                flagService.Lower(enableFlag);
             }
             else
             {
-                flagService.Raise(enableHudFlag);
+                flagService.Raise(enableFlag);
             }
         }
 
         private void OnDestroy()
         {
-            flagService.RemoveListening(enableHudFlag);
+            flagService.RemoveListening(enableFlag);
         }
     }
 }

@@ -6,7 +6,7 @@ namespace JoaoSant0s.ServicePackage.General
 {
     public class Service : MonoBehaviour
     {
-        private void Awake()
+        protected virtual void Awake()
         {
             Init();
         }
