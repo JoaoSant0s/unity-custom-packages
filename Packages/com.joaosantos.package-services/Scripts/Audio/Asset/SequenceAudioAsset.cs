@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Main.ServicePackage.Audio
+namespace JoaoSant0s.ServicePackage.Audio
 {
     [CreateAssetMenu(fileName = "SequenceAudioAsset", menuName = "Main/Service/Audio/SequenceAudioAsset")]
     public class SequenceAudioAsset : AudioAsset

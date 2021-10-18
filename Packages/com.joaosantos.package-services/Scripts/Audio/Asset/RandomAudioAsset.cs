@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
-namespace Main.ServicePackage.Audio
+using JoaoSant0s.Extensions.Collections;
+namespace JoaoSant0s.ServicePackage.Audio
 {
     [CreateAssetMenu(fileName = "RandomAudioAsset", menuName = "Main/Service/Audio/RandomAudioAsset")]
     public class RandomAudioAsset : AudioAsset

@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using CommonWrapper;
+using JoaoSant0s.CommonWrapper;
 
-namespace Main.ServicePackage.General
+namespace JoaoSant0s.ServicePackage.General
 {
     public class Services : SingletonBehaviour<Services>
     {

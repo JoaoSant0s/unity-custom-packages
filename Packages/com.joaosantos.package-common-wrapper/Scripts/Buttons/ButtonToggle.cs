@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
-namespace CommonWrapper
+namespace JoaoSant0s.CommonWrapper
 {
     [RequireComponent(typeof(Button))]
     public class ButtonToggle : MonoBehaviour

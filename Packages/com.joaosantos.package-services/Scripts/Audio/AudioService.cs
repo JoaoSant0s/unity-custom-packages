@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-using Main.ServicePackage.General;
+using JoaoSant0s.ServicePackage.General;
 
-namespace Main.ServicePackage.Audio
+namespace JoaoSant0s.ServicePackage.Audio
 {
     public class AudioService : Service
     {

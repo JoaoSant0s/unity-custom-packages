@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace CommonWrapper
+namespace JoaoSant0s.CommonWrapper
 {
     public class TriggerEvent : MonoBehaviour
     {

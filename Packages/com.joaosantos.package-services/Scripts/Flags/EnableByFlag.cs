@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using Main.ServicePackage.General;
+using JoaoSant0s.ServicePackage.General;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Main.ServicePackage.Flag
+namespace JoaoSant0s.ServicePackage.Flag
 {
     public class EnableByFlag : MonoBehaviour
     {

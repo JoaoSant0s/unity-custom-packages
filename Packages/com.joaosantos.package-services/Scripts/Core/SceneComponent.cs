@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
-namespace Main.Scene
+namespace JoaoSant0s.Scene
 {
     public class SceneComponent: MonoBehaviour
     {

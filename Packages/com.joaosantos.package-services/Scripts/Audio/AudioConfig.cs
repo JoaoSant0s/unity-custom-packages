@@ -3,10 +3,10 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
-using Main.ServicePackage.General;
+using JoaoSant0s.ServicePackage.General;
 using UnityEngine.Audio;
 
-namespace Main.ServicePackage.Audio
+namespace JoaoSant0s.ServicePackage.Audio
 {
     [CreateAssetMenu(fileName = "AudioConfig", menuName = "Main/Service/Audio/AudioConfig")]
     public class AudioConfig : ServiceConfig

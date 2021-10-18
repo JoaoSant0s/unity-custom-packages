@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Main.ServicePackage.Flag
+namespace JoaoSant0s.ServicePackage.Flag
 {
     public enum FlagState
     {        

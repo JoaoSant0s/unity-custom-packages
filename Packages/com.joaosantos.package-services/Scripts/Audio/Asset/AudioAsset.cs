@@ -7,7 +7,7 @@ using UnityEngine.Audio;
 
 using NaughtyAttributes;
 
-namespace Main.ServicePackage.Audio
+namespace JoaoSant0s.ServicePackage.Audio
 {
     public class AudioAsset : ScriptableObject
     {

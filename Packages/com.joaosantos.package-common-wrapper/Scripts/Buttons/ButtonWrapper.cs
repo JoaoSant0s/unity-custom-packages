@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace CommonWrapper
+namespace JoaoSant0s.CommonWrapper
 {
     public class ButtonWrapper : MonoBehaviour
     {

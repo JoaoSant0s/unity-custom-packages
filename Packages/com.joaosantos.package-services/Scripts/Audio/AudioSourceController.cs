@@ -7,7 +7,7 @@ using UnityEngine.Events;
 
 using DG.Tweening;
 
-namespace Main.ServicePackage.Audio
+namespace JoaoSant0s.ServicePackage.Audio
 {
     [RequireComponent(typeof(AudioSource))]
     public class AudioSourceController : MonoBehaviour

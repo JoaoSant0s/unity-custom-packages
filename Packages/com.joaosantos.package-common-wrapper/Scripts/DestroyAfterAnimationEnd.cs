@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace CommonWrapper
+namespace JoaoSant0s.CommonWrapper
 {
     public class DestroyAfterAnimationEnd : MonoBehaviour
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
-namespace Main.ServicePackage.Audio
+namespace JoaoSant0s.ServicePackage.Audio
 {
     [CreateAssetMenu(fileName = "LoopAudioAsset", menuName = "Main/Service/Audio/LoopAudioAsset")]
     public class LoopAudioAsset : AudioAsset

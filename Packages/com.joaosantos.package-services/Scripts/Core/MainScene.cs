@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 using UnityEngine;
 
-namespace Main.Scene
+namespace JoaoSant0s.Scene
 {
     public class MainScene : MonoBehaviour
     {

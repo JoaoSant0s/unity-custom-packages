@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-using Main.ServicePackage.General;
+using JoaoSant0s.ServicePackage.General;
 
-namespace Main.ServicePackage.Flag
+namespace JoaoSant0s.ServicePackage.Flag
 {
     public class FlagService : Service
     {

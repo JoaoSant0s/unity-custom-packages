@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 using DG.Tweening;
 
-namespace Main.ServicePackage.Popup
+namespace JoaoSant0s.ServicePackage.Popup
 {
     public class BasePopup : MonoBehaviour
     {

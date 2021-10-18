@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
 
-public static class NaughtyAttributesExtensions
+namespace JoaoSant0s.Extensions.NaughtyAttributes
 {
-    public static int Count<T>(this DropdownList<T> dropDown)
+    public static class NaughtyAttributesExtensions
     {
-        var count = 0;
-        foreach (var item in dropDown)
+        public static int Count<T>(this DropdownList<T> dropDown)
         {
-            count++;
+            var count = 0;
+            foreach (var item in dropDown)
+            {
+                count++;
+            }
+            return count;
         }
-        return count;
     }
 }

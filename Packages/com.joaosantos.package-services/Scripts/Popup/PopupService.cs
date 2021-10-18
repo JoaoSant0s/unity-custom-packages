@@ -3,8 +3,10 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
-using Main.ServicePackage.General;
-namespace Main.ServicePackage.Popup
+using JoaoSant0s.ServicePackage.General;
+
+using JoaoSant0s.Extensions.Collections;
+namespace JoaoSant0s.ServicePackage.Popup
 {
     public class PopupService : Service
     {
