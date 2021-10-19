@@ -1,6 +1,6 @@
 {
   "name": "com.joaosantos.package-services",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "displayName": "JS Services Wrapper",
   "description": "Package with set of services.\n\nDependencies:\n\n- Naughtyattributes\n- Dotween\n- Common Wrapper",
   "unity": "2020.3",
@@ -13,7 +13,6 @@
   ],
   "author": {
     "name": "JoaoSant0s",
-    "email": "ricardoelric@gmail.com",
-    "url": ""
+    "email": "ricardoelric@gmail.com"
   }
 }
