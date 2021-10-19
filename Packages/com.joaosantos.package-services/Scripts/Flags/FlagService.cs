@@ -16,26 +16,28 @@ namespace JoaoSant0s.ServicePackage.Flag
         public void Raise(FlagAsset asset)
         {
             if (!flagDictionary.ContainsKey(asset)) return;
-            if (flagDictionary[asset].state == FlagState.Raise) return;
+            if (flagDictionary[asset].State == FlagState.Raise) return;
 
-            flagDictionary[asset].state = FlagState.Raise;
-
-            flagDictionary[asset].raiseEvent?.Invoke();
+            flagDictionary[asset].State = FlagState.Raise;
         }
 
         public void Lower(FlagAsset asset)
         {
             if (!flagDictionary.ContainsKey(asset)) return;
-            if (flagDictionary[asset].state == FlagState.Lower) return;
+            if (flagDictionary[asset].State == FlagState.Lower) return;
 
-            flagDictionary[asset].state = FlagState.Lower;
-
-            flagDictionary[asset].lowerEvent?.Invoke();
+            flagDictionary[asset].State = FlagState.Lower;
         }
 
         public void AddListening(FlagAsset asset, UnityEvent raiseEvent, UnityEvent lowerEvent)
         {
-            var flagObject = new FlagObject(FlagState.None, raiseEvent, lowerEvent);
+            var flagObject = new FlagEventObject(FlagState.None, raiseEvent, lowerEvent);
+            flagDictionary.Add(asset, flagObject);
+        }
+
+         public void AddListening(FlagAsset asset, UnityAction raiseEvent, UnityAction lowerEvent)
+        {
+            var flagObject = new FlagActionObject(FlagState.None, raiseEvent, lowerEvent);
             flagDictionary.Add(asset, flagObject);
         }
 
@@ -49,15 +51,80 @@ namespace JoaoSant0s.ServicePackage.Flag
     [Serializable]
     public class FlagObject
     {
-        public FlagState state;
+        protected FlagState state; 
+
+        public FlagState State
+        {
+            get
+            {
+                return state;
+            }
+            set{
+                state = value;
+
+                if(state == FlagState.Raise)
+                {
+                    Raise();
+                } else if (state == FlagState.Lower)
+                {
+                    Lower();
+                }
+            }
+        }
+
+        public FlagObject(FlagState state)
+        {
+            this.state = state;            
+        }   
+
+        protected virtual void Raise() { }
+
+        protected virtual void Lower() { }
+    }
+
+    [Serializable]
+    public class FlagEventObject : FlagObject
+    {
         public UnityEvent raiseEvent;
         public UnityEvent lowerEvent;
 
-        public FlagObject(FlagState state, UnityEvent raiseEvent, UnityEvent lowerEvent)
+        public FlagEventObject(FlagState state, UnityEvent raiseEvent, UnityEvent lowerEvent) : base(state)
         {
-            this.state = state;
             this.raiseEvent = raiseEvent;
             this.lowerEvent = lowerEvent;
+        }        
+
+        protected override void Raise()
+        {
+            this.raiseEvent?.Invoke();
+        }
+
+        protected override void Lower()
+        {
+            this.lowerEvent?.Invoke();
+        }
+    }
+
+     [Serializable]
+    public class FlagActionObject : FlagObject
+    {
+        public UnityAction raiseAction;
+        public UnityAction lowerAction;
+
+        public FlagActionObject(FlagState state, UnityAction raiseAction, UnityAction lowerAction) : base(state)
+        {            
+            this.raiseAction = raiseAction;
+            this.lowerAction = lowerAction;
+        } 
+
+        protected override void Raise()
+        {
+            this.raiseAction?.Invoke();
+        }
+
+        protected override void Lower()
+        {
+            this.lowerAction?.Invoke();
         }
     }
 }

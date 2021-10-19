@@ -11,23 +11,34 @@ namespace JoaoSant0s.ServicePackage.General
         private static Transform staticTransform;
         private static List<Service> services;
 
+        private static List<Service> AllServices
+        {
+            get{
+                if (services == null)
+                {
+                    services = new List<Service>();
+                }
+                return services;
+            }
+        }
+
         #region Unity Methods
 
         protected override void Awake()
         {
             base.Awake();
             staticTransform = transform;
+            
+            gameObject.name = this.GetType().Name;
+            DontDestroyOnLoad(gameObject);
         }
 
         #endregion
 
         public static T Get<T>() where T : Service
         {
-            if (services == null)
-            {
-                services = new List<Service>();
-            }
-            var service = services.Find(s => s is T);
+            CreateServicesSet();
+            var service = AllServices.Find(s => s is T);
 
             if (service != null) return (T)service;
 
@@ -43,9 +54,20 @@ namespace JoaoSant0s.ServicePackage.General
             newGameObject.transform.SetParent(staticTransform);
             newGameObject.name = newService.GetType().Name;
 
-            services.Add(newService);
+            AllServices.Add(newService);
 
             return newService;
+        }
+
+        private static void CreateServicesSet()
+        {
+            if ( staticTransform != null ) return;
+
+            var newGameObject = new GameObject();
+
+            var newServices = newGameObject.AddComponent<Services>();
+            
+            newGameObject.name = newServices.GetType().Name;
         }
     }
 }

@@ -1,0 +1,18 @@
+{
+    "name": "com.joaosantos.test.Runtime",
+    "rootNamespace": "",
+    "references": [
+        "GUID:d1c97dd0014cbdf4fb63cdad4c842dfb",
+        "GUID:453bddd653b4eae49b1fb1fe24c07cb5",
+        "GUID:8d277cd153d2834479fe0764ee0c23f5"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

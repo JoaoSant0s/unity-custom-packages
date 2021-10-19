@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 namespace JoaoSant0s.ServicePackage.Flag
 {
-    public class EnableByFlag : MonoBehaviour
+    public class ExecuteEventByFlag : MonoBehaviour
     {
         [Header("Config")]
         [SerializeField]
@@ -30,11 +30,17 @@ namespace JoaoSant0s.ServicePackage.Flag
             flagService = Services.Get<FlagService>();
 
             flagService.AddListening(enableFlag, raiseEvent, lowerEvent);
+            
+            StartTrigger();
+        }
+
+        private void StartTrigger()
+        {
             if (startState == FlagState.Lower)
             {
                 flagService.Lower(enableFlag);
             }
-            else
+            else if (startState == FlagState.Raise)
             {
                 flagService.Raise(enableFlag);
             }
