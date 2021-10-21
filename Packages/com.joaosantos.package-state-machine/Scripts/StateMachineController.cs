@@ -6,8 +6,11 @@ namespace JoaoSant0s.StateMachine
 {
     public class StateMachineController : MonoBehaviour
     {
-        private IState currentState;
+        [SerializeField]
+        private bool showDebug = true;
         public string CurrentStateName => currentState?.GetType().Name;
+
+        private IState currentState;
 
         public void ChangeState(IState state, bool jumpLastState = false)
         {
@@ -18,7 +21,10 @@ namespace JoaoSant0s.StateMachine
                 currentState.OnFinish();
             }
 
-            Debugs.Log("Change", currentState, state);
+            if (showDebug)
+            {
+                Debug.Log(string.Format("Change --- {0} --- {1}", currentState, state));
+            }
 
             currentState = state;
 
