@@ -5,8 +5,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-using DG.Tweening;
-
 namespace JoaoSant0s.ServicePackage.Audio
 {
     [RequireComponent(typeof(AudioSource))]
@@ -68,14 +66,6 @@ namespace JoaoSant0s.ServicePackage.Audio
             audioObject = null;
             
             audioSource.Stop();
-        }
-
-        public void StopFade(float duration)
-        {
-            savedAsset = null;
-            audioObject = null;
-
-            audioSource.DOFade(0, duration).SetUpdate(true).OnComplete(() => { audioSource.Stop(); });
         }
 
         #endregion

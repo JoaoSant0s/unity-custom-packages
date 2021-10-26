@@ -122,18 +122,11 @@ namespace JoaoSant0s.ServicePackage.Audio
             audioSource.Play(asset, endLoopAction: endLoopAction);
         }
 
-        public void Stop(AudioConditionAsset stopCondition, float fadeDuration = 0)
+        public void Stop(AudioConditionAsset stopCondition)
         {
             var audioSource = GetAudioSourceController(stopCondition);
-
-            if (fadeDuration == 0)
-            {
-                audioSource?.Stop();
-            }
-            else
-            {
-                audioSource?.StopFade(fadeDuration);
-            }
+            
+            audioSource?.Stop();
         }
 
         #endregion
