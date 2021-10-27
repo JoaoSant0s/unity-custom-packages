@@ -3,69 +3,52 @@ using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
+using System.Linq;
 using UnityEngine.Events;
 
 namespace JoaoSant0s.ServicePackage.Audio
 {
-    [RequireComponent(typeof(AudioSource))]
-    public class AudioSourceController : MonoBehaviour
+    public class AudioSourceController
     {
-        private AudioSource audioSource;
+        private AudioService audioService;
 
-        private AudioAsset savedAsset;
+        private Dictionary<AudioSource, bool> audioSourceInUse;
 
-        private AudioObject audioObject;
-
-        public bool IsPlaying => audioSource.isPlaying;
-
-        #region Unity Methods
-        private void Awake()
+        public AudioSourceController(AudioService service)
         {
-            audioSource = GetComponent<AudioSource>();
+            audioService = service;
+            audioSourceInUse = new Dictionary<AudioSource, bool>();
         }
-
-        #endregion
 
         #region Public Methods
 
-        public void Reset()
+        public AudioSource GetValidAudioSource()
         {
-            Destroy(this.audioSource.gameObject);
-        }
+            var element = audioSourceInUse.FirstOrDefault( element => element.Value == false);
+            AudioSource audioSource = element.Key;
 
-        public void Play(AudioAsset asset, AudioService.TryUpdateMusic endLoopAction = null)
-        {
-            savedAsset = asset;
-            audioObject = asset.Create();
+            if(element.Key == null)
+            {
+                audioSource = CreateAudioSourceController();
+            }
 
-            audioObject.Play(audioSource, asset, endLoopAction);
-        }
-
-        public bool CheckStopCondition(AudioConditionAsset asset)
-        {
-            if (savedAsset == null) return true;
-
-            return savedAsset.CheckStopCondition(asset);
-        }
-
-        public bool CheckSameAsset(AudioAsset asset)
-        {
-            return savedAsset == asset;
-        }
-
-        private void Update()
-        {
-            if (audioObject == null) return;
-
-            audioObject.Update();
-        }
-
-        public void Stop()
-        {
-            savedAsset = null;
-            audioObject = null;
+            audioSourceInUse[audioSource] = true;
             
-            audioSource.Stop();
+            return audioSource;
+        }
+
+        public AudioSource CreateAudioSourceController()
+        {
+            var newGameObject = new GameObject();
+
+            var audioSource = newGameObject.AddComponent<AudioSource>();
+
+            newGameObject.transform.SetParent(audioService.transform);
+            newGameObject.name = audioSource.GetType().Name;
+
+            audioSourceInUse[audioSource] = false;
+
+            return audioSource;
         }
 
         #endregion

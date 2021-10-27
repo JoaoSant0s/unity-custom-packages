@@ -8,17 +8,14 @@ namespace JoaoSant0s.ServicePackage.Audio
     [CreateAssetMenu(fileName = "SimpleAudioAsset", menuName = "JoaoSant0s/ServicePackage/Audio/SimpleAudioAsset")]
     public class SimpleAudioAsset : AudioAsset
     {
-        [Header("Objects")]
+        [Header("Configs")]
+        public AudioMixerGroup mixer;
+
+        [Range(0f, 1f)]
+        public float volume = 1;
+
         public AudioClip clip;
 
-        public override void Play(AudioSource audioSource)
-        {
-            audioSource.clip = clip;
-            audioSource.loop = false;
-            audioSource.volume = volume;
-            audioSource.outputAudioMixerGroup = mixer;
-            audioSource.Play();
-        }
-
+        public override AudioObject Create(AudioSourceController controller) { return new SimpleAudioObject(controller, this); }
     }
 }

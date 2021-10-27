@@ -10,34 +10,32 @@ namespace JoaoSant0s.ServicePackage.Audio
 {
     public class AudioService : Service
     {
-        public delegate bool TryUpdateMusic();
-
-        public bool IsMusicMuted { get; set; }
-        public bool IsSfxMuted { get; set; }
+        public bool IsMusicMuted { get; protected set; }
+        public bool IsSfxMuted { get; protected set; }
         private AudioConfig config;
 
-        private List<AudioSourceController> audioSources;
+        private AudioSourceController audioSourceController;
+
+        private List<AudioObject> audioObjects;
 
         #region Override Methods
         protected override void Init()
         {
-            this.config = Resources.Load<AudioConfig>("Configs/AudioConfig");
-            this.audioSources = new List<AudioSourceController>();
-
-            ToggleMusic();
-            ToggleSfx();
+            config = Resources.Load<AudioConfig>("Configs/AudioConfig");
+            audioObjects = new List<AudioObject>();
+            audioSourceController = new AudioSourceController(this);
 
             Setup();
         }
 
         public override void Reset()
         {
-            for (int i = 0; i < this.audioSources.Count; i++)
+            for (int i = 0; i < this.audioObjects.Count; i++)
             {
-                this.audioSources[i].Reset();
+                this.audioObjects[i].Reset();
             }
 
-            this.audioSources.Clear();
+            this.audioObjects.Clear();
 
             Setup();
         }
@@ -50,83 +48,48 @@ namespace JoaoSant0s.ServicePackage.Audio
         {
             for (int i = 0; i < this.config.startAudioSourceAmount; i++)
             {
-                CreateAudioSourceController();
+                audioSourceController.CreateAudioSourceController();
             }
         }
 
-        private AudioSourceController CreateAudioSourceController()
+        private List<AudioObject> GetAudioObject(AudioConditionAsset stopCondition)
         {
-            var newGameObject = new GameObject();
-
-            var audioSource = newGameObject.AddComponent<AudioSourceController>();
-
-            newGameObject.transform.SetParent(transform);
-            newGameObject.name = audioSource.GetType().Name;
-
-            audioSources.Add(audioSource);
-
-            return audioSource;
-        }
-
-        private AudioSourceController GetValidAudioSourceController()
-        {
-            var audioSource = audioSources.Find(a => !a.IsPlaying);
-
-            if (audioSource == null)
-            {
-                audioSource = CreateAudioSourceController();
-            }
-
-            return audioSource;
-        }
-
-        private AudioSourceController GetAudioSourceController(AudioConditionAsset stopCondition)
-        {
-            var audioSource = audioSources.Find(a => a.CheckStopCondition(stopCondition));
-
-            return audioSource;
-        }
-
-        private bool IsAudioSourceInUse(AudioAsset asset)
-        {
-            var audioSource = audioSources.Find(a => a.CheckSameAsset(asset));
-            return audioSource != null;
+            return audioObjects.FindAll(a => a.CheckStopCondition(stopCondition));
         }
 
         #endregion
 
         #region Public Methods
 
-        public void ToggleMusic()
+        public void MuteMusic(bool value)
         {
-            IsMusicMuted = !IsMusicMuted;
+            IsMusicMuted = value;
 
             this.config.musicMixer.SetFloat(config.exposedVolumeParameter, IsMusicMuted ? config.upperMusicVolume : config.lowerVolume);
         }
 
-        public void ToggleSfx()
+        public void MuteSfx(bool value)
         {
-            IsSfxMuted = !IsSfxMuted;
+            IsSfxMuted = value;
 
             this.config.sfxMixer.SetFloat(config.exposedVolumeParameter, IsSfxMuted ? config.upperSfxVolume : config.lowerVolume);
         }
 
-        public void Play(AudioAsset asset, bool unique = false, TryUpdateMusic endLoopAction = null)
+        public void Play(AudioAsset asset)
         {
-            if (unique)
-            {
-                if (IsAudioSourceInUse(asset)) return;
-            }
-
-            var audioSource = GetValidAudioSourceController();
-            audioSource.Play(asset, endLoopAction: endLoopAction);
+            var audioObject = asset.Create(audioSourceController);
+            audioObjects.Add(audioObject);
+            audioObject.Play();
         }
 
         public void Stop(AudioConditionAsset stopCondition)
         {
-            var audioSource = GetAudioSourceController(stopCondition);
-            
-            audioSource?.Stop();
+            var audioObjects = GetAudioObject(stopCondition);
+
+            for (int i = 0; i < audioObjects.Count; i++)
+            {
+                audioObjects[i]?.Stop();
+            }
         }
 
         #endregion

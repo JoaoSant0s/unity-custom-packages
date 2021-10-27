@@ -9,14 +9,24 @@ namespace JoaoSant0s.ServicePackage.Audio
 {
     public class AudioObject
     {
-        public bool started;
+        protected AudioAsset audioAsset;
+        protected AudioSourceController audioController;
 
-        public virtual void Play(AudioSource audioSource, AudioAsset asset, AudioService.TryUpdateMusic endLoopAction = null)
+        public AudioObject(AudioSourceController controller, AudioAsset asset)
         {
-            asset.Play(audioSource);
-            started = true;
+            audioController = controller;
+            audioAsset = asset;
         }
 
-        public virtual void Update() { }
+        public virtual void Play() { }
+
+        public virtual void Reset() { }
+
+        public virtual void Stop() { }
+
+        public virtual bool CheckStopCondition(AudioConditionAsset asset)
+        {
+            return false;
+        }
     }
 }
