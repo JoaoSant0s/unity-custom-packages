@@ -5,7 +5,7 @@ using UnityEngine.Audio;
 
 namespace JoaoSant0s.ServicePackage.Audio
 {
-    [CreateAssetMenu(fileName = "SimpleAudioAsset", menuName = "Main/Service/Audio/SimpleAudioAsset")]
+    [CreateAssetMenu(fileName = "SimpleAudioAsset", menuName = "JoaoSant0s/ServicePackage/Audio/SimpleAudioAsset")]
     public class SimpleAudioAsset : AudioAsset
     {
         [Header("Objects")]

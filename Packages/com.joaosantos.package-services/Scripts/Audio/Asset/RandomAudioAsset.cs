@@ -6,7 +6,7 @@ using UnityEngine.Audio;
 using JoaoSant0s.Extensions.Collections;
 namespace JoaoSant0s.ServicePackage.Audio
 {
-    [CreateAssetMenu(fileName = "RandomAudioAsset", menuName = "Main/Service/Audio/RandomAudioAsset")]
+    [CreateAssetMenu(fileName = "RandomAudioAsset", menuName = "JoaoSant0s/ServicePackage/Audio/RandomAudioAsset")]
     public class RandomAudioAsset : AudioAsset
     {
         [Header("Objects")]

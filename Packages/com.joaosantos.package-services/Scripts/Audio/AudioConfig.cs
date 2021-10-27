@@ -8,7 +8,7 @@ using UnityEngine.Audio;
 
 namespace JoaoSant0s.ServicePackage.Audio
 {
-    [CreateAssetMenu(fileName = "AudioConfig", menuName = "Main/Service/Audio/AudioConfig")]
+    [CreateAssetMenu(fileName = "AudioConfig", menuName = "JoaoSant0s/ServicePackage/Audio/AudioConfig")]
     public class AudioConfig : ServiceConfig
     {
         [Header("Audio Mixer")]
