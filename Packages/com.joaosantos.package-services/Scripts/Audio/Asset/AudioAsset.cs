@@ -5,8 +5,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
-using NaughtyAttributes;
-
 namespace JoaoSant0s.ServicePackage.Audio
 {
     public class AudioAsset : ScriptableObject
