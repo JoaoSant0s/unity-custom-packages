@@ -16,12 +16,12 @@ namespace JoaoSant0s.ServicePackage.Audio
         public AudioMixer sfxMixer;
 
         [Header("Properties")]
-        public int startAudioSourceAmount;
+        public int startAudioSourceAmount = 4;
 
         public string exposedVolumeParameter = "Volume";
 
         public int upperMusicVolume;
-        public int upperSfxVolume;
-        public int lowerVolume;
+        public int upperSfxVolume = 2;
+        public int lowerVolume = -80;
     }
 }
