@@ -1,8 +1,8 @@
 {
   "name": "com.joaosantos.package-services",
-  "version": "1.0.6",
+  "version": "2.0.0",
   "displayName": "JS Services Wrapper",
-  "description": "Package with set of services.\n\nDependencies:\n\n- Naughtyattributes\n- Dotween\n- Common Wrapper",
+  "description": "Package with set of services.\n\nDependencies:\n\n- Common Wrapper",
   "unity": "2020.3",
   "documentationUrl": "",
   "changelogUrl": "",

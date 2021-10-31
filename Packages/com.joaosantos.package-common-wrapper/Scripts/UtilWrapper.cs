@@ -23,6 +23,18 @@ namespace JoaoSant0s.CommonWrapper
             return results.Count > 0;
         }
 
+        public static Transform FindTransformWithTag(string tagName)
+        {
+            var popupObjectArea = GameObject.FindGameObjectWithTag(tagName);
+
+            return popupObjectArea.transform;
+        }
+
+        public static RectTransform FindRectTransformWithTag(string tagName)
+        {
+            return (RectTransform)FindTransformWithTag(tagName);
+        }
+
         public static bool WasDistanceLessThan(Transform p, Transform next, float distance)
         {
             if (distance < 0) return true;

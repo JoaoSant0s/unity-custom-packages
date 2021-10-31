@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
+using JoaoSant0s.CommonWrapper;
 using JoaoSant0s.ServicePackage.General;
 
 using JoaoSant0s.Extensions.Collections;
@@ -12,23 +13,35 @@ namespace JoaoSant0s.ServicePackage.Popup
     {
         private RectTransform popupArea;
 
-        private BasePopup[] popupPrefabs;
+        private PopupConfig config;
+
+        public PopupInfo[] PopupsInfo => config.popupsInfo;        
 
         protected override void Init()
         {
-            var config = Resources.Load<PopupConfig>("Configs/PopupConfig");
+            config = Resources.Load<PopupConfig>("Configs/PopupConfig");
+            this.popupArea = UtilWrapper.FindRectTransformWithTag(config.mainPopupTag);            
+        }
 
-            this.popupPrefabs = config.popupPrefabs;
-            this.popupArea = (RectTransform)GameObject.FindGameObjectWithTag(config.popupTag).transform;
+        private RectTransform GetPopupArea(PopupInfo  info)
+        {
+            if (string.IsNullOrEmpty(info.overridePopupTag))
+            {
+                return this.popupArea;
+            }
+            
+            return UtilWrapper.FindRectTransformWithTag(info.overridePopupTag);            
         }
 
         public T ShowPopup<T>() where T : BasePopup
         {
-            var prefab = (T)popupPrefabs.Find(p => p is T);
+            var info = PopupsInfo.Find(info => info.prefab is T);
 
-            T popup = Instantiate(prefab);
+            var area = GetPopupArea(info);
+            
+            T popup = Instantiate((T)info.prefab);
 
-            ((RectTransform)popup.transform).SetParent(this.popupArea, false);
+            ((RectTransform)popup.transform).SetParent(area, false);
 
             return popup;
         }
