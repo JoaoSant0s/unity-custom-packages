@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb1e118f1cdc01b4ab9cbe86b89577f2, type: 3}
+  m_Name: MusicAudioAsset
+  m_EditorClassIdentifier: 
+  mixer: {fileID: 24300002, guid: 0f16fdb31f3810f46aa663d2814f938d, type: 2}
+  volume: 1
+  clip: {fileID: 8300000, guid: 9320fb23ace4d9043a1067a355ac9a7a, type: 3}
+  stopCondition: {fileID: 11400000, guid: 40670f62fd3199e40990ed7afc617d62, type: 2}

@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.Events;
-
-using DG.Tweening;
 
 namespace JoaoSant0s.ServicePackage.Popup
 {
@@ -23,15 +22,9 @@ namespace JoaoSant0s.ServicePackage.Popup
             OnBeforeHide?.Invoke();
         }
 
-        public void Hide(float duration = 0)
+        public virtual void Hide()
         {
-            if (duration == 0)
-            {
-                Close();
-                return;
-            }
-
-            this.canvasGroup.DOFade(0, duration).OnComplete(Close);
+            Close();            
         }
 
         private void Close()

@@ -3,79 +3,78 @@ using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
+using System.Linq;
 using UnityEngine.Events;
-
-using DG.Tweening;
 
 namespace JoaoSant0s.ServicePackage.Audio
 {
-    [RequireComponent(typeof(AudioSource))]
-    public class AudioSourceController : MonoBehaviour
+    public class AudioSourceController
     {
-        private AudioSource audioSource;
+        private AudioService audioService;
 
-        private AudioAsset savedAsset;
+        private Dictionary<AudioSource, bool> audioSourceInUse;
 
-        private AudioObject audioObject;
-
-        public bool IsPlaying => audioSource.isPlaying;
-
-        #region Unity Methods
-        private void Awake()
+        public AudioSourceController(AudioService service)
         {
-            audioSource = GetComponent<AudioSource>();
+            audioService = service;
+            audioSourceInUse = new Dictionary<AudioSource, bool>();
+            Setup();
         }
+
+        #region Private Methods
+
+        private void Setup()
+        {
+            for (int i = 0; i < audioService.Config.startAudioSourceAmount; i++)
+            {
+                CreateAudioSourceController();
+            }
+        }        
 
         #endregion
 
         #region Public Methods
 
-        public void Reset()
+        public AudioSource GetUnlockedAudioSource()
         {
-            Destroy(this.audioSource.gameObject);
-        }
+            var element = audioSourceInUse.FirstOrDefault( element => !element.Value);
+            AudioSource audioSource = element.Key;
 
-        public void Play(AudioAsset asset, AudioService.TryUpdateMusic endLoopAction = null)
-        {
-            savedAsset = asset;
-            audioObject = asset.Create();
-
-            audioObject.Play(audioSource, asset, endLoopAction);
-        }
-
-        public bool CheckStopCondition(AudioConditionAsset asset)
-        {
-            if (savedAsset == null) return true;
-
-            return savedAsset.CheckStopCondition(asset);
-        }
-
-        public bool CheckSameAsset(AudioAsset asset)
-        {
-            return savedAsset == asset;
-        }
-
-        private void Update()
-        {
-            if (audioObject == null) return;
-
-            audioObject.Update();
-        }
-
-        public void Stop()
-        {
-            savedAsset = null;
-            audioObject = null;
+            if(element.Key == null)
+            {
+                audioSource = CreateAudioSourceController();
+            }
             
-            audioSource.Stop();
+            return audioSource;
         }
 
-        public void StopFade(float duration)
+        public void LockAudioSource(AudioSource audioSource)
         {
-            savedAsset = null;
-            audioObject = null;
+            audioSourceInUse[audioSource] = true;
+        }
 
-            audioSource.DOFade(0, duration).SetUpdate(true).OnComplete(() => { audioSource.Stop(); });
+        public void UnlockAudioSource(AudioSource audioSource)
+        {
+            audioSource.clip = null;
+            audioSource.loop = false;
+            audioSource.volume = 1;
+            audioSource.outputAudioMixerGroup = null;
+
+            audioSourceInUse[audioSource] = false;
+        }
+
+        public AudioSource CreateAudioSourceController()
+        {
+            var newGameObject = new GameObject();
+
+            var audioSource = newGameObject.AddComponent<AudioSource>();
+
+            newGameObject.transform.SetParent(audioService.transform);
+            newGameObject.name = audioSource.GetType().Name;
+
+            audioSourceInUse[audioSource] = false;
+
+            return audioSource;
         }
 
         #endregion

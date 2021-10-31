@@ -1,19 +1,5 @@
 {
   "dependencies": {
-    "com.dbrizov.naughtyattributes": {
-      "version": "2.1.0",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {},
-      "url": "https://package.openupm.com"
-    },
-    "com.demigiant.dotween": {
-      "version": "1.2.632",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {},
-      "url": "https://package.openupm.com"
-    },
     "com.joaosantos.package-common-wrapper": {
       "version": "file:com.joaosantos.package-common-wrapper",
       "depth": 0,
