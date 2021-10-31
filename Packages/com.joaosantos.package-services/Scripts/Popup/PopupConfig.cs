@@ -19,6 +19,7 @@ namespace JoaoSant0s.ServicePackage.Popup
     public struct PopupInfo
     {
         public BasePopup prefab;
+        [Tooltip("Let empty if has no override Popup Value.")]
         public string overridePopupTag;
     }
 }
