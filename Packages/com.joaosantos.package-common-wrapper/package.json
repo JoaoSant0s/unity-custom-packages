@@ -1,14 +1,14 @@
 {
   "name": "com.joaosantos.package-common-wrapper",
-  "version": "1.0.5",
+  "version": "2.0.0",
   "displayName": "JS Common Wrapper",
-  "description": "Package with a wrapper of auxiliar scripts.\n\nDependencies:\n\n- Naughtyattributes",
+  "description": "Package with a wrapper of auxiliar scripts.",
   "unity": "2020.3",
   "documentationUrl": "",
   "changelogUrl": "",
   "licensesUrl": "",
   "keywords": [
-    "Pacakge",
+    "Package",
     "Common Wrapper"
   ],
   "author": {
