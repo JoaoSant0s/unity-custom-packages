@@ -14,15 +14,19 @@ namespace JoaoSant0s.ServicePackage.Audio
 
         public override void Play()
         {
-            audioSource = audioController.GetValidAudioSource();
+            audioSource = audioController.GetUnlockedAudioSource();
+            audioController.LockAudioSource(audioSource);
 
             ConfigAudioSource();
 
             audioSource.Play();
         }
+
         public override void Stop() 
         { 
             audioSource.Stop();
+            audioController.UnlockAudioSource(audioSource);
+            DisposeAudio?.Invoke(this);
         }
 
         public override bool CheckStopCondition(AudioConditionAsset asset)
@@ -31,6 +35,8 @@ namespace JoaoSant0s.ServicePackage.Audio
         }
 
         #endregion
+
+        #region Private Methods
 
         private void ConfigAudioSource()
         {
@@ -41,5 +47,8 @@ namespace JoaoSant0s.ServicePackage.Audio
             audioSource.volume = asset.volume;
             audioSource.outputAudioMixerGroup = asset.mixer;
         }
+
+        #endregion
+
     }
 }

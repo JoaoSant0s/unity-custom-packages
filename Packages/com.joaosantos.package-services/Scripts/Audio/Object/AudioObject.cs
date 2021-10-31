@@ -9,8 +9,11 @@ namespace JoaoSant0s.ServicePackage.Audio
 {
     public class AudioObject
     {
-        protected AudioAsset audioAsset;
+        public delegate void OnDisposeAudio(AudioObject audioObject);
+        public OnDisposeAudio DisposeAudio;
+
         protected AudioSourceController audioController;
+        protected AudioAsset audioAsset;
 
         public AudioObject(AudioSourceController controller, AudioAsset asset)
         {
@@ -20,7 +23,7 @@ namespace JoaoSant0s.ServicePackage.Audio
 
         public virtual void Play() { }
 
-        public virtual void Reset() { }
+        public virtual void Update() { }
 
         public virtual void Stop() { }
 
@@ -28,5 +31,6 @@ namespace JoaoSant0s.ServicePackage.Audio
         {
             return false;
         }
+        
     }
 }

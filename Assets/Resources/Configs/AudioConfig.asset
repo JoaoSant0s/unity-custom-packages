@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbad2cb68fd16974191a56f6005bb489, type: 3}
   m_Name: AudioConfig
   m_EditorClassIdentifier: 
-  musicMixer: {fileID: 0}
-  sfxMixer: {fileID: 0}
+  musicMixer: {fileID: 24100000, guid: 0f16fdb31f3810f46aa663d2814f938d, type: 2}
+  sfxMixer: {fileID: 24100000, guid: 6e91964838dbc484ba7315ca5b9796ee, type: 2}
   startAudioSourceAmount: 4
   exposedVolumeParameter: Volume
   upperMusicVolume: 0

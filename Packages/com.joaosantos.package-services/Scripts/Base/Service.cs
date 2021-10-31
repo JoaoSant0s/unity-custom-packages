@@ -11,8 +11,13 @@ namespace JoaoSant0s.ServicePackage.General
             Init();
         }
 
-        protected virtual void Init() { }
+        protected virtual void Start()
+        {
+            Begin();
+        }
 
-        public virtual void Reset() { }
+        protected virtual void Init() { }
+        
+        protected virtual void Begin() { }
     }
 }

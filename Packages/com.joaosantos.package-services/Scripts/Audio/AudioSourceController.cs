@@ -18,23 +18,49 @@ namespace JoaoSant0s.ServicePackage.Audio
         {
             audioService = service;
             audioSourceInUse = new Dictionary<AudioSource, bool>();
+            Setup();
         }
+
+        #region Private Methods
+
+        private void Setup()
+        {
+            for (int i = 0; i < audioService.Config.startAudioSourceAmount; i++)
+            {
+                CreateAudioSourceController();
+            }
+        }        
+
+        #endregion
 
         #region Public Methods
 
-        public AudioSource GetValidAudioSource()
+        public AudioSource GetUnlockedAudioSource()
         {
-            var element = audioSourceInUse.FirstOrDefault( element => element.Value == false);
+            var element = audioSourceInUse.FirstOrDefault( element => !element.Value);
             AudioSource audioSource = element.Key;
 
             if(element.Key == null)
             {
                 audioSource = CreateAudioSourceController();
             }
-
-            audioSourceInUse[audioSource] = true;
             
             return audioSource;
+        }
+
+        public void LockAudioSource(AudioSource audioSource)
+        {
+            audioSourceInUse[audioSource] = true;
+        }
+
+        public void UnlockAudioSource(AudioSource audioSource)
+        {
+            audioSource.clip = null;
+            audioSource.loop = false;
+            audioSource.volume = 1;
+            audioSource.outputAudioMixerGroup = null;
+
+            audioSourceInUse[audioSource] = false;
         }
 
         public AudioSource CreateAudioSourceController()
