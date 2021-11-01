@@ -12,7 +12,7 @@ namespace JoaoSant0s.ServicePackage.Popup
     public class PopupConfig : ServiceConfig
     {
         public string mainPopupTag;
-        public PopupInfo[] popupsInfo;
+        public PopupInfo[] popupsInfos;
     }
 
     [Serializable]

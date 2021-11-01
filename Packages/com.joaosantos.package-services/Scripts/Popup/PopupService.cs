@@ -15,7 +15,7 @@ namespace JoaoSant0s.ServicePackage.Popup
 
         private PopupConfig config;
 
-        public PopupInfo[] PopupsInfo => config.popupsInfo;        
+        public PopupInfo[] PopupsInfos => config.popupsInfos;        
 
         protected override void Init()
         {
@@ -35,7 +35,7 @@ namespace JoaoSant0s.ServicePackage.Popup
 
         public T ShowPopup<T>() where T : BasePopup
         {
-            var info = PopupsInfo.Find(info => info.prefab is T);
+            var info = PopupsInfos.Find(info => info.prefab is T);
 
             var area = GetPopupArea(info);
             

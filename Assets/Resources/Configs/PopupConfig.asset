@@ -18,3 +18,8 @@ MonoBehaviour:
     overridePopupTag: 
   - prefab: {fileID: 5811720265824611053, guid: a9c716f2612467044ac2a8a88c7081ca, type: 3}
     overridePopupTag: PopupInternal
+  popupsInfos:
+  - prefab: {fileID: 5446014173083935235, guid: 1bea7db4d4f1258409678b90d047956d, type: 3}
+    overridePopupTag: 
+  - prefab: {fileID: 5811720265824611053, guid: a9c716f2612467044ac2a8a88c7081ca, type: 3}
+    overridePopupTag: PopupInternal
