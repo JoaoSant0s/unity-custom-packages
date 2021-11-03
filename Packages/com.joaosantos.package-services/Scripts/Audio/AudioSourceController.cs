@@ -50,6 +50,7 @@ namespace JoaoSant0s.ServicePackage.Audio
 
         public void LockAudioSource(AudioSource audioSource)
         {
+            audioSource.gameObject.SetActive(true);
             audioSourceInUse[audioSource] = true;
         }
 
@@ -59,7 +60,7 @@ namespace JoaoSant0s.ServicePackage.Audio
             audioSource.loop = false;
             audioSource.volume = 1;
             audioSource.outputAudioMixerGroup = null;
-
+            audioSource.gameObject.SetActive(false);
             audioSourceInUse[audioSource] = false;
         }
 
@@ -71,7 +72,7 @@ namespace JoaoSant0s.ServicePackage.Audio
 
             newGameObject.transform.SetParent(audioService.transform);
             newGameObject.name = audioSource.GetType().Name;
-
+            audioSource.gameObject.SetActive(false);
             audioSourceInUse[audioSource] = false;
 
             return audioSource;
