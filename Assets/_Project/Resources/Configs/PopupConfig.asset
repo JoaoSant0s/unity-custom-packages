@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 299e3b4ed8d7c454bb0a14193d50c3f1, type: 3}
+  m_Name: PopupConfig
+  m_EditorClassIdentifier: 
+  mainPopupTag: PopupExternal
+  popupsInfo:
+  - prefab: {fileID: 5446014173083935235, guid: 1bea7db4d4f1258409678b90d047956d, type: 3}
+    overridePopupTag: 
+  - prefab: {fileID: 5811720265824611053, guid: a9c716f2612467044ac2a8a88c7081ca, type: 3}
+    overridePopupTag: PopupInternal
+  popupsInfos:
+  - prefab: {fileID: 5446014173083935235, guid: 1bea7db4d4f1258409678b90d047956d, type: 3}
+    overridePopupTag: 
+  - prefab: {fileID: 5811720265824611053, guid: a9c716f2612467044ac2a8a88c7081ca, type: 3}
+    overridePopupTag: PopupInternal

@@ -15,36 +15,42 @@ namespace JoaoSant0s.ServicePackage.Popup
 
         private PopupConfig config;
 
-        public PopupInfo[] PopupsInfo => config.popupsInfo;        
+        public PopupInfo[] PopupsInfos => config.popupsInfos;        
 
-        protected override void Init()
+        #region Override Methods
+
+        public override void Init()
         {
             config = Resources.Load<PopupConfig>("Configs/PopupConfig");
             this.popupArea = UtilWrapper.FindRectTransformWithTag(config.mainPopupTag);            
         }
 
-        private RectTransform GetPopupArea(PopupInfo  info)
-        {
-            if (string.IsNullOrEmpty(info.overridePopupTag))
-            {
-                return this.popupArea;
-            }
-            
-            return UtilWrapper.FindRectTransformWithTag(info.overridePopupTag);            
-        }
+        #endregion
 
-        public T ShowPopup<T>() where T : BasePopup
-        {
-            var info = PopupsInfo.Find(info => info.prefab is T);
+        #region Public Methods
 
-            var area = GetPopupArea(info);
+        public T Show<T>() where T : BasePopup
+        {
+            var info = PopupsInfos.Find(info => info.prefab is T);
             
             T popup = Instantiate((T)info.prefab);
 
-            ((RectTransform)popup.transform).SetParent(area, false);
+            ((RectTransform)popup.transform).SetParent(this.popupArea, false);
 
             return popup;
         }
 
+        public T Show<T>(RectTransform popupArea) where T : BasePopup
+        {
+            var info = PopupsInfos.Find(info => info.prefab is T);            
+            
+            T popup = Instantiate((T)info.prefab);
+
+            ((RectTransform)popup.transform).SetParent(popupArea, false);
+
+            return popup;
+        }
+
+        #endregion
     }
 }

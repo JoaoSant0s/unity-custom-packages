@@ -31,7 +31,7 @@ namespace JoaoSant0s.ServicePackage.Audio
         #endregion
 
         #region Override Methods
-        protected override void Init()
+        public override void Init()
         {
             Config = Resources.Load<AudioConfig>("Configs/AudioConfig");
             audioObjects = new List<AudioObject>();
