@@ -8,6 +8,8 @@ using JoaoSant0s.ServicePackage.Popup;
 
 public class TestPopupService : MonoBehaviour
 {
+    [SerializeField]
+    private Transform internalPopupArea;
     private PopupService popupService;
 
     void Start()
@@ -19,12 +21,12 @@ public class TestPopupService : MonoBehaviour
 
     public void ShowExternalPopup()
     {
-        popupService.ShowPopup<ExternalPopup>();
+        popupService.Show<ExternalPopup>();
     }
 
     public void ShowInternalPopup()
     {
-        popupService.ShowPopup<InternalPopup>();
+        popupService.Show<InternalPopup>((RectTransform)internalPopupArea);
     }
 
     #endregion
