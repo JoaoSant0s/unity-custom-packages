@@ -17,11 +17,17 @@ namespace JoaoSant0s.ServicePackage.Popup
 
         public PopupInfo[] PopupsInfos => config.popupsInfos;        
 
-        protected override void Init()
+        #region Override Methods
+
+        public override void Init()
         {
             config = Resources.Load<PopupConfig>("Configs/PopupConfig");
             this.popupArea = UtilWrapper.FindRectTransformWithTag(config.mainPopupTag);            
         }
+
+        #endregion
+
+        #region Public Methods
 
         public T Show<T>() where T : BasePopup
         {
@@ -45,5 +51,6 @@ namespace JoaoSant0s.ServicePackage.Popup
             return popup;
         }
 
+        #endregion
     }
 }

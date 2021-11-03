@@ -15,12 +15,16 @@ namespace JoaoSant0s.ServicePackage.Pool
         private PoolConfig config;
 
         private Dictionary<PoolBase, List<PoolBase>> poolDictionary;
+        
+        #region Override Methods
 
-        protected override void Init()
+        public override void Init()
         {
             config = Resources.Load<PoolConfig>("Configs/PoolConfig");
             Setup();
         }
+
+        #endregion
 
         #region Public Methods        
 
