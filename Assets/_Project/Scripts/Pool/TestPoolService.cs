@@ -20,7 +20,7 @@ public class TestPoolService : MonoBehaviour
 
     public void SpawnElement()
     {
-        var element = poolService.Instatiate<PoolBase>(spawnArea, spawnArea.position);
+        poolService.Get<TestPoolElement>(spawnArea, spawnArea.position);
     }
 
     #endregion

@@ -9,13 +9,13 @@ namespace JoaoSant0s.ServicePackage.Pool
 {
     public class PoolBase : MonoBehaviour
     {
-        public delegate void OnHidePoolElement(PoolBase element);
-        public OnHidePoolElement HidePoolElement;
+        public delegate void OnDisposePoolElement(PoolBase element);
+        public OnDisposePoolElement DisposePoolElement;
 
-        public void Hide()
+        public void Dispose()
         {
-            OnHide();
-            HidePoolElement?.Invoke(this);
+            OnDispose();
+            DisposePoolElement?.Invoke(this);
         }
 
         public void Show()
@@ -23,7 +23,7 @@ namespace JoaoSant0s.ServicePackage.Pool
             OnShow();
         }
 
-        public virtual void OnHide() { }
+        public virtual void OnDispose() { }
 
         public virtual void OnShow() { }
     }

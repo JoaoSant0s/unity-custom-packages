@@ -17,25 +17,19 @@ public class TestPoolElement : PoolBase
         rb2d = GetComponent<Rigidbody2D>();
     }
 
-    private void OnEnable() 
-    {
-        //Must Use to enable configs and functions any time, because the object will be reused
-        StartCoroutine(HideRoutine());
-    }
-
-    private void OnDisable() 
-    {
-        //Must Use to disable configs and functions any time, because the object will be reused
-    }
-
-    private IEnumerator HideRoutine()
+    private IEnumerator DisposeRoutine()
     {
         yield return new WaitForSeconds(delayToHide);
-        Hide();
+        Dispose();
     }
 
-    public override void OnHide()
+    public override void OnDispose()
     {
         rb2d.velocity = Vector2.zero;
+    }
+
+    public override void OnShow()
+    {        
+        StartCoroutine(DisposeRoutine());
     }
 }

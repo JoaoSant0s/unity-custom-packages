@@ -24,25 +24,25 @@ namespace JoaoSant0s.ServicePackage.Pool
 
         #region Public Methods        
 
-        public T Instatiate<T>(Transform parent, Vector3 position, Quaternion quaternion) where T : PoolBase
+        public T Get<T>(Transform parent, Vector3 position, Quaternion quaternion) where T : PoolBase
         {
             var instance = GetValidElement<T>();
             instance.transform.SetParent(parent);
             instance.transform.position = position;
             instance.transform.rotation = quaternion;
-            instance.Show();
             instance.gameObject.SetActive(true);
+            instance.Show();
 
             return instance;
         }
 
-        public T Instatiate<T>(Transform parent, Vector3 position) where T : PoolBase
+        public T Get<T>(Transform parent, Vector3 position) where T : PoolBase
         {
             var instance = GetValidElement<T>();
             instance.transform.SetParent(parent);
             instance.transform.position = position;
-            instance.Show();
             instance.gameObject.SetActive(true);
+            instance.Show();
 
             return instance;
         }
@@ -106,7 +106,7 @@ namespace JoaoSant0s.ServicePackage.Pool
         {
             var poolElement = Instantiate(key, transform);
             ResetPoolElement(key, poolElement);
-            poolElement.HidePoolElement += ReturnToPool;
+            poolElement.DisposePoolElement += ReturnToPool;
 
             if (!IsPoolFull(key) && restore) poolDictionary[key].Add(poolElement);
 
