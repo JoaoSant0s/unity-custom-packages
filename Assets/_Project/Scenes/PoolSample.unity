@@ -154,6 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnArea: {fileID: 183180878}
+  index: 1
 --- !u!4 &62217573
 Transform:
   m_ObjectHideFlags: 0

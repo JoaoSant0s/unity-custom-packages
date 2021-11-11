@@ -23,12 +23,12 @@ public class TestPoolElement : PoolBase
         Dispose();
     }
 
-    public override void OnDispose()
+    protected override void OnDispose()
     {
         rb2d.velocity = Vector2.zero;
     }
 
-    public override void OnShow()
+    protected override void OnShow()
     {        
         StartCoroutine(DisposeRoutine());
     }

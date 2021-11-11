@@ -10,6 +10,11 @@ public class TestPoolService : MonoBehaviour
 {
     [SerializeField]
     private Transform spawnArea;
+
+    [SerializeField]
+    [Range(0, 1)]
+    private int index;
+
     private PoolService poolService;
     void Start()
     {
@@ -20,7 +25,7 @@ public class TestPoolService : MonoBehaviour
 
     public void SpawnElement()
     {
-        poolService.Get<TestPoolElement>(spawnArea, spawnArea.position);
+        poolService.Get<TestPoolElement>(spawnArea, spawnArea.position, index);
     }
 
     #endregion

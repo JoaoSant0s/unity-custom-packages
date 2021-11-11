@@ -9,8 +9,10 @@ namespace JoaoSant0s.ServicePackage.Pool
 {
     public class PoolBase : MonoBehaviour
     {
-        public delegate void OnDisposePoolElement(PoolBase element);
-        public OnDisposePoolElement DisposePoolElement;
+        internal delegate void OnDisposePoolElement(PoolBase element);
+        internal OnDisposePoolElement DisposePoolElement;
+
+        internal int indexOrdering;
 
         public void Dispose()
         {
@@ -23,8 +25,8 @@ namespace JoaoSant0s.ServicePackage.Pool
             OnShow();
         }
 
-        public virtual void OnDispose() { }
+        protected virtual void OnDispose() { }
 
-        public virtual void OnShow() { }
+        protected virtual void OnShow() { }
     }
 }
