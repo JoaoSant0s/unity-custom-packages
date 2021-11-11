@@ -26,12 +26,21 @@ namespace JoaoSant0s.ServicePackage.Pool
 
         #endregion
 
-        #region Public Methods        
+        #region Public Methods
 
-        public T Get<T>(Transform parent, Vector3 position, Quaternion quaternion) where T : PoolBase
+        public T Get<T>(Vector3 position) where T : PoolBase
         {
             var instance = GetValidElement<T>();
-            instance.transform.SetParent(parent);
+            instance.transform.position = position;
+            instance.gameObject.SetActive(true);
+            instance.Show();
+
+            return instance;
+        }
+
+        public T Get<T>(Vector3 position, Quaternion quaternion) where T : PoolBase
+        {
+            var instance = GetValidElement<T>();
             instance.transform.position = position;
             instance.transform.rotation = quaternion;
             instance.gameObject.SetActive(true);
@@ -45,6 +54,18 @@ namespace JoaoSant0s.ServicePackage.Pool
             var instance = GetValidElement<T>();
             instance.transform.SetParent(parent);
             instance.transform.position = position;
+            instance.gameObject.SetActive(true);
+            instance.Show();
+
+            return instance;
+        }
+
+        public T Get<T>(Transform parent, Vector3 position, Quaternion quaternion) where T : PoolBase
+        {
+            var instance = GetValidElement<T>();
+            instance.transform.SetParent(parent);
+            instance.transform.position = position;
+            instance.transform.rotation = quaternion;
             instance.gameObject.SetActive(true);
             instance.Show();
 
