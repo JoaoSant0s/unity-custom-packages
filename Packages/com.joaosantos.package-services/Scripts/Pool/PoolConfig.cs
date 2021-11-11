@@ -40,5 +40,9 @@ namespace JoaoSant0s.ServicePackage.Pool
         public int startPoolAmount;
         public int maxPoolAmount;
         public Vector3 outsidePosition;
+
+        [Header("Extra Get Parameter")]
+        [Min(0)]
+        public int indexOrdering;
     }
 }
