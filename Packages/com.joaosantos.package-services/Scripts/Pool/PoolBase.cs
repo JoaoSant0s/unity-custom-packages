@@ -12,6 +12,8 @@ namespace JoaoSant0s.ServicePackage.Pool
         internal delegate void OnDisposePoolElement(PoolBase element);
         internal OnDisposePoolElement DisposePoolElement;
 
+        internal int indexOrdering;
+
         public void Dispose()
         {
             OnDispose();

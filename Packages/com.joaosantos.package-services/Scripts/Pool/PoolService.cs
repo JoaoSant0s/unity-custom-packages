@@ -14,7 +14,7 @@ namespace JoaoSant0s.ServicePackage.Pool
     {
         private PoolConfig config;
 
-        private Dictionary<PoolBase, List<PoolBase>> poolDictionary;
+        private Dictionary<PoolInfo, List<PoolBase>> poolDictionary;
         
         #region Override Methods
 
@@ -28,9 +28,9 @@ namespace JoaoSant0s.ServicePackage.Pool
 
         #region Public Methods
 
-        public T Get<T>(Vector3 position) where T : PoolBase
+        public T Get<T>(Vector3 position, int indexOrdering = 0) where T : PoolBase
         {
-            var instance = GetValidElement<T>();
+            var instance = GetValidElement<T>(indexOrdering);
             instance.transform.position = position;
             instance.gameObject.SetActive(true);
             instance.Show();
@@ -38,9 +38,9 @@ namespace JoaoSant0s.ServicePackage.Pool
             return instance;
         }
 
-        public T Get<T>(Vector3 position, Quaternion quaternion) where T : PoolBase
+        public T Get<T>(Vector3 position, Quaternion quaternion, int indexOrdering = 0) where T : PoolBase
         {
-            var instance = GetValidElement<T>();
+            var instance = GetValidElement<T>(indexOrdering);
             instance.transform.position = position;
             instance.transform.rotation = quaternion;
             instance.gameObject.SetActive(true);
@@ -49,9 +49,9 @@ namespace JoaoSant0s.ServicePackage.Pool
             return instance;
         }
 
-        public T Get<T>(Transform parent, Vector3 position) where T : PoolBase
+        public T Get<T>(Transform parent, Vector3 position, int indexOrdering = 0) where T : PoolBase
         {
-            var instance = GetValidElement<T>();
+            var instance = GetValidElement<T>(indexOrdering);
             instance.transform.SetParent(parent);
             instance.transform.position = position;
             instance.gameObject.SetActive(true);
@@ -60,9 +60,9 @@ namespace JoaoSant0s.ServicePackage.Pool
             return instance;
         }
 
-        public T Get<T>(Transform parent, Vector3 position, Quaternion quaternion) where T : PoolBase
+        public T Get<T>(Transform parent, Vector3 position, Quaternion quaternion, int indexOrdering = 0) where T : PoolBase
         {
-            var instance = GetValidElement<T>();
+            var instance = GetValidElement<T>(indexOrdering);
             instance.transform.SetParent(parent);
             instance.transform.position = position;
             instance.transform.rotation = quaternion;
@@ -78,7 +78,7 @@ namespace JoaoSant0s.ServicePackage.Pool
 
         private void Setup()
         {
-            poolDictionary = new Dictionary<PoolBase, List<PoolBase>>();
+            poolDictionary = new Dictionary<PoolInfo, List<PoolBase>>();
 
             foreach (var item in config.PoolConfigDictionary)
             {
@@ -88,27 +88,30 @@ namespace JoaoSant0s.ServicePackage.Pool
 
         private void CreatePoolDictionary(PoolInfo info)
         {
-            var key = info.prefab;
-            
-            poolDictionary[key] = new List<PoolBase>();
+            poolDictionary[info] = new List<PoolBase>();
 
             for (int i = 0; i < info.startPoolAmount; i++)
             {
-                CreatePoolElement(key);
+                CreatePoolElement(info);
             }
         }
 
-        private T GetValidElement<T>() where T : PoolBase
+        private T GetValidElement<T>(int indexOrdering) where T : PoolBase
         {
-            var tuple = poolDictionary.FirstOrDefault(element => element.Key is T);
-            
-            Debug.Assert(tuple.Key != null, "The Type selected was not initialized by the PoolConfig");
+            var tuple = poolDictionary.FirstOrDefault(element => {
+                var key = element.Key;
+                return key.prefab is T && key.indexOrdering == indexOrdering;
+            });
 
+            var errorString = string.Format("The Type or selected index {0} was not initialized by the PoolConfig", indexOrdering);
+            
+            Debug.Assert(tuple.Key.prefab != null, errorString);
+            
             T instance = GetElementFromList<T>(tuple.Value);
             
             if (instance == null)
             {
-                instance = CreatePoolElement((T) tuple.Key, false);
+                instance = (T) CreatePoolElement(tuple.Key, false);
             }
 
             return instance;
@@ -127,29 +130,34 @@ namespace JoaoSant0s.ServicePackage.Pool
             return instance;
         }
 
-        private T CreatePoolElement<T>(T key, bool restore = true) where T : PoolBase
+        private PoolBase CreatePoolElement(PoolInfo info, bool restore = true)
         {
-            var poolElement = Instantiate(key, transform);
-            ResetPoolElement(key, poolElement);
+            var poolElement = Instantiate(info.prefab, transform);
+            ResetPoolElement(info, poolElement);
             poolElement.DisposePoolElement += ReturnToPool;
 
-            if (!IsPoolFull(key) && restore) poolDictionary[key].Add(poolElement);
+            if (!IsPoolFull(info) && restore) poolDictionary[info].Add(poolElement);
 
             return poolElement;
         }
 
-        private bool IsPoolFull<T>(T key) where T : PoolBase
+        private bool IsPoolFull(PoolInfo info)
         {
-            var amount = poolDictionary[key].Count;
+            var amount = poolDictionary[info].Count;
 
-            var maxAmount = config.PoolConfigDictionary[key].maxPoolAmount;
+            var maxAmount = info.maxPoolAmount;
 
             return amount >= maxAmount;
         }
 
         private void ReturnToPool(PoolBase pool)
         {
-            var tuple = poolDictionary.FirstOrDefault(element => element.Key.GetType() == pool.GetType());
+            var tuple = poolDictionary.FirstOrDefault(element => {
+                var checkType = element.Key.prefab.GetType() == pool.GetType();
+                var checkOrdering = pool.indexOrdering == element.Key.indexOrdering;
+
+                return checkType &&  checkOrdering;   
+            });
             
             var key = tuple.Key;
 
@@ -163,11 +171,12 @@ namespace JoaoSant0s.ServicePackage.Pool
             ResetPoolElement(tuple.Key, pool);
         }
 
-        private void ResetPoolElement(PoolBase key, PoolBase pool)
+        private void ResetPoolElement(PoolInfo info, PoolBase pool)
         {
             pool.gameObject.SetActive(false);
             pool.transform.SetParent(transform);
-            pool.transform.position = config.PoolConfigDictionary[key].outsidePosition;            
+            pool.transform.position = info.outsidePosition;
+            pool.indexOrdering = info.indexOrdering;
         }
 
         #endregion
