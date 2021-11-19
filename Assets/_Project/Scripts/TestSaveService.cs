@@ -16,30 +16,75 @@ public class TestSaveService : MonoBehaviour
 
     private void Start() 
     {
-        var testIntUnit = "testIntUnit";
-        var testFloatUnit = "testFloatUnit";
-        var testStringUnit = "testStringUnit";
-        var testBoolUnit = "testBoolUnit";
-        var testVector3Unit = "testVector3Unit";
+        //TestInt();
 
-        saveService.Set<int>(testIntUnit, -11);
-        Debug.Log(saveService.Get<int>(testIntUnit));
+        //TestFloat();
 
-        saveService.Set<float>(testFloatUnit, -11.2031265f);
-        Debug.Log(saveService.Get<float>(testFloatUnit));
+        TestString();
 
-        saveService.Set<string>(testStringUnit, "testStringUnit");
-        Debug.Log(saveService.Get<string>(testStringUnit));
+        //var testBoolUnit = "testBoolUnit";
+        //var testVector3Unit = "testVector3Unit";
 
-        saveService.Set<bool>(testBoolUnit, true);
-        Debug.Log(saveService.Get<bool>(testBoolUnit));
+        //saveService.Set<string>(testStringUnit, "testStringUnit");
+        //Debug.Log(saveService.Get<string>(testStringUnit));
 
-        Debug.Log(saveService.GetOrDefault<Vector3>("noValue", Vector3.zero));
+        //saveService.Set<bool>(testBoolUnit, true);
+        //Debug.Log(saveService.Get<bool>(testBoolUnit));
+
+        //Debug.Log(saveService.GetOrDefault<Vector3>("noValue", Vector3.zero));
         
-        saveService.Set<Vector3>(testVector3Unit, new Vector3(1.0001f, -11.0001f, -11.2031201f));
-        var value = saveService.Get<Vector3>(testVector3Unit);
+        //saveService.Set<Vector3>(testVector3Unit, new Vector3(1.0001f, -11.0001f, -11.2031201f));
+        //var value = saveService.Get<Vector3>(testVector3Unit);
+        //Debug.Log(value);
+        //transform.Translate(new Vector3(value, value, value));
+    }
+
+    private void TestInt()
+    {
+        Debug.Log("");
+        Debug.Log("TestInt");
+
+        var testIntUnit = "testIntUnit";        
+        var mainValue = -1233311;
+
+        saveService.Set<int>(testIntUnit, -1233311);
+        var value = saveService.Get<int>(testIntUnit);
+
+        Debug.Log(mainValue);
         Debug.Log(value);
-        transform.Translate(value);
+        Debug.Log(mainValue == value);
+    }
+
+    private void TestFloat()
+    {
+        Debug.Log("");
+        Debug.Log("TestFloat");
+
+        var testFloatUnit = "testFloatUnit";
+        var mainValue = -1151.201555f;
+
+        saveService.Set<float>(testFloatUnit, mainValue);
+        var value = saveService.Get<float>(testFloatUnit);
+
+        Debug.Log(mainValue);
+        Debug.Log(value);
+        Debug.Log(mainValue == value);
+    }
+
+    private void TestString()
+    {
+        Debug.Log("");
+        Debug.Log("TestString");
+
+        var testStringUnit = "testStringUnit";
+        var mainValue = "testing the value";
+
+        saveService.Set<string>(testStringUnit, mainValue);
+        var value = saveService.Get<string>(testStringUnit);
+
+        Debug.Log(mainValue);
+        Debug.Log(value);
+        Debug.Log(mainValue == value);
     }
 }
 

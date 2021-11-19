@@ -3,11 +3,12 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 
+using Conversor = System.Text.Encoding;
+
 using UnityEngine;
 
 using JoaoSant0s.CommonWrapper;
 using JoaoSant0s.ServicePackage.General;
-
 namespace JoaoSant0s.ServicePackage.Save
 {
     public class SaveService : Service
@@ -64,6 +65,7 @@ namespace JoaoSant0s.ServicePackage.Save
         public void Set<T>(string radicalKey, T value)
         {
             var key = BuildKey(radicalKey);
+
             SetUnit<T>(key, value);
         }
 
@@ -80,53 +82,20 @@ namespace JoaoSant0s.ServicePackage.Save
         {
             var type = typeof(T);
 
-            if (type == typeof(int))
-            {
-                return (T) Convert.ChangeType(PlayerPrefs.GetInt(key), type);  
-
-            }else if (type == typeof(float))
-            {
-                return (T) Convert.ChangeType(PlayerPrefs.GetFloat(key), type);                 
-            }
-
             var stringValue = PlayerPrefs.GetString(key);
-
-            Debugs.Log(stringValue, type, type == typeof(object));
 
             if (type == typeof(object))
             {
                 return JsonUtility.FromJson<T>(stringValue);               
             }else
             {
-                if(type == typeof(Vector3))
-                {
-                    var auxValue = JsonUtility.FromJson<Vector3Value>(stringValue);
-                    return (T)Convert.ChangeType(auxValue.value, type);
-                }
-                else
-                {
-                    return (T)Convert.ChangeType(stringValue, type);
-                }
+                return GetSimpleUnit<T>(type, stringValue);
             }
         }
 
         private void SetUnit<T>(string key, T tValue)
         {
             var type = typeof(T);
-            Debugs.Log(tValue, type);
-
-            if (type == typeof(int))
-            {
-                PlayerPrefs.SetInt(key, ((int) Convert.ChangeType(tValue, type)));
-
-                return;
-
-            }else if (type == typeof(float))
-            {
-                PlayerPrefs.SetFloat(key, ((float) Convert.ChangeType(tValue, type)));
-
-                return;
-            }
 
             var value = "";
 
@@ -135,17 +104,63 @@ namespace JoaoSant0s.ServicePackage.Save
                 value = JsonUtility.ToJson(tValue);
             }else
             {
-                if(type == typeof(Vector3))
-                {
-                    Vector3 v = ((Vector3) Convert.ChangeType(tValue, type));
-                    value = JsonUtility.ToJson(new Vector3Value(){value = v});
-                }else
-                {
-                    value = tValue.ToString();                    
-                }
+                Byte[] bytes = GetBytes<T>(tValue, type);
+
+                value = BitConverter.ToString(bytes);
             }
             
             PlayerPrefs.SetString(key, value);
+        }
+
+        private Byte[] GetBytes<T>(T tValue, Type type)
+        {
+            if (tValue is int)
+            {
+                return BitConverter.GetBytes((int) Convert.ChangeType(tValue, type));
+
+            }else if (tValue is float)
+            {
+                return BitConverter.GetBytes((float) Convert.ChangeType(tValue, type));
+
+            }else if (tValue is string)
+            {
+                var stringValue = (string) Convert.ChangeType(tValue, type);
+
+                return Conversor.UTF8.GetBytes(stringValue);
+
+            }
+
+            Debug.LogError(string.Format("Create the type to convert the value {0} to Array of Bytes", tValue));
+
+            return new Byte [0];
+        }
+
+        private T GetSimpleUnit<T>(Type  type, string stringValue)
+        {
+            if (type == typeof(int) )
+            {                
+                var bytes = UtilWrapper.GetBytesFromStringTransformation(stringValue);
+                var vale = BitConverter.ToInt32(bytes, 0);
+
+                return (T)Convert.ChangeType(vale, type);
+
+            }else if (type == typeof(float) )
+            {                
+                var bytes = UtilWrapper.GetBytesFromStringTransformation(stringValue);
+                var vale = BitConverter.ToSingle(bytes, 0);
+
+                return (T)Convert.ChangeType(vale, type);
+
+            }else if (type == typeof(string) )
+            {                
+                var bytes = UtilWrapper.GetBytesFromStringTransformation(stringValue);                
+                var vale = Conversor.UTF8.GetString(bytes);
+
+                return (T)Convert.ChangeType(vale, type);
+
+            }
+            
+            return (T)Convert.ChangeType(stringValue, type);
         }
 
         #endregion
