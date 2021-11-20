@@ -20,17 +20,14 @@ public class TestSaveService : MonoBehaviour
 
         //TestFloat();
 
-        TestString();
+        //TestString();
 
-        //var testBoolUnit = "testBoolUnit";
+        //TestBool();
+
+        TestDouble();
+        
         //var testVector3Unit = "testVector3Unit";
-
-        //saveService.Set<string>(testStringUnit, "testStringUnit");
-        //Debug.Log(saveService.Get<string>(testStringUnit));
-
-        //saveService.Set<bool>(testBoolUnit, true);
-        //Debug.Log(saveService.Get<bool>(testBoolUnit));
-
+        
         //Debug.Log(saveService.GetOrDefault<Vector3>("noValue", Vector3.zero));
         
         //saveService.Set<Vector3>(testVector3Unit, new Vector3(1.0001f, -11.0001f, -11.2031201f));
@@ -44,11 +41,11 @@ public class TestSaveService : MonoBehaviour
         Debug.Log("");
         Debug.Log("TestInt");
 
-        var testIntUnit = "testIntUnit";        
+        var testKey = "testIntUnit";        
         var mainValue = -1233311;
 
-        saveService.Set<int>(testIntUnit, -1233311);
-        var value = saveService.Get<int>(testIntUnit);
+        saveService.Set<int>(testKey, -1233311);
+        var value = saveService.Get<int>(testKey);
 
         Debug.Log(mainValue);
         Debug.Log(value);
@@ -60,11 +57,11 @@ public class TestSaveService : MonoBehaviour
         Debug.Log("");
         Debug.Log("TestFloat");
 
-        var testFloatUnit = "testFloatUnit";
+        var testKey = "testFloatUnit";
         var mainValue = -1151.201555f;
 
-        saveService.Set<float>(testFloatUnit, mainValue);
-        var value = saveService.Get<float>(testFloatUnit);
+        saveService.Set<float>(testKey, mainValue);
+        var value = saveService.Get<float>(testKey);
 
         Debug.Log(mainValue);
         Debug.Log(value);
@@ -76,15 +73,47 @@ public class TestSaveService : MonoBehaviour
         Debug.Log("");
         Debug.Log("TestString");
 
-        var testStringUnit = "testStringUnit";
+        var testKey = "testStringUnit";
         var mainValue = "testing the value";
 
-        saveService.Set<string>(testStringUnit, mainValue);
-        var value = saveService.Get<string>(testStringUnit);
+        saveService.Set<string>(testKey, mainValue);
+        var value = saveService.Get<string>(testKey);
 
         Debug.Log(mainValue);
         Debug.Log(value);
         Debug.Log(mainValue == value);
+    }
+
+    private void TestBool()
+    {
+        Debug.Log("");
+        Debug.Log("TestBool");
+
+        var testKey = "testBoolUnit";
+        var mainValue = true;
+
+        saveService.Set<bool>(testKey, mainValue);
+        var value = saveService.Get<bool>(testKey);
+
+        Debug.Log(mainValue);
+        Debug.Log(value);
+        Debug.Log(mainValue == value);    
+    }
+
+    private void TestDouble()
+    {
+        Debug.Log("");
+        Debug.Log("TestDouble");
+
+        var testKey = "testDoubleUnit";
+        var mainValue = 155151515d;
+
+        saveService.Set<double>(testKey, mainValue);
+        var value = saveService.Get<double>(testKey);
+
+        Debug.Log(mainValue);
+        Debug.Log(value);
+        Debug.Log(mainValue == value);    
     }
 }
 

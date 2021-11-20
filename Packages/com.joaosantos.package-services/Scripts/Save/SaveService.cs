@@ -34,7 +34,7 @@ namespace JoaoSant0s.ServicePackage.Save
             return PlayerPrefs.HasKey(key);
         }
 
-        public bool DeleteSave(string radicalKey)
+        public bool DeleteKey(string radicalKey)
         {
             var key = BuildKey(radicalKey);
 
@@ -89,7 +89,7 @@ namespace JoaoSant0s.ServicePackage.Save
                 return JsonUtility.FromJson<T>(stringValue);               
             }else
             {
-                return GetSimpleUnit<T>(type, stringValue);
+                return ConvertUnit<T>(type, stringValue);
             }
         }
 
@@ -117,17 +117,20 @@ namespace JoaoSant0s.ServicePackage.Save
             if (tValue is int)
             {
                 return BitConverter.GetBytes((int) Convert.ChangeType(tValue, type));
-
             }else if (tValue is float)
             {
                 return BitConverter.GetBytes((float) Convert.ChangeType(tValue, type));
-
             }else if (tValue is string)
             {
                 var stringValue = (string) Convert.ChangeType(tValue, type);
 
                 return Conversor.UTF8.GetBytes(stringValue);
-
+            }else if (tValue is bool)
+            {
+                return BitConverter.GetBytes((bool) Convert.ChangeType(tValue, type));
+            }else if (tValue is double)
+            {
+                return BitConverter.GetBytes((double) Convert.ChangeType(tValue, type));
             }
 
             Debug.LogError(string.Format("Create the type to convert the value {0} to Array of Bytes", tValue));
@@ -135,29 +138,35 @@ namespace JoaoSant0s.ServicePackage.Save
             return new Byte [0];
         }
 
-        private T GetSimpleUnit<T>(Type  type, string stringValue)
+        private T ConvertUnit<T>(Type  type, string stringValue)
         {
+            var bytes = UtilWrapper.GetBytesFromStringTransformation(stringValue);
+
             if (type == typeof(int) )
             {                
-                var bytes = UtilWrapper.GetBytesFromStringTransformation(stringValue);
                 var vale = BitConverter.ToInt32(bytes, 0);
 
                 return (T)Convert.ChangeType(vale, type);
-
             }else if (type == typeof(float) )
             {                
-                var bytes = UtilWrapper.GetBytesFromStringTransformation(stringValue);
                 var vale = BitConverter.ToSingle(bytes, 0);
 
                 return (T)Convert.ChangeType(vale, type);
-
             }else if (type == typeof(string) )
             {                
-                var bytes = UtilWrapper.GetBytesFromStringTransformation(stringValue);                
                 var vale = Conversor.UTF8.GetString(bytes);
 
                 return (T)Convert.ChangeType(vale, type);
+            }else if (type == typeof(bool) )
+            {                
+                var vale = BitConverter.ToBoolean(bytes, 0);
 
+                return (T)Convert.ChangeType(vale, type);
+            }else if (type == typeof(double) )
+            {                
+                var vale = BitConverter.ToDouble(bytes, 0);
+
+                return (T)Convert.ChangeType(vale, type);
             }
             
             return (T)Convert.ChangeType(stringValue, type);
