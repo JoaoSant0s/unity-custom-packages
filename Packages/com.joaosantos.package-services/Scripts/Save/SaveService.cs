@@ -83,90 +83,73 @@ namespace JoaoSant0s.ServicePackage.Save
             var type = typeof(T);
 
             var stringValue = PlayerPrefs.GetString(key);
-
-            if (type == typeof(object))
-            {
-                return JsonUtility.FromJson<T>(stringValue);               
-            }else
-            {
-                return ConvertUnit<T>(type, stringValue);
-            }
+           
+            return ConvertToObjectFormat<T>(type, stringValue);    
         }
 
         private void SetUnit<T>(string key, T tValue)
         {
             var type = typeof(T);
 
-            var value = "";
+            var value = ConvertToStringFormat(tValue, type);
 
-            if (type == typeof(object))
-            {
-                value = JsonUtility.ToJson(tValue);
-            }else
-            {
-                Byte[] bytes = GetBytes<T>(tValue, type);
-
-                value = BitConverter.ToString(bytes);
-            }
+            Debug.Assert(value != null, string.Format("Convertion of {0} to type {0} can be made! Implement on the service", tValue, type));
             
             PlayerPrefs.SetString(key, value);
         }
 
-        private Byte[] GetBytes<T>(T tValue, Type type)
+        private string ConvertToStringFormat<T>(T tValue, Type type)
         {
-            if (tValue is int)
-            {
-                return BitConverter.GetBytes((int) Convert.ChangeType(tValue, type));
-            }else if (tValue is float)
-            {
-                return BitConverter.GetBytes((float) Convert.ChangeType(tValue, type));
-            }else if (tValue is string)
-            {
-                var stringValue = (string) Convert.ChangeType(tValue, type);
+            object obj = null;
 
-                return Conversor.UTF8.GetBytes(stringValue);
-            }else if (tValue is bool)
+            if(type == typeof(object))
             {
-                return BitConverter.GetBytes((bool) Convert.ChangeType(tValue, type));
-            }else if (tValue is double)
+                obj = JsonUtility.ToJson(tValue);
+            } else if (type == typeof(int))
             {
-                return BitConverter.GetBytes((double) Convert.ChangeType(tValue, type));
+                obj = new IntValue((int) Convert.ChangeType(tValue, type));
+            }else if (type == typeof(float))
+            {
+                obj = new FloatValue((float) Convert.ChangeType(tValue, type));
+            }else if (type == typeof(string))
+            {
+                return (string) Convert.ChangeType(tValue, type);
+            }else if (type == typeof(bool))
+            {
+                obj = new BoolValue((bool) Convert.ChangeType(tValue, type));
+            }else if (type == typeof(double))
+            {
+                obj = new DoubleValue((double) Convert.ChangeType(tValue, type));
             }
 
-            Debug.LogError(string.Format("Create the type to convert the value {0} to Array of Bytes", tValue));
-
-            return new Byte [0];
+            return (obj != null) ? JsonUtility.ToJson(obj) : null;
         }
 
-        private T ConvertUnit<T>(Type  type, string stringValue)
+        private T ConvertToObjectFormat<T>(Type  type, string stringValue)
         {
-            var bytes = UtilWrapper.GetBytesFromStringTransformation(stringValue);
-
-            if (type == typeof(int) )
+            if (type == typeof(object))
+            {
+                return JsonUtility.FromJson<T>(stringValue);    
+            }else if (type == typeof(int))
             {                
-                var vale = BitConverter.ToInt32(bytes, 0);
+                var obj = JsonUtility.FromJson<IntValue>(stringValue);
 
-                return (T)Convert.ChangeType(vale, type);
-            }else if (type == typeof(float) )
+                return (T)Convert.ChangeType(obj.value, type);
+            }else if (type == typeof(float))
             {                
-                var vale = BitConverter.ToSingle(bytes, 0);
+                var obj = JsonUtility.FromJson<FloatValue>(stringValue);
 
-                return (T)Convert.ChangeType(vale, type);
-            }else if (type == typeof(string) )
+                return (T)Convert.ChangeType(obj.value, type);
+            }else if (type == typeof(bool))
             {                
-                var vale = Conversor.UTF8.GetString(bytes);
+                var obj = JsonUtility.FromJson<BoolValue>(stringValue);
 
-                return (T)Convert.ChangeType(vale, type);
-            }else if (type == typeof(bool) )
+                return (T)Convert.ChangeType(obj.value, type);                
+            }else if (type == typeof(double))
             {                
-                var vale = BitConverter.ToBoolean(bytes, 0);
+                var obj = JsonUtility.FromJson<DoubleValue>(stringValue);
 
-                return (T)Convert.ChangeType(vale, type);
-            }else if (type == typeof(double) )
-            {                
-                var vale = BitConverter.ToDouble(bytes, 0);
-
-                return (T)Convert.ChangeType(vale, type);
+                return (T)Convert.ChangeType(obj.value, type);                
             }
             
             return (T)Convert.ChangeType(stringValue, type);
@@ -176,10 +159,47 @@ namespace JoaoSant0s.ServicePackage.Save
         
     }
 
+    [Serializable]
+    internal class IntValue
+    {
+        public int value;
+
+        public IntValue(int newValue)
+        {
+            value = newValue;
+        }
+    }
 
     [Serializable]
-    internal class Vector3Value
+    internal class FloatValue
     {
-        public Vector3 value;
+        public float value;
+
+        public FloatValue(float newValue)
+        {
+            value = newValue;
+        }
+    }
+
+    [Serializable]
+    internal class BoolValue
+    {
+        public bool value;
+
+        public BoolValue(bool newValue)
+        {
+            value = newValue;
+        }
+    }
+
+    [Serializable]
+    internal class DoubleValue
+    {
+        public double value;
+
+        public DoubleValue(double newValue)
+        {
+            value = newValue;
+        }
     }
 }

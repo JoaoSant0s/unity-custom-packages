@@ -24,16 +24,7 @@ public class TestSaveService : MonoBehaviour
 
         //TestBool();
 
-        TestDouble();
-        
-        //var testVector3Unit = "testVector3Unit";
-        
-        //Debug.Log(saveService.GetOrDefault<Vector3>("noValue", Vector3.zero));
-        
-        //saveService.Set<Vector3>(testVector3Unit, new Vector3(1.0001f, -11.0001f, -11.2031201f));
-        //var value = saveService.Get<Vector3>(testVector3Unit);
-        //Debug.Log(value);
-        //transform.Translate(new Vector3(value, value, value));
+        //TestDouble();
     }
 
     private void TestInt()
