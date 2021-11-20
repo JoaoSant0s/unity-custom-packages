@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 
 using JoaoSant0s.ServicePackage.Save;
@@ -16,15 +18,21 @@ public class TestSaveService : MonoBehaviour
 
     private void Start() 
     {
-        //TestInt();
+        TestInt();
 
-        //TestFloat();
+        TestFloat();
 
-        //TestString();
+        TestString();
 
-        //TestBool();
+        TestBool();
 
-        //TestDouble();
+        TestDouble();
+
+        TestVector2();
+
+        TestVector3();
+
+        TestSerializableObject();
     }
 
     private void TestInt()
@@ -105,6 +113,66 @@ public class TestSaveService : MonoBehaviour
         Debug.Log(mainValue);
         Debug.Log(value);
         Debug.Log(mainValue == value);    
+    }
+
+    private void TestVector2()
+    {
+        Debug.Log("");
+        Debug.Log("TestVector2");
+
+        var testKey = "TestVector2Unit";
+        var mainValue = new Vector2(25.5f, 81f);
+
+        saveService.Set<Vector2>(testKey, mainValue);
+        var value = saveService.Get<Vector2>(testKey);
+
+        Debug.Log(mainValue);
+        Debug.Log(value);
+        Debug.Log(mainValue == value);    
+    }
+
+    private void TestVector3()
+    {
+        Debug.Log("");
+        Debug.Log("TestVector3");
+
+        var testKey = "TestVector3Unit";
+        var mainValue = new Vector3(25.5f, 81f, 1212.45454f);
+
+        saveService.Set<Vector3>(testKey, mainValue);
+        var value = saveService.Get<Vector3>(testKey);
+
+        Debug.Log(mainValue);
+        Debug.Log(value);
+        Debug.Log(mainValue == value);    
+    }
+
+    private void TestSerializableObject()
+    {
+        Debug.Log("");
+        Debug.Log("TestSerializableObject");
+
+        var testKey = "TestSerializableObject";
+        var mainValue = new TestObject() {stringValue = "Test Serializable Object", floatValue = 21.40f };
+
+        saveService.Set<TestObject>(testKey, mainValue);
+        var value = saveService.Get<TestObject>(testKey);
+
+        Debug.Log(mainValue);
+        Debug.Log(value);
+        Debug.Log(mainValue == value);
+    }
+}
+
+[Serializable]
+public class TestObject
+{
+    public string stringValue;
+    public float floatValue;
+
+    public override string ToString()
+    {
+        return string.Format("-- {0}, {1} --", stringValue, floatValue);
     }
 }
 

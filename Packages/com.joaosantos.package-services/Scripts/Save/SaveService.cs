@@ -9,6 +9,7 @@ using UnityEngine;
 
 using JoaoSant0s.CommonWrapper;
 using JoaoSant0s.ServicePackage.General;
+
 namespace JoaoSant0s.ServicePackage.Save
 {
     public class SaveService : Service
@@ -87,54 +88,16 @@ namespace JoaoSant0s.ServicePackage.Save
             return ConvertToObjectFormat<T>(type, stringValue);    
         }
 
-        private void SetUnit<T>(string key, T tValue)
-        {
-            var type = typeof(T);
-
-            var value = ConvertToStringFormat(tValue, type);
-
-            Debug.Assert(value != null, string.Format("Convertion of {0} to type {0} can be made! Implement on the service", tValue, type));
-            
-            PlayerPrefs.SetString(key, value);
-        }
-
-        private string ConvertToStringFormat<T>(T tValue, Type type)
-        {
-            object obj = null;
-
-            if(type == typeof(object))
-            {
-                obj = JsonUtility.ToJson(tValue);
-            } else if (type == typeof(int))
-            {
-                obj = new IntValue((int) Convert.ChangeType(tValue, type));
-            }else if (type == typeof(float))
-            {
-                obj = new FloatValue((float) Convert.ChangeType(tValue, type));
-            }else if (type == typeof(string))
-            {
-                return (string) Convert.ChangeType(tValue, type);
-            }else if (type == typeof(bool))
-            {
-                obj = new BoolValue((bool) Convert.ChangeType(tValue, type));
-            }else if (type == typeof(double))
-            {
-                obj = new DoubleValue((double) Convert.ChangeType(tValue, type));
-            }
-
-            return (obj != null) ? JsonUtility.ToJson(obj) : null;
-        }
-
         private T ConvertToObjectFormat<T>(Type  type, string stringValue)
         {
-            if (type == typeof(object))
-            {
-                return JsonUtility.FromJson<T>(stringValue);    
-            }else if (type == typeof(int))
+            if (type == typeof(int))
             {                
                 var obj = JsonUtility.FromJson<IntValue>(stringValue);
 
                 return (T)Convert.ChangeType(obj.value, type);
+            }else if (type == typeof(string))
+            {
+                return (T)Convert.ChangeType(stringValue, type);
             }else if (type == typeof(float))
             {                
                 var obj = JsonUtility.FromJson<FloatValue>(stringValue);
@@ -150,56 +113,67 @@ namespace JoaoSant0s.ServicePackage.Save
                 var obj = JsonUtility.FromJson<DoubleValue>(stringValue);
 
                 return (T)Convert.ChangeType(obj.value, type);                
+            }else if (type == typeof(Vector2))
+            {                
+                var obj = JsonUtility.FromJson<Vector2Value>(stringValue);                
+                return (T)Convert.ChangeType(obj.value, type);                
+            }else if (type == typeof(Vector3))
+            {                
+                var obj = JsonUtility.FromJson<Vector3Value>(stringValue);                
+                return (T)Convert.ChangeType(obj.value, type);                
+            }else{
+                Debug.Log(stringValue);
+                var obj = JsonUtility.FromJson<T>(stringValue);                
+                Debug.Log(obj);
+                return (T)Convert.ChangeType(obj, type);     
             }
+        }
+
+        private void SetUnit<T>(string key, T tValue)
+        {
+            var type = typeof(T);
+
+            var value = ConvertToStringFormat(tValue, type);
+
+            Debug.Assert(value != null, string.Format("Convertion of {0} to type {0} can be made!", tValue, type));
+            Debug.Assert(value != null, "Implement on the service or make the Object Serializable!");
             
-            return (T)Convert.ChangeType(stringValue, type);
+            PlayerPrefs.SetString(key, value);
         }
 
-        #endregion
-        
-    }
-
-    [Serializable]
-    internal class IntValue
-    {
-        public int value;
-
-        public IntValue(int newValue)
+        private string ConvertToStringFormat<T>(T tValue, Type type)
         {
-            value = newValue;
+            object obj = null;
+
+            if (type == typeof(int))
+            {
+                obj = new IntValue((int) Convert.ChangeType(tValue, type));
+            }else if (type == typeof(float))
+            {
+                obj = new FloatValue((float) Convert.ChangeType(tValue, type));
+            }else if (type == typeof(string))
+            {
+                return (string) Convert.ChangeType(tValue, type);
+            }else if (type == typeof(bool))
+            {
+                obj = new BoolValue((bool) Convert.ChangeType(tValue, type));
+            }else if (type == typeof(double))
+            {
+                obj = new DoubleValue((double) Convert.ChangeType(tValue, type));
+            }else if (type == typeof(Vector2))
+            {
+                obj = new Vector2Value((Vector2) Convert.ChangeType(tValue, type));
+            }else if (type == typeof(Vector3))
+            {
+                obj = new Vector3Value((Vector3) Convert.ChangeType(tValue, type));
+            }else{
+                Debugs.Log(tValue, type);
+                obj = JsonUtility.ToJson(tValue);
+            }
+
+            return JsonUtility.ToJson(obj);
         }
-    }
 
-    [Serializable]
-    internal class FloatValue
-    {
-        public float value;
-
-        public FloatValue(float newValue)
-        {
-            value = newValue;
-        }
-    }
-
-    [Serializable]
-    internal class BoolValue
-    {
-        public bool value;
-
-        public BoolValue(bool newValue)
-        {
-            value = newValue;
-        }
-    }
-
-    [Serializable]
-    internal class DoubleValue
-    {
-        public double value;
-
-        public DoubleValue(double newValue)
-        {
-            value = newValue;
-        }
-    }
+        #endregion        
+    }   
 }
