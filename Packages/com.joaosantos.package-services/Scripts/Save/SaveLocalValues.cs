@@ -29,6 +29,17 @@ namespace JoaoSant0s.ServicePackage.Save
     }
 
     [Serializable]
+    internal class LongValue
+    {
+        public long value;
+
+        public LongValue(long newValue)
+        {
+            value = newValue;
+        }
+    }
+
+    [Serializable]
     internal class BoolValue
     {
         public bool value;

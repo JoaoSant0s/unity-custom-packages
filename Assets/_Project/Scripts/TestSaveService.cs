@@ -23,12 +23,14 @@ public class TestSaveService : MonoBehaviour
 
         TestFloat();
 
-        TestString();
-
-        TestBool();
+        TestLong();
 
         TestDouble();
 
+        TestBool();
+
+        TestString();
+        
         TestVector2();
 
         TestVector3();
@@ -36,6 +38,8 @@ public class TestSaveService : MonoBehaviour
         TestSerializableObject();
 
         TestQuaternion();
+
+        TestDateTime();
     }
 
     private void TestInt()
@@ -70,20 +74,36 @@ public class TestSaveService : MonoBehaviour
         Debug.Log(mainValue == value);
     }
 
-    private void TestString()
+    private void TestLong()
     {
         Debug.Log("");
-        Debug.Log("TestString");
+        Debug.Log("TestLong");
 
-        var testKey = "testStringUnit";
-        var mainValue = "testing the value";
+        var testKey = "TestLongUnit";
+        var mainValue = 4546251351513213L;
 
-        saveService.Set<string>(testKey, mainValue);
-        var value = saveService.Get<string>(testKey);
+        saveService.Set<long>(testKey, mainValue);
+        var value = saveService.Get<long>(testKey);
 
         Debug.Log(mainValue);
         Debug.Log(value);
         Debug.Log(mainValue == value);
+    }
+
+    private void TestDouble()
+    {
+        Debug.Log("");
+        Debug.Log("TestDouble");
+
+        var testKey = "testDoubleUnit";
+        var mainValue = 155151515d;
+
+        saveService.Set<double>(testKey, mainValue);
+        var value = saveService.Get<double>(testKey);
+
+        Debug.Log(mainValue);
+        Debug.Log(value);
+        Debug.Log(mainValue == value);    
     }
 
     private void TestBool()
@@ -102,20 +122,20 @@ public class TestSaveService : MonoBehaviour
         Debug.Log(mainValue == value);    
     }
 
-    private void TestDouble()
+    private void TestString()
     {
         Debug.Log("");
-        Debug.Log("TestDouble");
+        Debug.Log("TestString");
 
-        var testKey = "testDoubleUnit";
-        var mainValue = 155151515d;
+        var testKey = "testStringUnit";
+        var mainValue = "testing the value";
 
-        saveService.Set<double>(testKey, mainValue);
-        var value = saveService.Get<double>(testKey);
+        saveService.Set<string>(testKey, mainValue);
+        var value = saveService.Get<string>(testKey);
 
         Debug.Log(mainValue);
         Debug.Log(value);
-        Debug.Log(mainValue == value);    
+        Debug.Log(mainValue == value);
     }
 
     private void TestVector2()
@@ -176,6 +196,22 @@ public class TestSaveService : MonoBehaviour
 
         saveService.Set<Quaternion>(testKey, mainValue);
         var value = saveService.Get<Quaternion>(testKey);
+
+        Debug.Log(mainValue);
+        Debug.Log(value);
+        Debug.Log(mainValue.Equals(value));
+    }
+
+    private void TestDateTime()
+    {
+        Debug.Log("");
+        Debug.Log("TestDateTime");
+
+        var testKey = "TestDateTime";
+        var mainValue = DateTime.Now;
+
+        saveService.Set<DateTime>(testKey, mainValue);
+        var value = saveService.Get<DateTime>(testKey);
 
         Debug.Log(mainValue);
         Debug.Log(value);

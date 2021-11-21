@@ -105,6 +105,11 @@ namespace JoaoSant0s.ServicePackage.Save
                 var obj = JsonUtility.FromJson<FloatValue>(stringValue);
 
                 return (T)Convert.ChangeType(obj.value, type);
+            }else if (type == typeof(long))
+            {                
+                var obj = JsonUtility.FromJson<LongValue>(stringValue);
+
+                return (T)Convert.ChangeType(obj.value, type);
             }else if (type == typeof(bool))
             {                
                 var obj = JsonUtility.FromJson<BoolValue>(stringValue);
@@ -117,18 +122,28 @@ namespace JoaoSant0s.ServicePackage.Save
                 return (T)Convert.ChangeType(obj.value, type);                
             }else if (type == typeof(Vector2))
             {                
-                var obj = JsonUtility.FromJson<Vector2Value>(stringValue);                
+                var obj = JsonUtility.FromJson<Vector2Value>(stringValue);
+
                 return (T)Convert.ChangeType(obj.value, type);                
             }else if (type == typeof(Vector3))
             {                
-                var obj = JsonUtility.FromJson<Vector3Value>(stringValue);                
+                var obj = JsonUtility.FromJson<Vector3Value>(stringValue);
+
                 return (T)Convert.ChangeType(obj.value, type);                
             }else if (type == typeof(Quaternion))
             {                
-                var obj = JsonUtility.FromJson<QuaternionValue>(stringValue);                
+                var obj = JsonUtility.FromJson<QuaternionValue>(stringValue);
+
                 return (T)Convert.ChangeType(obj.value, type);                
+            }else if (type == typeof(DateTime))
+            {                
+                var obj = JsonUtility.FromJson<LongValue>(stringValue);
+                var date = new DateTime(obj.value);
+
+                return (T)Convert.ChangeType(date, type);                
             }else{
                 var obj = JsonUtility.FromJson<T>(stringValue);
+
                 return (T)Convert.ChangeType(obj, type);     
             }
         }
@@ -155,6 +170,9 @@ namespace JoaoSant0s.ServicePackage.Save
             }else if (type == typeof(float))
             {
                 obj = new FloatValue((float) Convert.ChangeType(tValue, type));
+            }else if (type == typeof(long))
+            {
+                obj = new LongValue((long) Convert.ChangeType(tValue, type));
             }else if (type == typeof(string))
             {
                 return (string) Convert.ChangeType(tValue, type);
@@ -173,6 +191,10 @@ namespace JoaoSant0s.ServicePackage.Save
             }else if (type == typeof(Quaternion))
             {
                 obj = new QuaternionValue((Quaternion) Convert.ChangeType(tValue, type));
+            }else if (type == typeof(DateTime))
+            {
+                var date = (DateTime) Convert.ChangeType(tValue, type);
+                obj = new LongValue(date.Ticks);
             }else{
                 obj = tValue;
             }
