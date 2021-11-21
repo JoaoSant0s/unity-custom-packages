@@ -71,7 +71,6 @@ namespace JoaoSant0s.ServicePackage.Save
         /// <param name="key">basic key parameter</param>
         public T Get<T>(string key)
         {
-            Debug.Log("Get");
             var internalKey = BuildKey(key);
             
             return GetUnit<T>(internalKey);
@@ -86,7 +85,6 @@ namespace JoaoSant0s.ServicePackage.Save
         /// <param name="value"> the saved ba</param>
         public void Set<T>(string key, T value)
         {
-            Debug.Log("Set");
             var internalKey = BuildKey(key);
 
             SetUnit<T>(internalKey, value);
@@ -155,6 +153,11 @@ namespace JoaoSant0s.ServicePackage.Save
                 var obj = JsonUtility.FromJson<QuaternionValue>(stringValue);
 
                 return (T)Convert.ChangeType(obj.value, type);                
+            }else if (type == typeof(Rect))
+            {                
+                var obj = JsonUtility.FromJson<RectValue>(stringValue);
+
+                return (T)Convert.ChangeType(obj.value, type);                
             }else if (type == typeof(DateTime))
             {                
                 var obj = JsonUtility.FromJson<LongValue>(stringValue);
@@ -211,6 +214,9 @@ namespace JoaoSant0s.ServicePackage.Save
             }else if (type == typeof(Quaternion))
             {
                 obj = new QuaternionValue((Quaternion) Convert.ChangeType(tValue, type));
+            }else if (type == typeof(Rect))
+            {
+                obj = new RectValue((Rect) Convert.ChangeType(tValue, type));
             }else if (type == typeof(DateTime))
             {
                 var date = (DateTime) Convert.ChangeType(tValue, type);

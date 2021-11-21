@@ -40,11 +40,12 @@ public class TestSaveService : MonoBehaviour
         TestQuaternion();
 
         TestDateTime();
+
+        TestRect();
     }
 
     private void TestInt()
     {
-        Debug.Log("");
         Debug.Log("TestInt");
 
         var testKey = "testIntUnit";        
@@ -53,14 +54,11 @@ public class TestSaveService : MonoBehaviour
         saveService.Set<int>(testKey, -1233311);
         var value = saveService.Get<int>(testKey);
 
-        Debug.Log(mainValue);
-        Debug.Log(value);
         Debug.Log(mainValue == value);
     }
 
     private void TestFloat()
     {
-        Debug.Log("");
         Debug.Log("TestFloat");
 
         var testKey = "testFloatUnit";
@@ -69,14 +67,11 @@ public class TestSaveService : MonoBehaviour
         saveService.Set<float>(testKey, mainValue);
         var value = saveService.Get<float>(testKey);
 
-        Debug.Log(mainValue);
-        Debug.Log(value);
         Debug.Log(mainValue == value);
     }
 
     private void TestLong()
     {
-        Debug.Log("");
         Debug.Log("TestLong");
 
         var testKey = "TestLongUnit";
@@ -85,14 +80,11 @@ public class TestSaveService : MonoBehaviour
         saveService.Set<long>(testKey, mainValue);
         var value = saveService.Get<long>(testKey);
 
-        Debug.Log(mainValue);
-        Debug.Log(value);
         Debug.Log(mainValue == value);
     }
 
     private void TestDouble()
     {
-        Debug.Log("");
         Debug.Log("TestDouble");
 
         var testKey = "testDoubleUnit";
@@ -101,14 +93,11 @@ public class TestSaveService : MonoBehaviour
         saveService.Set<double>(testKey, mainValue);
         var value = saveService.Get<double>(testKey);
 
-        Debug.Log(mainValue);
-        Debug.Log(value);
         Debug.Log(mainValue == value);    
     }
 
     private void TestBool()
     {
-        Debug.Log("");
         Debug.Log("TestBool");
 
         var testKey = "testBoolUnit";
@@ -117,14 +106,11 @@ public class TestSaveService : MonoBehaviour
         saveService.Set<bool>(testKey, mainValue);
         var value = saveService.Get<bool>(testKey);
 
-        Debug.Log(mainValue);
-        Debug.Log(value);
         Debug.Log(mainValue == value);    
     }
 
     private void TestString()
     {
-        Debug.Log("");
         Debug.Log("TestString");
 
         var testKey = "testStringUnit";
@@ -133,14 +119,11 @@ public class TestSaveService : MonoBehaviour
         saveService.Set<string>(testKey, mainValue);
         var value = saveService.Get<string>(testKey);
 
-        Debug.Log(mainValue);
-        Debug.Log(value);
         Debug.Log(mainValue == value);
     }
 
     private void TestVector2()
     {
-        Debug.Log("");
         Debug.Log("TestVector2");
 
         var testKey = "TestVector2Unit";
@@ -149,14 +132,11 @@ public class TestSaveService : MonoBehaviour
         saveService.Set<Vector2>(testKey, mainValue);
         var value = saveService.Get<Vector2>(testKey);
 
-        Debug.Log(mainValue);
-        Debug.Log(value);
         Debug.Log(mainValue == value);    
     }
 
     private void TestVector3()
     {
-        Debug.Log("");
         Debug.Log("TestVector3");
 
         var testKey = "TestVector3Unit";
@@ -165,57 +145,59 @@ public class TestSaveService : MonoBehaviour
         saveService.Set<Vector3>(testKey, mainValue);
         var value = saveService.Get<Vector3>(testKey);
 
-        Debug.Log(mainValue);
-        Debug.Log(value);
         Debug.Log(mainValue == value);    
     }
 
     private void TestSerializableObject()
     {
-        Debug.Log("");
         Debug.Log("TestSerializableObject");
 
-        var testKey = "TestSerializableObject";
+        var testKey = "TestSerializableObjectUnit";
         var mainValue = new TestObject() {stringValue = "Test Serializable Object", floatValue = 21.40f };
 
         saveService.Set<TestObject>(testKey, mainValue);
         var value = saveService.Get<TestObject>(testKey);
 
-        Debug.Log(mainValue);
-        Debug.Log(value);
         Debug.Log(mainValue.Equals(value));
     }
 
     private void TestQuaternion()
     {
-        Debug.Log("");
         Debug.Log("TestQuaternion");
 
-        var testKey = "TestQuaternion";
+        var testKey = "TestQuaternionUnit";
         var mainValue = Quaternion.AngleAxis(45f, Vector3.up);
 
         saveService.Set<Quaternion>(testKey, mainValue);
         var value = saveService.Get<Quaternion>(testKey);
 
-        Debug.Log(mainValue);
-        Debug.Log(value);
-        Debug.Log(mainValue.Equals(value));
+        Debug.Log(mainValue == value);
     }
 
     private void TestDateTime()
     {
-        Debug.Log("");
         Debug.Log("TestDateTime");
 
-        var testKey = "TestDateTime";
+        var testKey = "TestDateTimeUnit";
         var mainValue = DateTime.Now;
 
         saveService.Set<DateTime>(testKey, mainValue);
         var value = saveService.Get<DateTime>(testKey);
 
-        Debug.Log(mainValue);
-        Debug.Log(value);
-        Debug.Log(mainValue.Equals(value));
+        Debug.Log(mainValue == value);
+    }
+
+    private void TestRect()
+    {
+        Debug.Log("TestRect");
+
+        var testKey = "TestRectUnit";
+        var mainValue = new Rect(41, 17, 51, 39);
+
+        saveService.Set<Rect>(testKey, mainValue);
+        var value = saveService.Get<Rect>(testKey);
+
+        Debug.Log(mainValue == value);
     }
 }
 

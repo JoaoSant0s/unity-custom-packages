@@ -93,4 +93,15 @@ namespace JoaoSant0s.ServicePackage.Save
             value = newValue;
         }
     }
+
+    [Serializable]
+    internal class RectValue
+    {
+        public Rect value;
+
+        public RectValue(Rect newValue)
+        {
+            value = newValue;
+        }
+    }
 }
