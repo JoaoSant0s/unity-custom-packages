@@ -9,9 +9,9 @@ using JoaoSant0s.ServicePackage.General;
 
 namespace JoaoSant0s.ServicePackage.Save
 {
-[CreateAssetMenu(fileName = "SaveConfig", menuName = "JoaoSant0s/ServicePackage/Save/SaveConfig")]
+[CreateAssetMenu(fileName = "SaveLocalConfig", menuName = "JoaoSant0s/ServicePackage/Save/SaveLocalConfig")]
 
-    public class SaveConfig : ServiceConfig
+    public class SaveLocalConfig : ServiceConfig
     {
         [SerializeField]
         [Tooltip("Used as Player Prefs prefix indicator")]

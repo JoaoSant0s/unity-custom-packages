@@ -12,15 +12,15 @@ using JoaoSant0s.ServicePackage.General;
 
 namespace JoaoSant0s.ServicePackage.Save
 {
-    public class SaveService : Service
+    public class SaveLocalService : Service
     {
-      private SaveConfig config;
+      private SaveLocalConfig config;
         
         #region Override Methods
 
         public override void Init()
         {
-            config = Resources.Load<SaveConfig>("Configs/SaveConfig");
+            config = Resources.Load<SaveLocalConfig>("Configs/SaveLocalConfig");
         }
 
         #endregion

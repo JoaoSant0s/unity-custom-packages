@@ -10,30 +10,30 @@ using JoaoSant0s.CommonWrapper;
 
 public class TestSaveService : MonoBehaviour
 {
-    private SaveService saveService;
+    private SaveLocalService saveService;
 
     private void Awake() 
     {
-        saveService = Services.Get<SaveService>();
+        saveService = Services.Get<SaveLocalService>();
     }
 
     private void Start() 
     {
-        //TestInt();
+        TestInt();
 
-        //TestFloat();
+        TestFloat();
 
-        //TestString();
+        TestString();
 
-        //TestBool();
+        TestBool();
 
-        //TestDouble();
+        TestDouble();
 
-        //TestVector2();
+        TestVector2();
 
-        //TestVector3();
+        TestVector3();
 
-        //TestSerializableObject();
+        TestSerializableObject();
 
         TestQuaternion();
     }
