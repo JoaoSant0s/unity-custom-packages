@@ -58,6 +58,7 @@ namespace JoaoSant0s.ServicePackage.Save
 
         public T Get<T>(string radicalKey)
         {
+            Debug.Log("Get");
             var key = BuildKey(radicalKey);
             
             return GetUnit<T>(key);
@@ -65,6 +66,7 @@ namespace JoaoSant0s.ServicePackage.Save
 
         public void Set<T>(string radicalKey, T value)
         {
+            Debug.Log("Set");
             var key = BuildKey(radicalKey);
 
             SetUnit<T>(key, value);
@@ -122,9 +124,7 @@ namespace JoaoSant0s.ServicePackage.Save
                 var obj = JsonUtility.FromJson<Vector3Value>(stringValue);                
                 return (T)Convert.ChangeType(obj.value, type);                
             }else{
-                Debug.Log(stringValue);
-                var obj = JsonUtility.FromJson<T>(stringValue);                
-                Debug.Log(obj);
+                var obj = JsonUtility.FromJson<T>(stringValue);
                 return (T)Convert.ChangeType(obj, type);     
             }
         }
@@ -167,8 +167,7 @@ namespace JoaoSant0s.ServicePackage.Save
             {
                 obj = new Vector3Value((Vector3) Convert.ChangeType(tValue, type));
             }else{
-                Debugs.Log(tValue, type);
-                obj = JsonUtility.ToJson(tValue);
+                obj = tValue;
             }
 
             return JsonUtility.ToJson(obj);

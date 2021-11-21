@@ -6,6 +6,7 @@ using UnityEngine;
 
 using JoaoSant0s.ServicePackage.Save;
 using JoaoSant0s.ServicePackage.General;
+using JoaoSant0s.CommonWrapper;
 
 public class TestSaveService : MonoBehaviour
 {
@@ -18,19 +19,19 @@ public class TestSaveService : MonoBehaviour
 
     private void Start() 
     {
-        TestInt();
+        //TestInt();
 
-        TestFloat();
+        //TestFloat();
 
-        TestString();
+        //TestString();
 
-        TestBool();
+        //TestBool();
 
-        TestDouble();
+        //TestDouble();
 
-        TestVector2();
+        //TestVector2();
 
-        TestVector3();
+        //TestVector3();
 
         TestSerializableObject();
     }
@@ -160,7 +161,7 @@ public class TestSaveService : MonoBehaviour
 
         Debug.Log(mainValue);
         Debug.Log(value);
-        Debug.Log(mainValue == value);
+        Debug.Log(mainValue.Equals(value));
     }
 }
 
@@ -172,7 +173,26 @@ public class TestObject
 
     public override string ToString()
     {
-        return string.Format("-- {0}, {1} --", stringValue, floatValue);
+        return JsonUtility.ToJson(this);
+    }
+
+    public override bool Equals(object obj)
+    {
+        if ((obj == null) || !this.GetType().Equals(obj.GetType()))
+        {
+            return false;
+        }
+        else
+        {
+            TestObject otherTestObject = obj as TestObject;
+
+            return otherTestObject.stringValue == stringValue && otherTestObject.floatValue == floatValue;
+        }
+    }
+
+    public override int GetHashCode()
+    {        
+        return stringValue.GetHashCode() ^ floatValue.GetHashCode();
     }
 }
 
