@@ -33,7 +33,9 @@ public class TestSaveService : MonoBehaviour
 
         //TestVector3();
 
-        TestSerializableObject();
+        //TestSerializableObject();
+
+        TestQuaternion();
     }
 
     private void TestInt()
@@ -158,6 +160,22 @@ public class TestSaveService : MonoBehaviour
 
         saveService.Set<TestObject>(testKey, mainValue);
         var value = saveService.Get<TestObject>(testKey);
+
+        Debug.Log(mainValue);
+        Debug.Log(value);
+        Debug.Log(mainValue.Equals(value));
+    }
+
+    private void TestQuaternion()
+    {
+        Debug.Log("");
+        Debug.Log("TestQuaternion");
+
+        var testKey = "TestQuaternion";
+        var mainValue = Quaternion.AngleAxis(45f, Vector3.up);
+
+        saveService.Set<Quaternion>(testKey, mainValue);
+        var value = saveService.Get<Quaternion>(testKey);
 
         Debug.Log(mainValue);
         Debug.Log(value);

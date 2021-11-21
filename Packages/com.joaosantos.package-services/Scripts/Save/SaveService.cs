@@ -123,6 +123,10 @@ namespace JoaoSant0s.ServicePackage.Save
             {                
                 var obj = JsonUtility.FromJson<Vector3Value>(stringValue);                
                 return (T)Convert.ChangeType(obj.value, type);                
+            }else if (type == typeof(Quaternion))
+            {                
+                var obj = JsonUtility.FromJson<QuaternionValue>(stringValue);                
+                return (T)Convert.ChangeType(obj.value, type);                
             }else{
                 var obj = JsonUtility.FromJson<T>(stringValue);
                 return (T)Convert.ChangeType(obj, type);     
@@ -166,6 +170,9 @@ namespace JoaoSant0s.ServicePackage.Save
             }else if (type == typeof(Vector3))
             {
                 obj = new Vector3Value((Vector3) Convert.ChangeType(tValue, type));
+            }else if (type == typeof(Quaternion))
+            {
+                obj = new QuaternionValue((Quaternion) Convert.ChangeType(tValue, type));
             }else{
                 obj = tValue;
             }

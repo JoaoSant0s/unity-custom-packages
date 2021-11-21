@@ -71,4 +71,15 @@ namespace JoaoSant0s.ServicePackage.Save
             value = newValue;
         }
     }
+
+    [Serializable]
+    internal class QuaternionValue
+    {
+        public Quaternion value;
+
+        public QuaternionValue(Quaternion newValue)
+        {
+            value = newValue;
+        }
+    }
 }
