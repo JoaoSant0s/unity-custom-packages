@@ -46,30 +46,50 @@ namespace JoaoSant0s.ServicePackage.Save
             return true;
         }
 
-        public T GetOrDefault<T>(string radicalKey, T defaultValue = default(T))
+        /// <summary>
+        /// Get a saved value locally or use a Default value.
+        /// Can Get values with type:
+        /// Int, Long, Double, bool, string, Vector2, Vector3, Serializable Objects, Quaternion, DateTime, Rect.
+        /// </summary>
+        /// <param name="key">basic key parameter</param>
+        /// <param name="defaultValue">default value if not found the saved key</param>
+        public T GetOrDefault<T>(string key, T defaultValue = default(T))
         {
-            var key = BuildKey(radicalKey);
+            var internalKey = BuildKey(key);
 
-            if (Contains(key))
-                return Get<T>(key);
+            if (Contains(internalKey))
+                return Get<T>(internalKey);
             else
                 return defaultValue;
-        }      
-
-        public T Get<T>(string radicalKey)
-        {
-            Debug.Log("Get");
-            var key = BuildKey(radicalKey);
-            
-            return GetUnit<T>(key);
         }
 
-        public void Set<T>(string radicalKey, T value)
+        /// <summary>
+        /// Get a saved value locally or use a Default value.
+        /// Can Get values with type:
+        /// Int, Long, Double, bool, string, Vector2, Vector3, Serializable Objects, Quaternion, DateTime, Rect.	
+        /// </summary>
+        /// <param name="key">basic key parameter</param>
+        public T Get<T>(string key)
+        {
+            Debug.Log("Get");
+            var internalKey = BuildKey(key);
+            
+            return GetUnit<T>(internalKey);
+        }
+
+        /// <summary>
+        /// Set the value locally.
+        /// Can set this values Types:
+        /// Int, Long, Double, bool, string, Vector2, Vector3, Serializable Objects, Quaternion, DateTime, Rect.	
+        /// </summary>
+        /// <param name="key">basic key parameter</param>
+        /// <param name="value"> the saved ba</param>
+        public void Set<T>(string key, T value)
         {
             Debug.Log("Set");
-            var key = BuildKey(radicalKey);
+            var internalKey = BuildKey(key);
 
-            SetUnit<T>(key, value);
+            SetUnit<T>(internalKey, value);
         }
 
         #endregion
