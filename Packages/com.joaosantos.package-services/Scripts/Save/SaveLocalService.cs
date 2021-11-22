@@ -125,6 +125,12 @@ namespace JoaoSant0s.ServicePackage.Save
             }else if (type == typeof(string[]))
             {
                 obj = JsonUtility.FromJson<StringArrayValue>(stringValue).value;
+            }else if (type == typeof(Vector2[]))
+            {
+                obj = JsonUtility.FromJson<Vector2ArrayValue>(stringValue).value;
+            }else if (type == typeof(Vector3[]))
+            {
+                obj = JsonUtility.FromJson<Vector3ArrayValue>(stringValue).value;
             }
 
             return obj;
@@ -263,6 +269,12 @@ namespace JoaoSant0s.ServicePackage.Save
             }else if (type == typeof(string[]))
             {
                 obj = new StringArrayValue((string[]) Convert.ChangeType(tValue, type));
+            }else if (type == typeof(Vector2[]))
+            {
+                obj = new Vector2ArrayValue((Vector2[]) Convert.ChangeType(tValue, type));
+            }else if (type == typeof(Vector3[]))
+            {
+                obj = new Vector3ArrayValue((Vector3[]) Convert.ChangeType(tValue, type));
             }
 
             return obj;

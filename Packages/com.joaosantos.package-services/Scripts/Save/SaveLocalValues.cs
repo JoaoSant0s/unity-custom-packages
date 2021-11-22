@@ -150,6 +150,17 @@ namespace JoaoSant0s.ServicePackage.Save
     }
 
     [Serializable]
+    internal class Vector2ArrayValue
+    {
+        public Vector2[] value;
+
+        public Vector2ArrayValue(Vector2[] newValue)
+        {
+            value = newValue;
+        }
+    }
+
+    [Serializable]
     internal class Vector3Value
     {
         public Vector3 value;
@@ -159,6 +170,18 @@ namespace JoaoSant0s.ServicePackage.Save
             value = newValue;
         }
     }
+
+    [Serializable]
+    internal class Vector3ArrayValue
+    {
+        public Vector3[] value;
+
+        public Vector3ArrayValue(Vector3[] newValue)
+        {
+            value = newValue;
+        }
+    }
+    
 
     [Serializable]
     internal class QuaternionValue

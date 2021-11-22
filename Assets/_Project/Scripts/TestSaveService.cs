@@ -64,6 +64,10 @@ public class TestSaveService : MonoBehaviour
         TestBoolArray();
 
         TestStringArray();
+
+        TestVector2Array();
+        
+        TestVector3Array();
     }
 
 #region Collections
@@ -147,6 +151,34 @@ public class TestSaveService : MonoBehaviour
 
         saveService.Set<string[]>(testKey, mainValue);
         var value = saveService.Get<string[]>(testKey);
+
+        Debugs.Log(mainValue);
+        Debugs.Log(value);
+    }
+
+    private void TestVector2Array()
+    {
+        Debug.Log("TestVector2Array");
+
+        var testKey = "TestVector2Array";
+        var mainValue = new Vector2[] {Vector2.down, Vector2.up, Vector2.left};
+
+        saveService.Set<Vector2[]>(testKey, mainValue);
+        var value = saveService.Get<Vector2[]>(testKey);
+
+        Debugs.Log(mainValue);
+        Debugs.Log(value);
+    }
+
+    private void TestVector3Array()
+    {
+        Debug.Log("TestVector3Array");
+
+        var testKey = "TestVector3Array";
+        var mainValue = new Vector3[] {Vector3.down, Vector3.up, Vector3.left};
+
+        saveService.Set<Vector3[]>(testKey, mainValue);
+        var value = saveService.Get<Vector3[]>(testKey);
 
         Debugs.Log(mainValue);
         Debugs.Log(value);
