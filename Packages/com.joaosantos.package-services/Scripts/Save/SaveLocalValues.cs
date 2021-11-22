@@ -18,11 +18,33 @@ namespace JoaoSant0s.ServicePackage.Save
     }
 
     [Serializable]
+    internal class IntArrayValue
+    {
+        public int[] value;
+
+        public IntArrayValue(int[] newValue)
+        {
+            value = newValue;
+        }
+    }
+
+    [Serializable]
     internal class FloatValue
     {
         public float value;
 
         public FloatValue(float newValue)
+        {
+            value = newValue;
+        }
+    }
+
+    [Serializable]
+    internal class FloatArrayValue
+    {
+        public float[] value;
+
+        public FloatArrayValue(float[] newValue)
         {
             value = newValue;
         }
@@ -40,6 +62,17 @@ namespace JoaoSant0s.ServicePackage.Save
     }
 
     [Serializable]
+    internal class LongArrayValue
+    {
+        public long[] value;
+
+        public LongArrayValue(long[] newValue)
+        {
+            value = newValue;
+        }
+    }
+
+    [Serializable]
     internal class BoolValue
     {
         public bool value;
@@ -51,11 +84,33 @@ namespace JoaoSant0s.ServicePackage.Save
     }
 
     [Serializable]
+    internal class BoolArrayValue
+    {
+        public bool[] value;
+
+        public BoolArrayValue(bool[] newValue)
+        {
+            value = newValue;
+        }
+    }
+
+    [Serializable]
     internal class DoubleValue
     {
         public double value;
 
         public DoubleValue(double newValue)
+        {
+            value = newValue;
+        }
+    }
+
+    [Serializable]
+    internal class DoubleArrayValue
+    {
+        public double[] value;
+
+        public DoubleArrayValue(double[] newValue)
         {
             value = newValue;
         }
@@ -100,6 +155,17 @@ namespace JoaoSant0s.ServicePackage.Save
         public Rect value;
 
         public RectValue(Rect newValue)
+        {
+            value = newValue;
+        }
+    }
+
+    [Serializable]
+    internal class StringArrayValue
+    {
+        public string[] value;
+
+        public StringArrayValue(string[] newValue)
         {
             value = newValue;
         }

@@ -19,6 +19,13 @@ public class TestSaveService : MonoBehaviour
 
     private void Start() 
     {
+        //TestNoCollections();
+
+        TestCollections();
+    }
+
+    private void TestNoCollections()
+    {
         TestInt();
 
         TestFloat();
@@ -44,6 +51,95 @@ public class TestSaveService : MonoBehaviour
         TestRect();
     }
 
+    private void TestCollections()
+    {
+        TestIntArray();
+
+        TestFloatArray();
+
+        TestLongArray();
+
+        TestDoubleArray();
+
+        TestBoolArray();
+    }
+
+#region Collections
+
+    private void TestIntArray()
+    {
+        Debug.Log("TestIntArray");
+
+        var testKey = "TestIntArray";        
+        var mainValue = new int[3] {5, 45, 81};
+
+        saveService.Set<int[]>(testKey, mainValue);
+        var value = saveService.Get<int[]>(testKey);
+
+        Debugs.Log(mainValue);
+        Debugs.Log(value);
+    }
+
+    private void TestFloatArray()
+    {
+        Debug.Log("TestFloatArray");
+
+        var testKey = "TestFloatArray";
+        var mainValue = new float[] {12312.12312f, -12.12312f, -123.123321f};
+
+        saveService.Set<float[]>(testKey, mainValue);
+        var value = saveService.Get<float[]>(testKey);
+
+        Debugs.Log(mainValue);
+        Debugs.Log(value);
+    }
+
+    private void TestLongArray()
+    {
+        Debug.Log("TestLongArray");
+
+        var testKey = "TestLongArray";
+        var mainValue = new long[] {12312L, 5454545L, -123123321L};
+
+        saveService.Set<long[]>(testKey, mainValue);
+        var value = saveService.Get<long[]>(testKey);
+
+        Debugs.Log(mainValue);
+        Debugs.Log(value);
+    }
+
+    private void TestDoubleArray()
+    {
+        Debug.Log("TestDoubleArray");
+
+        var testKey = "TestDoubleArray";
+        var mainValue = new double[] {123.12D, -9291123.12D, -0.12D};
+
+        saveService.Set<double[]>(testKey, mainValue);
+        var value = saveService.Get<double[]>(testKey);
+
+        Debugs.Log(mainValue);
+        Debugs.Log(value);
+    }
+
+    private void TestBoolArray()
+    {
+        Debug.Log("TestBoolArray");
+
+        var testKey = "TestBoolArray";
+        var mainValue = new bool[] {true, false, true};
+
+        saveService.Set<bool[]>(testKey, mainValue);
+        var value = saveService.Get<bool[]>(testKey);
+
+        Debugs.Log(mainValue);
+        Debugs.Log(value);
+    }
+
+#endregion
+
+
+#region No Collections
     private void TestInt()
     {
         Debug.Log("TestInt");
@@ -51,7 +147,7 @@ public class TestSaveService : MonoBehaviour
         var testKey = "testIntUnit";        
         var mainValue = -1233311;
 
-        saveService.Set<int>(testKey, -1233311);
+        saveService.Set<int>(testKey, mainValue);
         var value = saveService.Get<int>(testKey);
 
         Debug.Log(mainValue == value);
@@ -199,6 +295,9 @@ public class TestSaveService : MonoBehaviour
 
         Debug.Log(mainValue == value);
     }
+
+#endregion
+
 }
 
 [Serializable]

@@ -49,37 +49,22 @@ namespace JoaoSant0s.ServicePackage.Save
         /// <summary>
         /// Get a saved value locally or use a Default value.
         /// Can Get values with type:
-        /// Int, Long, Double, bool, string, Vector2, Vector3, Serializable Objects, Quaternion, DateTime, Rect.
-        /// </summary>
-        /// <param name="key">basic key parameter</param>
-        /// <param name="defaultValue">default value if not found the saved key</param>
-        public T GetOrDefault<T>(string key, T defaultValue = default(T))
-        {
-            var internalKey = BuildKey(key);
-
-            if (Contains(internalKey))
-                return Get<T>(internalKey);
-            else
-                return defaultValue;
-        }
-
-        /// <summary>
-        /// Get a saved value locally or use a Default value.
-        /// Can Get values with type:
-        /// Int, Long, Double, bool, string, Vector2, Vector3, Serializable Objects, Quaternion, DateTime, Rect.	
+        /// Int, Long, Double, Bool, String, Vector2, Vector3, Serializable Objects, Quaternion, DateTime, Rect.	
+        /// Int[], Long[], Double[], Bool[], String[], Vector2[], Vector3[], Serializable Objects[], Quaternion[], DateTime[], Rect[].
         /// </summary>
         /// <param name="key">basic key parameter</param>
         public T Get<T>(string key)
         {
             var internalKey = BuildKey(key);
             
-            return GetUnit<T>(internalKey);
+            return GetData<T>(internalKey);
         }
 
         /// <summary>
         /// Set the value locally.
         /// Can set this values Types:
-        /// Int, Long, Double, bool, string, Vector2, Vector3, Serializable Objects, Quaternion, DateTime, Rect.	
+        /// Int, Long, Double, Bool, String, Vector2, Vector3, Serializable Objects, Quaternion, DateTime, Rect.	
+        /// Int[], Long[], Double[], bool[], string[], Vector2[], Vector3[], Serializable Objects[], Quaternion[], DateTime[], Rect[].
         /// </summary>
         /// <param name="key">basic key parameter</param>
         /// <param name="value"> the saved ba</param>
@@ -87,8 +72,9 @@ namespace JoaoSant0s.ServicePackage.Save
         {
             var internalKey = BuildKey(key);
 
-            SetUnit<T>(internalKey, value);
+            SetData<T>(internalKey, value);
         }
+        
 
         #endregion
 
@@ -99,9 +85,11 @@ namespace JoaoSant0s.ServicePackage.Save
             return string.Format("{0}_{1}", config.Prefix, radical);
         }
 
-        private T GetUnit<T>(string key)
+        private T GetData<T>(string key)
         {
             var type = typeof(T);
+
+            Debugs.Log(key, type);
 
             var stringValue = PlayerPrefs.GetString(key);
            
@@ -115,12 +103,20 @@ namespace JoaoSant0s.ServicePackage.Save
                 var obj = JsonUtility.FromJson<IntValue>(stringValue);
 
                 return (T)Convert.ChangeType(obj.value, type);
-            }else if (type == typeof(string))
-            {
-                return (T)Convert.ChangeType(stringValue, type);
-            }else if (type == typeof(float))
+            }else if (type == typeof(int[]))
+            {                
+                var obj = JsonUtility.FromJson<IntArrayValue>(stringValue);
+
+                return (T)Convert.ChangeType(obj.value, type);
+            }
+            else if (type == typeof(float))
             {                
                 var obj = JsonUtility.FromJson<FloatValue>(stringValue);
+
+                return (T)Convert.ChangeType(obj.value, type);
+            }else if (type == typeof(float[]))
+            {                
+                var obj = JsonUtility.FromJson<FloatArrayValue>(stringValue);
 
                 return (T)Convert.ChangeType(obj.value, type);
             }else if (type == typeof(long))
@@ -128,9 +124,19 @@ namespace JoaoSant0s.ServicePackage.Save
                 var obj = JsonUtility.FromJson<LongValue>(stringValue);
 
                 return (T)Convert.ChangeType(obj.value, type);
+            }else if (type == typeof(long[]))
+            {                
+                var obj = JsonUtility.FromJson<LongArrayValue>(stringValue);
+
+                return (T)Convert.ChangeType(obj.value, type);
             }else if (type == typeof(bool))
             {                
                 var obj = JsonUtility.FromJson<BoolValue>(stringValue);
+
+                return (T)Convert.ChangeType(obj.value, type);                
+            }else if (type == typeof(bool[]))
+            {                
+                var obj = JsonUtility.FromJson<BoolArrayValue>(stringValue);
 
                 return (T)Convert.ChangeType(obj.value, type);                
             }else if (type == typeof(double))
@@ -138,6 +144,19 @@ namespace JoaoSant0s.ServicePackage.Save
                 var obj = JsonUtility.FromJson<DoubleValue>(stringValue);
 
                 return (T)Convert.ChangeType(obj.value, type);                
+            }else if (type == typeof(double[]))
+            {                
+                var obj = JsonUtility.FromJson<DoubleArrayValue>(stringValue);
+
+                return (T)Convert.ChangeType(obj.value, type);                
+            }else if (type == typeof(string))
+            {
+                return (T)Convert.ChangeType(stringValue, type);
+            }else if (type == typeof(string[]))
+            {                
+                var obj = JsonUtility.FromJson<StringArrayValue>(stringValue);
+
+                return (T)Convert.ChangeType(obj.value, type);
             }else if (type == typeof(Vector2))
             {                
                 var obj = JsonUtility.FromJson<Vector2Value>(stringValue);
@@ -171,9 +190,11 @@ namespace JoaoSant0s.ServicePackage.Save
             }
         }
 
-        private void SetUnit<T>(string key, T tValue)
+        private void SetData<T>(string key, T tValue)
         {
             var type = typeof(T);
+
+            Debugs.Log(key, type, tValue);
 
             var value = ConvertToStringFormat(tValue, type);
 
@@ -190,21 +211,39 @@ namespace JoaoSant0s.ServicePackage.Save
             if (type == typeof(int))
             {
                 obj = new IntValue((int) Convert.ChangeType(tValue, type));
+            }else if (type == typeof(int[]))
+            {
+                obj = new IntArrayValue((int[]) Convert.ChangeType(tValue, type));
             }else if (type == typeof(float))
             {
                 obj = new FloatValue((float) Convert.ChangeType(tValue, type));
+            }else if (type == typeof(float[]))
+            {
+                obj = new FloatArrayValue((float[]) Convert.ChangeType(tValue, type));
             }else if (type == typeof(long))
             {
                 obj = new LongValue((long) Convert.ChangeType(tValue, type));
-            }else if (type == typeof(string))
+            }else if (type == typeof(long[]))
             {
-                return (string) Convert.ChangeType(tValue, type);
+                obj = new LongArrayValue((long[]) Convert.ChangeType(tValue, type));
             }else if (type == typeof(bool))
             {
                 obj = new BoolValue((bool) Convert.ChangeType(tValue, type));
+            }else if (type == typeof(bool[]))
+            {
+                obj = new BoolArrayValue((bool[]) Convert.ChangeType(tValue, type));
             }else if (type == typeof(double))
             {
                 obj = new DoubleValue((double) Convert.ChangeType(tValue, type));
+            }else if (type == typeof(double[]))
+            {
+                obj = new DoubleArrayValue((double[]) Convert.ChangeType(tValue, type));
+            }else if (type == typeof(string))
+            {
+                return (string) Convert.ChangeType(tValue, type);
+            }else if (type == typeof(string[]))
+            {
+                obj = new StringArrayValue((string[]) Convert.ChangeType(tValue, type));
             }else if (type == typeof(Vector2))
             {
                 obj = new Vector2Value((Vector2) Convert.ChangeType(tValue, type));
