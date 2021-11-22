@@ -5,11 +5,25 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 using JoaoSant0s.Extensions.Transforms;
+using System;
 
 namespace JoaoSant0s.CommonWrapper
 {
     public static class UtilWrapper
     {
+        public static Byte[] GetBytesFromStringTransformation(string stringReference)
+        {
+            String[] arr = stringReference.Split('-');
+            Byte[] array = new Byte[arr.Length];
+
+            for(int i = 0; i<arr.Length; i++)
+            {
+                array[i]=Convert.ToByte(arr[i],16);
+            }
+
+            return array;
+        }
+
         public static bool IsPointOverUIObject<T>()
         {
             PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
