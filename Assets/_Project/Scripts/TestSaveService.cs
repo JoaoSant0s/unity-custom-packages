@@ -19,9 +19,9 @@ public class TestSaveService : MonoBehaviour
 
     private void Start() 
     {
-        //TestNoCollections();
+        TestNoCollections();
 
-        TestCollections();
+        //TestCollections();
     }
 
     private void TestNoCollections()
@@ -62,6 +62,8 @@ public class TestSaveService : MonoBehaviour
         TestDoubleArray();
 
         TestBoolArray();
+
+        TestStringArray();
     }
 
 #region Collections
@@ -131,6 +133,20 @@ public class TestSaveService : MonoBehaviour
 
         saveService.Set<bool[]>(testKey, mainValue);
         var value = saveService.Get<bool[]>(testKey);
+
+        Debugs.Log(mainValue);
+        Debugs.Log(value);
+    }
+
+    private void TestStringArray()
+    {
+        Debug.Log("TestStringArray");
+
+        var testKey = "TestStringArray";
+        var mainValue = new string[] {"string", "string value", "value string"};
+
+        saveService.Set<string[]>(testKey, mainValue);
+        var value = saveService.Get<string[]>(testKey);
 
         Debugs.Log(mainValue);
         Debugs.Log(value);

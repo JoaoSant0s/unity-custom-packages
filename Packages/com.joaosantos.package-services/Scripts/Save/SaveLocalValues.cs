@@ -117,6 +117,28 @@ namespace JoaoSant0s.ServicePackage.Save
     }
 
     [Serializable]
+    internal class StringValue
+    {
+        public string value;
+
+        public StringValue(string newValue)
+        {
+            value = newValue;
+        }
+    }
+
+    [Serializable]
+    internal class StringArrayValue
+    {
+        public string[] value;
+
+        public StringArrayValue(string[] newValue)
+        {
+            value = newValue;
+        }
+    }
+
+    [Serializable]
     internal class Vector2Value
     {
         public Vector2 value;
@@ -158,16 +180,5 @@ namespace JoaoSant0s.ServicePackage.Save
         {
             value = newValue;
         }
-    }
-
-    [Serializable]
-    internal class StringArrayValue
-    {
-        public string[] value;
-
-        public StringArrayValue(string[] newValue)
-        {
-            value = newValue;
-        }
-    }
+    }    
 }
