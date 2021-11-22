@@ -19,9 +19,9 @@ public class TestSaveService : MonoBehaviour
 
     private void Start() 
     {
-        //TestNoCollections();
+        TestNoCollections();
 
-        TestCollections();
+        //TestCollections();
     }
 
     private void TestNoCollections()
@@ -68,8 +68,6 @@ public class TestSaveService : MonoBehaviour
         TestVector2Array();
 
         TestVector3Array();
-
-        //TestSerializableObjectArray();
 
         TestQuaternionArray();
 
@@ -190,21 +188,7 @@ public class TestSaveService : MonoBehaviour
 
         Debugs.Log(mainValue);
         Debugs.Log(value);
-    }
-
-    private void TestSerializableObjectArray()
-    {
-        Debug.Log("TestSerializableObjectArray");
-
-        var testKey = "TestSerializableObjectArray";
-        var mainValue = new TestObject[]{new TestObject() {stringValue = "Test 1", floatValue = 1.1f }, new TestObject() {stringValue = "Test 2", floatValue = 2.2f }};
-
-        saveService.Set<TestObject[]>(testKey, mainValue);
-        var value = saveService.Get<TestObject[]>(testKey);
-
-        Debugs.Log(mainValue);
-        Debugs.Log(value);
-    }
+    }    
 
     private void TestQuaternionArray()
     {
@@ -361,11 +345,11 @@ public class TestSaveService : MonoBehaviour
         Debug.Log("TestSerializableObject");
 
         var testKey = "TestSerializableObjectUnit";
-        var mainValue = new TestObject() {stringValue = "Test Serializable Object", floatValue = 21.40f };
+        var mainValue = new TestObject() {stringValue = "Test Serializable Object", floatValue = 21.40f, stringArrayValue = new string[] {"string", "string value", "value string"} };
 
         saveService.Set<TestObject>(testKey, mainValue);
         var value = saveService.Get<TestObject>(testKey);
-
+        
         Debug.Log(mainValue.Equals(value));
     }
 
@@ -417,6 +401,8 @@ public class TestObject
 {
     public string stringValue;
     public float floatValue;
+    
+    public string [] stringArrayValue;
 
     public override string ToString()
     {
@@ -439,7 +425,7 @@ public class TestObject
 
     public override int GetHashCode()
     {        
-        return stringValue.GetHashCode() ^ floatValue.GetHashCode();
+        return stringValue.GetHashCode() ^ floatValue.GetHashCode() ^ stringArrayValue.GetHashCode();
     }
 }
 

@@ -1,13 +1,8 @@
 using System;
 using System.Linq;
-using System.Collections;
-using System.Collections.Generic;
-
-using Conversor = System.Text.Encoding;
 
 using UnityEngine;
 
-using JoaoSant0s.CommonWrapper;
 using JoaoSant0s.ServicePackage.General;
 
 namespace JoaoSant0s.ServicePackage.Save
@@ -50,7 +45,7 @@ namespace JoaoSant0s.ServicePackage.Save
         /// Get a saved value locally or use a Default value.
         /// Can Get values with type:
         /// Int, Long, Double, Bool, String, Vector2, Vector3, Serializable Objects, Quaternion, DateTime, Rect.	
-        /// Int[], Long[], Double[], Bool[], String[], Vector2[], Vector3[], Serializable Objects[], Quaternion[], DateTime[], Rect[].
+        /// Int[], Long[], Double[], Bool[], String[], Vector2[], Vector3[], Quaternion[], DateTime[], Rect[].
         /// </summary>
         /// <param name="key">basic key parameter</param>
         public T Get<T>(string key)
@@ -64,7 +59,7 @@ namespace JoaoSant0s.ServicePackage.Save
         /// Set the value locally.
         /// Can set this values Types:
         /// Int, Long, Double, Bool, String, Vector2, Vector3, Serializable Objects, Quaternion, DateTime, Rect.	
-        /// Int[], Long[], Double[], bool[], string[], Vector2[], Vector3[], Serializable Objects[], Quaternion[], DateTime[], Rect[].
+        /// Int[], Long[], Double[], bool[], string[], Vector2[], Vector3[], Quaternion[], DateTime[], Rect[].
         /// </summary>
         /// <param name="key">basic key parameter</param>
         /// <param name="value"> the saved ba</param>
@@ -141,9 +136,6 @@ namespace JoaoSant0s.ServicePackage.Save
             {
                 var tickArray = JsonUtility.FromJson<LongArrayValue>(stringValue);
                 obj = tickArray.value.Select(t => new DateTime(t)).ToArray();
-            }else
-            {
-                obj = JsonUtility.FromJson<T>(stringValue);                     
             }
 
             return obj;
@@ -255,7 +247,11 @@ namespace JoaoSant0s.ServicePackage.Save
                 
                 obj = new LongArrayValue(dates.Select(d => d.Ticks).ToArray());
             }else{
-                obj = tValue;
+                var objects = (object[]) Convert.ChangeType(tValue, type);
+
+                var stringArray = objects.Select(o => JsonUtility.ToJson(o)).ToArray();
+
+                obj = new StringArrayValue(stringArray);
             }
 
             return obj;
