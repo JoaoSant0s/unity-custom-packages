@@ -195,6 +195,17 @@ namespace JoaoSant0s.ServicePackage.Save
     }
 
     [Serializable]
+    internal class QuaternionArrayValue
+    {
+        public Quaternion[] value;
+
+        public QuaternionArrayValue(Quaternion[] newValue)
+        {
+            value = newValue;
+        }
+    }
+
+    [Serializable]
     internal class RectValue
     {
         public Rect value;
@@ -203,5 +214,16 @@ namespace JoaoSant0s.ServicePackage.Save
         {
             value = newValue;
         }
-    }    
+    }
+
+    [Serializable]
+    internal class RectArrayValue
+    {
+        public Rect[] value;
+
+        public RectArrayValue(Rect[] newValue)
+        {
+            value = newValue;
+        }
+    }
 }

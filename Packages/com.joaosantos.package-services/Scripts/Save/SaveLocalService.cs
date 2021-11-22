@@ -131,6 +131,19 @@ namespace JoaoSant0s.ServicePackage.Save
             }else if (type == typeof(Vector3[]))
             {
                 obj = JsonUtility.FromJson<Vector3ArrayValue>(stringValue).value;
+            }else if (type == typeof(Quaternion[]))
+            {
+                obj = JsonUtility.FromJson<QuaternionArrayValue>(stringValue).value;
+            }else if (type == typeof(Rect[]))
+            {
+                obj = JsonUtility.FromJson<RectArrayValue>(stringValue).value;
+            }else if (type == typeof(DateTime[]))
+            {
+                var tickArray = JsonUtility.FromJson<LongArrayValue>(stringValue);
+                obj = tickArray.value.Select(t => new DateTime(t)).ToArray();
+            }else
+            {
+                obj = JsonUtility.FromJson<T>(stringValue);                     
             }
 
             return obj;
@@ -202,6 +215,52 @@ namespace JoaoSant0s.ServicePackage.Save
             return JsonUtility.ToJson(obj);
         }
 
+        private object CollectionObjectFromObjectType<T>(Type type, T tValue)
+        {
+            object obj = null;
+
+            if (type == typeof(int[]))
+            {
+                obj = new IntArrayValue((int[]) Convert.ChangeType(tValue, type));
+            }else if (type == typeof(float[]))
+            {
+                obj = new FloatArrayValue((float[]) Convert.ChangeType(tValue, type));
+            }else if (type == typeof(long[]))
+            {
+                obj = new LongArrayValue((long[]) Convert.ChangeType(tValue, type));
+            }else if (type == typeof(bool[]))
+            {
+                obj = new BoolArrayValue((bool[]) Convert.ChangeType(tValue, type));
+            }else if (type == typeof(double[]))
+            {
+                obj = new DoubleArrayValue((double[]) Convert.ChangeType(tValue, type));
+            }else if (type == typeof(string[]))
+            {
+                obj = new StringArrayValue((string[]) Convert.ChangeType(tValue, type));
+            }else if (type == typeof(Vector2[]))
+            {
+                obj = new Vector2ArrayValue((Vector2[]) Convert.ChangeType(tValue, type));
+            }else if (type == typeof(Vector3[]))
+            {
+                obj = new Vector3ArrayValue((Vector3[]) Convert.ChangeType(tValue, type));
+            }else if (type == typeof(Quaternion[]))
+            {
+                obj = new QuaternionArrayValue((Quaternion[]) Convert.ChangeType(tValue, type));
+            }else if (type == typeof(Rect[]))
+            {
+                obj = new RectArrayValue((Rect[]) Convert.ChangeType(tValue, type));
+            }else if (type == typeof(DateTime[]))
+            {
+                var dates = (DateTime[]) Convert.ChangeType(tValue, type);
+                
+                obj = new LongArrayValue(dates.Select(d => d.Ticks).ToArray());
+            }else{
+                obj = tValue;
+            }
+
+            return obj;
+        }
+
         private object UnitObjectFromObjectType<T>(Type type, T tValue)
         {
             object obj = null;
@@ -245,40 +304,7 @@ namespace JoaoSant0s.ServicePackage.Save
             }
 
             return obj;
-        }
-
-        private object CollectionObjectFromObjectType<T>(Type type, T tValue)
-        {
-            object obj = null;
-
-            if (type == typeof(int[]))
-            {
-                obj = new IntArrayValue((int[]) Convert.ChangeType(tValue, type));
-            }else if (type == typeof(float[]))
-            {
-                obj = new FloatArrayValue((float[]) Convert.ChangeType(tValue, type));
-            }else if (type == typeof(long[]))
-            {
-                obj = new LongArrayValue((long[]) Convert.ChangeType(tValue, type));
-            }else if (type == typeof(bool[]))
-            {
-                obj = new BoolArrayValue((bool[]) Convert.ChangeType(tValue, type));
-            }else if (type == typeof(double[]))
-            {
-                obj = new DoubleArrayValue((double[]) Convert.ChangeType(tValue, type));
-            }else if (type == typeof(string[]))
-            {
-                obj = new StringArrayValue((string[]) Convert.ChangeType(tValue, type));
-            }else if (type == typeof(Vector2[]))
-            {
-                obj = new Vector2ArrayValue((Vector2[]) Convert.ChangeType(tValue, type));
-            }else if (type == typeof(Vector3[]))
-            {
-                obj = new Vector3ArrayValue((Vector3[]) Convert.ChangeType(tValue, type));
-            }
-
-            return obj;
-        }
+        }        
 
         #endregion        
     }   

@@ -66,8 +66,16 @@ public class TestSaveService : MonoBehaviour
         TestStringArray();
 
         TestVector2Array();
-        
+
         TestVector3Array();
+
+        //TestSerializableObjectArray();
+
+        TestQuaternionArray();
+
+        TestDateTimeArray();
+
+        TestRectArray();
     }
 
 #region Collections
@@ -179,6 +187,62 @@ public class TestSaveService : MonoBehaviour
 
         saveService.Set<Vector3[]>(testKey, mainValue);
         var value = saveService.Get<Vector3[]>(testKey);
+
+        Debugs.Log(mainValue);
+        Debugs.Log(value);
+    }
+
+    private void TestSerializableObjectArray()
+    {
+        Debug.Log("TestSerializableObjectArray");
+
+        var testKey = "TestSerializableObjectArray";
+        var mainValue = new TestObject[]{new TestObject() {stringValue = "Test 1", floatValue = 1.1f }, new TestObject() {stringValue = "Test 2", floatValue = 2.2f }};
+
+        saveService.Set<TestObject[]>(testKey, mainValue);
+        var value = saveService.Get<TestObject[]>(testKey);
+
+        Debugs.Log(mainValue);
+        Debugs.Log(value);
+    }
+
+    private void TestQuaternionArray()
+    {
+        Debug.Log("TestQuaternionArray");
+
+        var testKey = "TestQuaternionArray";
+        var mainValue = new Quaternion[]{ Quaternion.AngleAxis(45f, Vector3.up), Quaternion.AngleAxis(90f, Vector3.down)};
+
+        saveService.Set<Quaternion[]>(testKey, mainValue);
+        var value = saveService.Get<Quaternion[]>(testKey);
+
+        Debugs.Log(mainValue);
+        Debugs.Log(value);
+    }
+
+    private void TestDateTimeArray()
+    {
+        Debug.Log("TestDateTimeArray");
+
+        var testKey = "TestDateTimeArray";
+        var mainValue = new DateTime[]{ DateTime.Now, new DateTime(123440456L) };
+
+        saveService.Set<DateTime[]>(testKey, mainValue);
+        var value = saveService.Get<DateTime[]>(testKey);
+
+        Debugs.Log(mainValue);
+        Debugs.Log(value);
+    }
+
+    private void TestRectArray()
+    {
+        Debug.Log("TestRectArray");
+
+        var testKey = "TestRectArray";
+        var mainValue = new Rect[] {new Rect(41, 17, 51, 39), new Rect(51, 39, 41, 17)};
+
+        saveService.Set<Rect[]>(testKey, mainValue);
+        var value = saveService.Get<Rect[]>(testKey);
 
         Debugs.Log(mainValue);
         Debugs.Log(value);
