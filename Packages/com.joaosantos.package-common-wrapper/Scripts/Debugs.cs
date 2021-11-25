@@ -6,6 +6,11 @@ namespace JoaoSant0s.CommonWrapper
 {
     public class Debugs
     {
+        /// <summary>
+        /// Log a array of elements or a sequence finity of elements
+        /// Eg: Debugs.Log("a", "c", 10);
+        /// </summary>
+        /// <param name="list"> the next state object</param>
         public static void Log(params object[] list)
         {
             var log = "";
@@ -18,11 +23,18 @@ namespace JoaoSant0s.CommonWrapper
             Debug.Log(log);
         }
 
+        /// <summary>
+        /// Log a List of elements of type T in sequence
+        /// </summary>
+        /// <param name="list"> the next state object</param>
         public static void Log<T>(List<T> main)
         {
             Debug.Log(LogList(main));
         }
 
+        /// <summary>
+        /// Log a List of elements of type T in sequence   
+        /// </summary>
         public static void Log<T>(T[] main)
         {
             Debug.Log(LogList(main));
