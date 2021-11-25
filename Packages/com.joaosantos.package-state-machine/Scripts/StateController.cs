@@ -12,7 +12,11 @@ namespace JoaoSant0s.StateMachine
         {
             this.machineController = controller;
         }
-        
+
+        /// <summary>
+        /// Make the current state machine go to the next state
+        /// </summary>
+        /// <param name="nextState"> the next state object</param>
         protected void ChangeState(IState nextState)
         {
             this.machineController.ChangeState(nextState);
