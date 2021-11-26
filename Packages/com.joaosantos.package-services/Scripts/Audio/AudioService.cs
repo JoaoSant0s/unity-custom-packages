@@ -57,6 +57,10 @@ namespace JoaoSant0s.ServicePackage.Audio
 
         #region Public Methods
 
+        /// <summary>
+        /// Mute music audio mixer      
+        /// </summary>
+        /// <param name="value"> state value </param>
         public void MuteMusic(bool value)
         {
             IsMusicMuted = value;
@@ -64,6 +68,10 @@ namespace JoaoSant0s.ServicePackage.Audio
             Config.musicMixer.SetFloat(Config.exposedVolumeParameter, IsMusicMuted ? Config.lowerVolume : Config.upperMusicVolume);
         }
 
+        /// <summary>
+        /// Mute sfx audio mixer      
+        /// </summary>
+        /// <param name="value"> state value </param>
         public void MuteSfx(bool value)
         {
             IsSfxMuted = value;
@@ -71,6 +79,11 @@ namespace JoaoSant0s.ServicePackage.Audio
             Config.sfxMixer.SetFloat(Config.exposedVolumeParameter, IsSfxMuted ? Config.lowerVolume : Config.upperSfxVolume);
         }
 
+        /// <summary>
+        /// Play a audio asset
+        /// Audio Asset can be: Loop Audio, Random Audio or Simple Audio Asset      
+        /// </summary>
+        /// <param name="asset"> audio asset </param>
         public void Play(AudioAsset asset)
         {
             var audioObject = asset.Create(audioSourceController);
@@ -80,6 +93,10 @@ namespace JoaoSant0s.ServicePackage.Audio
             audioObjects.Add(audioObject);
         }
 
+        /// <summary>
+        /// Stop a audio asset by a condition
+        /// </summary>
+        /// <param name="stopCondition"> audio condition attached on Audio Asset </param>
         public void Stop(AudioConditionAsset stopCondition)
         {
             var audioObjects = GetAudioObject(stopCondition);
