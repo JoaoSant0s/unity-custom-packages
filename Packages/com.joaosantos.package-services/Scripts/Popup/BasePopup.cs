@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 namespace JoaoSant0s.ServicePackage.Popup
 {
-    public class BasePopup : MonoBehaviour
+    public abstract partial class BasePopup : MonoBehaviour
     {
         public UnityAction OnBeforeHide;
 
