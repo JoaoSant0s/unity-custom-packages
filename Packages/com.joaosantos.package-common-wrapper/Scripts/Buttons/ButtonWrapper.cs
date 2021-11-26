@@ -13,6 +13,10 @@ namespace JoaoSant0s.CommonWrapper
 
         #region Public Methods
 
+        /// <summary>
+        /// Active a Button on the list based on an id
+        /// </summary>
+        /// <param name="id"> id of a button </param>
         public void ActiveButton(string id)
         {
             for (int i = 0; i < buttons.Length; i++)

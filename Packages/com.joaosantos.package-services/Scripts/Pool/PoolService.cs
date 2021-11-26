@@ -15,7 +15,7 @@ namespace JoaoSant0s.ServicePackage.Pool
         private PoolConfig config;
 
         private Dictionary<PoolInfo, List<PoolBase>> poolDictionary;
-        
+
         #region Override Methods
 
         public override void Init()
@@ -28,6 +28,11 @@ namespace JoaoSant0s.ServicePackage.Pool
 
         #region Public Methods
 
+        /// <summary>
+        /// Get a valid Pool element of type T
+        /// </summary>
+        /// <param name="position"> position to spawn the element </param>
+        /// <param name="indexOrdering"> selection of an extra prefab of a specific Type </param>
         public T Get<T>(Vector3 position, int indexOrdering = 0) where T : PoolBase
         {
             var instance = GetValidElement<T>(indexOrdering);
@@ -38,6 +43,12 @@ namespace JoaoSant0s.ServicePackage.Pool
             return instance;
         }
 
+        /// <summary>
+        /// Get a valid Pool element of type T
+        /// </summary>
+        /// <param name="position"> position to spawn the element </param>
+        /// <param name="quaternion"> quaternion to spawn the element </param>
+        /// <param name="indexOrdering"> selection of an extra prefab of a specific Type </param>
         public T Get<T>(Vector3 position, Quaternion quaternion, int indexOrdering = 0) where T : PoolBase
         {
             var instance = GetValidElement<T>(indexOrdering);
@@ -49,6 +60,12 @@ namespace JoaoSant0s.ServicePackage.Pool
             return instance;
         }
 
+        /// <summary>
+        /// Get a valid Pool element of type T
+        /// </summary>
+        /// <param name="parent"> parent to spawn the element </param>
+        /// <param name="position"> position to spawn the element </param>        
+        /// <param name="indexOrdering"> selection of an extra prefab of a specific Type </param>
         public T Get<T>(Transform parent, Vector3 position, int indexOrdering = 0) where T : PoolBase
         {
             var instance = GetValidElement<T>(indexOrdering);
@@ -60,6 +77,13 @@ namespace JoaoSant0s.ServicePackage.Pool
             return instance;
         }
 
+        /// <summary>
+        /// Get a valid Pool element of type T
+        /// </summary>
+        /// <param name="parent"> parent to spawn the element </param>
+        /// <param name="position"> position to spawn the element </param>
+        /// <param name="quaternion"> quaternion to spawn the element </param>
+        /// <param name="indexOrdering"> selection of an extra prefab of a specific Type </param>
         public T Get<T>(Transform parent, Vector3 position, Quaternion quaternion, int indexOrdering = 0) where T : PoolBase
         {
             var instance = GetValidElement<T>(indexOrdering);
@@ -98,20 +122,21 @@ namespace JoaoSant0s.ServicePackage.Pool
 
         private T GetValidElement<T>(int indexOrdering) where T : PoolBase
         {
-            var tuple = poolDictionary.FirstOrDefault(element => {
+            var tuple = poolDictionary.FirstOrDefault(element =>
+            {
                 var key = element.Key;
                 return key.prefab is T && key.indexOrdering == indexOrdering;
             });
 
             var errorString = string.Format("The Type or selected index {0} was not initialized by the PoolConfig", indexOrdering);
-            
+
             Debug.Assert(tuple.Key.prefab != null, errorString);
-            
+
             T instance = GetElementFromList<T>(tuple.Value);
-            
+
             if (instance == null)
             {
-                instance = (T) CreatePoolElement(tuple.Key, false);
+                instance = (T)CreatePoolElement(tuple.Key, false);
             }
 
             return instance;
@@ -152,13 +177,14 @@ namespace JoaoSant0s.ServicePackage.Pool
 
         private void ReturnToPool(PoolBase pool)
         {
-            var tuple = poolDictionary.FirstOrDefault(element => {
+            var tuple = poolDictionary.FirstOrDefault(element =>
+            {
                 var checkType = element.Key.prefab.GetType() == pool.GetType();
                 var checkOrdering = pool.indexOrdering == element.Key.indexOrdering;
 
-                return checkType &&  checkOrdering;   
+                return checkType && checkOrdering;
             });
-            
+
             var key = tuple.Key;
 
             if (IsPoolFull(key))
@@ -182,3 +208,4 @@ namespace JoaoSant0s.ServicePackage.Pool
         #endregion
     }
 }
+

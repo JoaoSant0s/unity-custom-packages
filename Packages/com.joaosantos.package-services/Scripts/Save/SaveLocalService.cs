@@ -23,6 +23,9 @@ namespace JoaoSant0s.ServicePackage.Save
         
         #region Public Methods
 
+        /// <summary>
+        /// Contains a Key        
+        /// <param name="key"> basic key parameter</param>
         public bool Contains(string radicalKey)
         {
             var key = BuildKey(radicalKey);
@@ -30,6 +33,9 @@ namespace JoaoSant0s.ServicePackage.Save
             return PlayerPrefs.HasKey(key);
         }
 
+        /// <summary>
+        /// Delete Key        
+        /// <param name="key">basic key parameter</param>
         public bool DeleteKey(string radicalKey)
         {
             var key = BuildKey(radicalKey);
