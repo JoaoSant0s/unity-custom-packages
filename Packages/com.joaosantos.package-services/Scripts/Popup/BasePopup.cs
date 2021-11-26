@@ -24,7 +24,7 @@ namespace JoaoSant0s.ServicePackage.Popup
 
         public virtual void Hide()
         {
-            Close();            
+            Close();
         }
 
         private void Close()

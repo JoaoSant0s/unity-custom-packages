@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace JoaoSant0s.Scene
 {
-    public abstract partial class SceneComponent: MonoBehaviour
+    public abstract partial class SceneComponent : MonoBehaviour
     {
         public virtual void Initialize()
         {
