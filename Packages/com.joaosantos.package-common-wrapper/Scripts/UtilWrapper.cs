@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -10,6 +12,9 @@ namespace JoaoSant0s.CommonWrapper
 {
     public static class UtilWrapper
     {
+        /// <summary>
+        /// Check if the input is over a UI element of type T        
+        /// </summary>        
         public static bool IsPointOverUIObject<T>()
         {
             PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
@@ -21,6 +26,34 @@ namespace JoaoSant0s.CommonWrapper
             results = results.FindAll(r => r.gameObject.GetComponent<T>() == null);
 
             return results.Count > 0;
+        }
+
+        /// <summary>
+        /// Check if the input is over a any UI element
+        /// </summary>
+        public static bool IsPointOverUIObject()
+        {
+            PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+
+            eventDataCurrentPosition.position = Input.mousePosition;
+            List<RaycastResult> results = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+
+            return results.Count > 0;
+        }
+
+        /// <summary>
+        /// Return a list of RaycastResult objects after a input interaction
+        /// </summary>
+        public static List<RaycastResult> GetUIObjectsOverPoint()
+        {
+            PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+
+            eventDataCurrentPosition.position = Input.mousePosition;
+            List<RaycastResult> results = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+
+            return results;
         }
 
         public static Transform FindTransformWithTag(string tagName)
@@ -35,20 +68,32 @@ namespace JoaoSant0s.CommonWrapper
             return (RectTransform)FindTransformWithTag(tagName);
         }
 
-        public static bool WasDistanceLessThan(Transform p, Transform next, float distance)
+        /// <summary>
+        /// Check if the Transforms distance is less that a value
+        /// </summary>
+        /// <param name="baseTransform"> base transform to compare </param>
+        /// <param name="nextTransform"> next transform to compare </param>
+        /// <param name="distance"> the comparable distance </param>
+        public static bool IsDistanceLessThan(Transform baseTransform, Transform nextTransform, float distance)
         {
             if (distance < 0) return true;
 
-            return p.GetTransformDistance(next) < distance;
+            return baseTransform.Distance(nextTransform) < distance;
         }
 
-        public static bool ContainsAPoint(Vector2 basePoint, Vector2 nextPoint, Vector2 area)
+        /// <summary>
+        /// Check if a point is inside a other rectangle
+        /// </summary>
+        /// <param name="centerPoint"> the center point of the rectangle </param>
+        /// <param name="nextPoint"> the point that will check if is inside </param>
+        /// <param name="area"> the width and height of the rectangle </param>
+        public static bool ContainsAPoint(Vector2 centerPoint, Vector2 nextPoint, Vector2 area)
         {
-            var checkLeftHorizontal = nextPoint.x >= basePoint.x - area.x / 2f;
-            var checkRightHorizontal = nextPoint.x <= basePoint.x + area.x / 2f;
+            var checkLeftHorizontal = nextPoint.x >= centerPoint.x - area.x / 2f;
+            var checkRightHorizontal = nextPoint.x <= centerPoint.x + area.x / 2f;
 
-            var checkTopVertical = nextPoint.y <= basePoint.y + area.y / 2f;
-            var checkDownVertical = nextPoint.y >= basePoint.y - area.y / 2f;
+            var checkTopVertical = nextPoint.y <= centerPoint.y + area.y / 2f;
+            var checkDownVertical = nextPoint.y >= centerPoint.y - area.y / 2f;
 
             var checkHorizontal = checkLeftHorizontal && checkRightHorizontal;
             var checkVertical = checkTopVertical && checkDownVertical;
@@ -56,6 +101,11 @@ namespace JoaoSant0s.CommonWrapper
             return checkHorizontal && checkVertical;
         }
 
+        /// <summary>
+        /// Get the nearest transform from a list of transforms
+        /// </summary>
+        /// <param name="reference"> base transform to be comparable </param>
+        /// <param name="list"> the list of comparable transforms </param>
         public static Transform GetNearestElement(Transform reference, List<Transform> list)
         {
             if (list.Count == 0) return null;
@@ -65,7 +115,7 @@ namespace JoaoSant0s.CommonWrapper
 
             for (int i = 0; i < list.Count; i++)
             {
-                float distance = reference.GetTransformDistance(list[i].transform);
+                float distance = reference.Distance(list[i].transform);
 
                 if (distance < minDistance)
                 {
@@ -77,6 +127,12 @@ namespace JoaoSant0s.CommonWrapper
             return nearestElement;
         }
 
+        /// <summary>
+        /// Get the nearest transform from a list of transforms inside a container
+        /// </summary>
+        /// <param name="reference"> base transform to be comparable </param>
+        /// <param name="list"> the list of comparable transforms </param>
+        /// <param name="container"> the width and height that comparable transform must be inside </param>
         public static Transform GetNearestElement(Transform reference, List<Transform> list, Vector2 container)
         {
             if (list.Count == 0) return null;
@@ -88,7 +144,7 @@ namespace JoaoSant0s.CommonWrapper
             {
                 var element = list[i].transform;
 
-                float distance = reference.GetTransformDistance(element);
+                float distance = reference.Distance(element);
 
                 if (!ContainsAPoint(reference.position, element.position, container)) continue;
 
@@ -102,6 +158,11 @@ namespace JoaoSant0s.CommonWrapper
             return nearestElement;
         }
 
+        /// <summary>
+        /// Get the nearest Vector2 from a list of vectors2
+        /// </summary>
+        /// <param name="reference"> base vector2 to be comparable </param>
+        /// <param name="list"> the list of comparable vectors2 </param>
         public static Vector2 GetNearestVector(Vector2 reference, Vector2[] list)
         {
             var minDistance = float.MaxValue;
@@ -118,9 +179,16 @@ namespace JoaoSant0s.CommonWrapper
                 }
             }
 
-            return nearestElement;        
+            return nearestElement;
         }
 
+        /// <summary>
+        /// Adding extra "0" on positive numbers between 0 and 9
+        /// Eg: PositiveNumberFormat(9) => "09"
+        /// Eg: PositiveNumberFormat(3) => "03"
+        /// </summary>
+        /// <param name="reference"> base vector2 to be comparable </param>
+        /// <param name="list"> the list of comparable vectors2 </param>
         public static string PositiveNumberFormat(int value)
         {
             var convert = value.ToString();

@@ -41,11 +41,28 @@ namespace JoaoSant0s.CommonWrapper
 
         #region Public Methods
 
-        public void SetButtonActions(UnityAction action)
+        /// <summary>
+        /// Set button Action
+        /// </summary>
+        /// <param name="action"> the action to be toggled </param>
+        public void SetButtonAction(UnityAction action)
         {
             this.button.onClick.AddListener(action);
         }
 
+        /// <summary>
+        /// Remove button Action
+        /// </summary>
+        /// <param name="id"> the action to be removed </param>
+        public void RemoveButtonAction(UnityAction action)
+        {
+            this.button.onClick.RemoveListener(action);
+        }
+
+        /// <summary>
+        /// Set button state visual
+        /// </summary>
+        /// <param name="value"> value state </param>
         public void SetButtonState(bool value)
         {
             this.toggleState = value;            

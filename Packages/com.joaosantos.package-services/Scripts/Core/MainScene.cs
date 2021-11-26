@@ -25,6 +25,9 @@ namespace JoaoSant0s.Scene
 
         #region Private Methods
 
+        /// <summary>
+        /// Init all components on initialize components
+        /// </summary>
         protected void InitComponents()
         {
             for (int i = 0; i < initializeComponents.Length; i++)
