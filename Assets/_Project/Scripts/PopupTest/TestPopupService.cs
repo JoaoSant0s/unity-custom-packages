@@ -26,6 +26,7 @@ public class TestPopupService : MonoBehaviour
 
     public void ShowInternalPopup()
     {
+        if (popupService.Contains<InternalPopup>()) return;
         popupService.Show<InternalPopup>((RectTransform)internalPopupArea);
     }
 

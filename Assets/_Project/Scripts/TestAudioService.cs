@@ -21,7 +21,7 @@ public class TestAudioService : MonoBehaviour
 
     private bool musicMuted;
     private bool sfxMuted;
-   
+
     void Start()
     {
         audioService = Services.Get<AudioService>();

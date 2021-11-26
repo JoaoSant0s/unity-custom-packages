@@ -12,7 +12,7 @@ public class TestPoolElement : PoolBase
     private float delayToHide;
 
     private Rigidbody2D rb2d;
-    private void Awake() 
+    private void Awake()
     {
         rb2d = GetComponent<Rigidbody2D>();
     }
@@ -29,7 +29,7 @@ public class TestPoolElement : PoolBase
     }
 
     protected override void OnShow()
-    {        
+    {
         StartCoroutine(DisposeRoutine());
     }
 }

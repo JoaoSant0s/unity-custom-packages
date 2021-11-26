@@ -9,7 +9,7 @@ using JoaoSant0s.ServicePackage.General;
 
 namespace JoaoSant0s.ServicePackage.Save
 {
-[CreateAssetMenu(fileName = "SaveLocalConfig", menuName = "JoaoSant0s/ServicePackage/Save/SaveLocalConfig")]
+    [CreateAssetMenu(fileName = "SaveLocalConfig", menuName = "JoaoSant0s/ServicePackage/Save/SaveLocalConfig")]
 
     public class SaveLocalConfig : ServiceConfig
     {

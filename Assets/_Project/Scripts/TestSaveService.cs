@@ -12,12 +12,12 @@ public class TestSaveService : MonoBehaviour
 {
     private SaveLocalService saveService;
 
-    private void Awake() 
+    private void Awake()
     {
         saveService = Services.Get<SaveLocalService>();
     }
 
-    private void Start() 
+    private void Start()
     {
         TestNoCollections();
 
@@ -37,7 +37,7 @@ public class TestSaveService : MonoBehaviour
         TestBool();
 
         TestString();
-        
+
         TestVector2();
 
         TestVector3();
@@ -76,14 +76,14 @@ public class TestSaveService : MonoBehaviour
         TestRectArray();
     }
 
-#region Collections
+    #region Collections
 
     private void TestIntArray()
     {
         Debug.Log("TestIntArray");
 
-        var testKey = "TestIntArray";        
-        var mainValue = new int[3] {5, 45, 81};
+        var testKey = "TestIntArray";
+        var mainValue = new int[3] { 5, 45, 81 };
 
         saveService.Set<int[]>(testKey, mainValue);
         var value = saveService.Get<int[]>(testKey);
@@ -97,7 +97,7 @@ public class TestSaveService : MonoBehaviour
         Debug.Log("TestFloatArray");
 
         var testKey = "TestFloatArray";
-        var mainValue = new float[] {12312.12312f, -12.12312f, -123.123321f};
+        var mainValue = new float[] { 12312.12312f, -12.12312f, -123.123321f };
 
         saveService.Set<float[]>(testKey, mainValue);
         var value = saveService.Get<float[]>(testKey);
@@ -111,7 +111,7 @@ public class TestSaveService : MonoBehaviour
         Debug.Log("TestLongArray");
 
         var testKey = "TestLongArray";
-        var mainValue = new long[] {12312L, 5454545L, -123123321L};
+        var mainValue = new long[] { 12312L, 5454545L, -123123321L };
 
         saveService.Set<long[]>(testKey, mainValue);
         var value = saveService.Get<long[]>(testKey);
@@ -125,7 +125,7 @@ public class TestSaveService : MonoBehaviour
         Debug.Log("TestDoubleArray");
 
         var testKey = "TestDoubleArray";
-        var mainValue = new double[] {123.12D, -9291123.12D, -0.12D};
+        var mainValue = new double[] { 123.12D, -9291123.12D, -0.12D };
 
         saveService.Set<double[]>(testKey, mainValue);
         var value = saveService.Get<double[]>(testKey);
@@ -139,7 +139,7 @@ public class TestSaveService : MonoBehaviour
         Debug.Log("TestBoolArray");
 
         var testKey = "TestBoolArray";
-        var mainValue = new bool[] {true, false, true};
+        var mainValue = new bool[] { true, false, true };
 
         saveService.Set<bool[]>(testKey, mainValue);
         var value = saveService.Get<bool[]>(testKey);
@@ -153,7 +153,7 @@ public class TestSaveService : MonoBehaviour
         Debug.Log("TestStringArray");
 
         var testKey = "TestStringArray";
-        var mainValue = new string[] {"string", "string value", "value string"};
+        var mainValue = new string[] { "string", "string value", "value string" };
 
         saveService.Set<string[]>(testKey, mainValue);
         var value = saveService.Get<string[]>(testKey);
@@ -167,7 +167,7 @@ public class TestSaveService : MonoBehaviour
         Debug.Log("TestVector2Array");
 
         var testKey = "TestVector2Array";
-        var mainValue = new Vector2[] {Vector2.down, Vector2.up, Vector2.left};
+        var mainValue = new Vector2[] { Vector2.down, Vector2.up, Vector2.left };
 
         saveService.Set<Vector2[]>(testKey, mainValue);
         var value = saveService.Get<Vector2[]>(testKey);
@@ -181,21 +181,21 @@ public class TestSaveService : MonoBehaviour
         Debug.Log("TestVector3Array");
 
         var testKey = "TestVector3Array";
-        var mainValue = new Vector3[] {Vector3.down, Vector3.up, Vector3.left};
+        var mainValue = new Vector3[] { Vector3.down, Vector3.up, Vector3.left };
 
         saveService.Set<Vector3[]>(testKey, mainValue);
         var value = saveService.Get<Vector3[]>(testKey);
 
         Debugs.Log(mainValue);
         Debugs.Log(value);
-    }    
+    }
 
     private void TestQuaternionArray()
     {
         Debug.Log("TestQuaternionArray");
 
         var testKey = "TestQuaternionArray";
-        var mainValue = new Quaternion[]{ Quaternion.AngleAxis(45f, Vector3.up), Quaternion.AngleAxis(90f, Vector3.down)};
+        var mainValue = new Quaternion[] { Quaternion.AngleAxis(45f, Vector3.up), Quaternion.AngleAxis(90f, Vector3.down) };
 
         saveService.Set<Quaternion[]>(testKey, mainValue);
         var value = saveService.Get<Quaternion[]>(testKey);
@@ -209,7 +209,7 @@ public class TestSaveService : MonoBehaviour
         Debug.Log("TestDateTimeArray");
 
         var testKey = "TestDateTimeArray";
-        var mainValue = new DateTime[]{ DateTime.Now, new DateTime(123440456L) };
+        var mainValue = new DateTime[] { DateTime.Now, new DateTime(123440456L) };
 
         saveService.Set<DateTime[]>(testKey, mainValue);
         var value = saveService.Get<DateTime[]>(testKey);
@@ -223,7 +223,7 @@ public class TestSaveService : MonoBehaviour
         Debug.Log("TestRectArray");
 
         var testKey = "TestRectArray";
-        var mainValue = new Rect[] {new Rect(41, 17, 51, 39), new Rect(51, 39, 41, 17)};
+        var mainValue = new Rect[] { new Rect(41, 17, 51, 39), new Rect(51, 39, 41, 17) };
 
         saveService.Set<Rect[]>(testKey, mainValue);
         var value = saveService.Get<Rect[]>(testKey);
@@ -232,15 +232,15 @@ public class TestSaveService : MonoBehaviour
         Debugs.Log(value);
     }
 
-#endregion
+    #endregion
 
 
-#region No Collections
+    #region No Collections
     private void TestInt()
     {
         Debug.Log("TestInt");
 
-        var testKey = "testIntUnit";        
+        var testKey = "testIntUnit";
         var mainValue = -1233311;
 
         saveService.Set<int>(testKey, mainValue);
@@ -285,7 +285,7 @@ public class TestSaveService : MonoBehaviour
         saveService.Set<double>(testKey, mainValue);
         var value = saveService.Get<double>(testKey);
 
-        Debug.Log(mainValue == value);    
+        Debug.Log(mainValue == value);
     }
 
     private void TestBool()
@@ -298,7 +298,7 @@ public class TestSaveService : MonoBehaviour
         saveService.Set<bool>(testKey, mainValue);
         var value = saveService.Get<bool>(testKey);
 
-        Debug.Log(mainValue == value);    
+        Debug.Log(mainValue == value);
     }
 
     private void TestString()
@@ -324,7 +324,7 @@ public class TestSaveService : MonoBehaviour
         saveService.Set<Vector2>(testKey, mainValue);
         var value = saveService.Get<Vector2>(testKey);
 
-        Debug.Log(mainValue == value);    
+        Debug.Log(mainValue == value);
     }
 
     private void TestVector3()
@@ -337,7 +337,7 @@ public class TestSaveService : MonoBehaviour
         saveService.Set<Vector3>(testKey, mainValue);
         var value = saveService.Get<Vector3>(testKey);
 
-        Debug.Log(mainValue == value);    
+        Debug.Log(mainValue == value);
     }
 
     private void TestSerializableObject()
@@ -345,11 +345,11 @@ public class TestSaveService : MonoBehaviour
         Debug.Log("TestSerializableObject");
 
         var testKey = "TestSerializableObjectUnit";
-        var mainValue = new TestObject() {stringValue = "Test Serializable Object", floatValue = 21.40f, stringArrayValue = new string[] {"string", "string value", "value string"} };
+        var mainValue = new TestObject() { stringValue = "Test Serializable Object", floatValue = 21.40f, stringArrayValue = new string[] { "string", "string value", "value string" } };
 
         saveService.Set<TestObject>(testKey, mainValue);
         var value = saveService.Get<TestObject>(testKey);
-        
+
         Debug.Log(mainValue.Equals(value));
     }
 
@@ -392,7 +392,7 @@ public class TestSaveService : MonoBehaviour
         Debug.Log(mainValue == value);
     }
 
-#endregion
+    #endregion
 
 }
 
@@ -401,8 +401,8 @@ public class TestObject
 {
     public string stringValue;
     public float floatValue;
-    
-    public string [] stringArrayValue;
+
+    public string[] stringArrayValue;
 
     public override string ToString()
     {
@@ -424,7 +424,7 @@ public class TestObject
     }
 
     public override int GetHashCode()
-    {        
+    {
         return stringValue.GetHashCode() ^ floatValue.GetHashCode() ^ stringArrayValue.GetHashCode();
     }
 }

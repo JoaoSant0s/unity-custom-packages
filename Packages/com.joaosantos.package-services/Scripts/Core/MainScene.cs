@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace JoaoSant0s.Scene
 {
-    public class MainScene : MonoBehaviour
+    public abstract partial class MainScene : MonoBehaviour
     {
         [SerializeField]
         protected SceneComponent[] initializeComponents;
