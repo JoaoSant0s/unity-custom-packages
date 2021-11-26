@@ -78,7 +78,7 @@ namespace JoaoSant0s.CommonWrapper
         {
             if (distance < 0) return true;
 
-            return baseTransform.GetTransformDistance(nextTransform) < distance;
+            return baseTransform.Distance(nextTransform) < distance;
         }
 
         /// <summary>
@@ -115,7 +115,7 @@ namespace JoaoSant0s.CommonWrapper
 
             for (int i = 0; i < list.Count; i++)
             {
-                float distance = reference.GetTransformDistance(list[i].transform);
+                float distance = reference.Distance(list[i].transform);
 
                 if (distance < minDistance)
                 {
@@ -144,7 +144,7 @@ namespace JoaoSant0s.CommonWrapper
             {
                 var element = list[i].transform;
 
-                float distance = reference.GetTransformDistance(element);
+                float distance = reference.Distance(element);
 
                 if (!ContainsAPoint(reference.position, element.position, container)) continue;
 
