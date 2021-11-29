@@ -5,7 +5,7 @@ using UnityEngine;
 namespace JoaoSant0s.ServicePackage.Flag
 {
     public enum FlagState
-    {        
+    {
         Raise,
         Lower,
         None

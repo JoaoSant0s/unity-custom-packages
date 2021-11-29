@@ -13,7 +13,8 @@ namespace JoaoSant0s.ServicePackage.General
 
         private static List<Service> AllServices
         {
-            get{
+            get
+            {
                 if (services == null)
                 {
                     services = new List<Service>();
@@ -28,7 +29,7 @@ namespace JoaoSant0s.ServicePackage.General
         {
             base.Awake();
             staticTransform = transform;
-            
+
             gameObject.name = this.GetType().Name;
             DontDestroyOnLoad(gameObject);
         }
@@ -61,12 +62,12 @@ namespace JoaoSant0s.ServicePackage.General
 
         private static void CreateServicesSet()
         {
-            if ( staticTransform != null ) return;
+            if (staticTransform != null) return;
 
             var newGameObject = new GameObject();
 
             var newServices = newGameObject.AddComponent<Services>();
-            
+
             newGameObject.name = newServices.GetType().Name;
         }
     }

@@ -7,7 +7,7 @@ using JoaoSant0s.CommonWrapper;
 
 namespace JoaoSant0s.ServicePackage.Pool
 {
-    public class PoolBase : MonoBehaviour
+    public abstract partial class PoolBase : MonoBehaviour
     {
         internal delegate void OnDisposePoolElement(PoolBase element);
         internal OnDisposePoolElement DisposePoolElement;

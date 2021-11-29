@@ -29,7 +29,7 @@ namespace JoaoSant0s.ServicePackage.Audio
             {
                 CreateAudioSourceController();
             }
-        }        
+        }
 
         #endregion
 
@@ -37,14 +37,14 @@ namespace JoaoSant0s.ServicePackage.Audio
 
         public AudioSource GetUnlockedAudioSource()
         {
-            var element = audioSourceInUse.FirstOrDefault( element => !element.Value);
+            var element = audioSourceInUse.FirstOrDefault(element => !element.Value);
             AudioSource audioSource = element.Key;
 
-            if(element.Key == null)
+            if (element.Key == null)
             {
                 audioSource = CreateAudioSourceController();
             }
-            
+
             return audioSource;
         }
 

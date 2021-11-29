@@ -30,7 +30,7 @@ namespace JoaoSant0s.ServicePackage.Flag
             flagService = Services.Get<FlagService>();
 
             flagService.AddListening(enableFlag, raiseEvent, lowerEvent);
-            
+
             StartTrigger();
         }
 

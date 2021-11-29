@@ -7,5 +7,5 @@ using JoaoSant0s.ServicePackage.Popup;
 
 public class ExternalPopup : BasePopup
 {
-    
+
 }

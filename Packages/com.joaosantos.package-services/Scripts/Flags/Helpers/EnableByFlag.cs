@@ -41,7 +41,7 @@ namespace JoaoSant0s.ServicePackage.Flag
             {
                 flagService.Lower(enableFlag);
             }
-            else if(startState == FlagState.Raise)
+            else if (startState == FlagState.Raise)
             {
                 flagService.Raise(enableFlag);
             }
