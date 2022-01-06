@@ -80,7 +80,7 @@ public class TestSaveService : MonoBehaviour
 
     private void TestIntArray()
     {
-        Debug.Log("TestIntArray");
+        Debugs.LogColor("TestIntArray", Color.green);
 
         var testKey = "TestIntArray";
         var mainValue = new int[3] { 5, 45, 81 };
