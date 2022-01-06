@@ -23,7 +23,7 @@ namespace JoaoSant0s.ServicePackage.Popup
         public override void Init()
         {
             config = Resources.Load<PopupConfig>("Configs/PopupConfig");
-            this.popupArea = UtilWrapper.FindRectTransformWithTag(config.mainPopupTag);
+            this.popupArea = TransformWrapper.FindRectTransformWithTag(config.mainPopupTag);
         }
 
         #endregion

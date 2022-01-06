@@ -19,9 +19,9 @@ public class TestSaveService : MonoBehaviour
 
     private void Start()
     {
-        TestNoCollections();
+        //TestNoCollections();
 
-        //TestCollections();
+        TestCollections();
     }
 
     private void TestNoCollections()

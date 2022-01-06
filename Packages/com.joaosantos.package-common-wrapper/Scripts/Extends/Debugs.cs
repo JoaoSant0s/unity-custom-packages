@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace JoaoSant0s.CommonWrapper
 {
-    public class Debugs
+    public class Debugs : Debug
     {
         /// <summary>
         /// Log a array of elements or a sequence finity of elements
