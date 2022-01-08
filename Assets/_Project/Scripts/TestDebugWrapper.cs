@@ -2,15 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
+using UnityEngine.UI;
 
 using JoaoSant0s.CommonWrapper;
+using JoaoSant0s.Extensions.Strings;
 
 public class TestDebugWrapper : MonoBehaviour
 {
+    [SerializeField]
+    private Text[] texts;
 
     void Start()
     {
-        Debugs.LogColor("TestIntArray", Color.green);
+        texts[0].text = "Text".ToBold();
+        texts[1].text = "Text".ToItalic();
+
+        texts[2].text = "Text".ToModifiedColor(Color.red);
+        texts[3].text = "Text".ToSize(50);
 
         Debugs.Log(new int[3] { 5, 45, 81 });
 

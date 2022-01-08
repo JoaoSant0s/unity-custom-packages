@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using JoaoSant0s.Extensions.Colors;
+using JoaoSant0s.Extensions.Strings;
 
 namespace JoaoSant0s.CommonWrapper
 {
@@ -44,7 +45,13 @@ namespace JoaoSant0s.CommonWrapper
 
         public static void LogColor(object value, Color color)
         {
-            LogMessage(string.Format("<color={0}> {1} </color>", color.ToHex(), value));
+            if (value == null)
+            {
+                LogMessage(value);
+                return;
+            }
+            
+            LogMessage(value.ToString().ToModifiedColor(color));
         }
 
         public static void DrawRectangle(Vector2 startLocalAxis, float width, float height, Color color, float duration = 0f, bool depthTest = true, DrawAxisType axisType = DrawAxisType.XY)
