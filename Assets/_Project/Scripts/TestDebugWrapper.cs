@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 using JoaoSant0s.CommonWrapper;
 using JoaoSant0s.Extensions.Strings;
+using JoaoSant0s.Extensions.Numbers;
 
 public class TestDebugWrapper : MonoBehaviour
 {
@@ -19,6 +20,11 @@ public class TestDebugWrapper : MonoBehaviour
 
         texts[2].text = "Text".ToModifiedColor(Color.red);
         texts[3].text = "Text".ToSize(50);
+
+        var testDeg = 180;
+        var testRad = Mathf.PI;
+
+        Debugs.Log(testDeg.Deg2Rad(), testRad.Rad2Deg());
 
         Debugs.Log(new int[3] { 5, 45, 81 });
 
