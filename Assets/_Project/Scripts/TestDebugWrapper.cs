@@ -7,9 +7,16 @@ using UnityEngine.UI;
 using JoaoSant0s.CommonWrapper;
 using JoaoSant0s.Extensions.Strings;
 using JoaoSant0s.Extensions.Numbers;
+using JoaoSant0s.Extensions.Vectors;
 
 public class TestDebugWrapper : MonoBehaviour
 {
+    [SerializeField]
+    private Vector2Int elementsAmount;
+
+    [SerializeField]
+    private Vector2 elementsTime;
+
     [SerializeField]
     private Text[] texts;
 
@@ -25,6 +32,7 @@ public class TestDebugWrapper : MonoBehaviour
         var testRad = Mathf.PI;
 
         Debugs.Log(testDeg.Deg2Rad(), testRad.Rad2Deg());
+        Debugs.Log(elementsAmount.RandomInterval(), elementsTime.RandomInterval(), VectorWrapper.RandomVector2(2, 5), VectorWrapper.RandomVector2(2f, 5f));
 
         Debugs.Log(new int[3] { 5, 45, 81 });
 

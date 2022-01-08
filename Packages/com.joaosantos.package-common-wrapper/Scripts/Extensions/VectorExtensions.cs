@@ -19,6 +19,22 @@ namespace JoaoSant0s.Extensions.Vectors
             return value;
         }
 
+        /// <summary>
+        /// Return a random int within [x..y)
+        /// </summary>    
+        public static int RandomInterval(this Vector2Int value)
+        {
+            return Random.Range(value.x, value.y);
+        }
+
+        /// <summary>
+        /// Return a random float within [x..y)
+        /// </summary>    
+        public static float RandomInterval(this Vector2 value)
+        {
+            return Random.Range(value.x, value.y);
+        }
+
         #endregion
 
         #region Vector 3

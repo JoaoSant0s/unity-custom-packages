@@ -19,6 +19,16 @@ namespace JoaoSant0s.CommonWrapper
         }
 
         /// <summary>
+        /// Generate a random Vector 2 Int
+        /// </summary>
+        /// <param name="min"> minimum value </param>
+        /// <param name="max"> maximum value </param>
+        public static Vector2Int RandomVector2(int min, int max)
+        {
+            return new Vector2Int(Random.Range(min, max), Random.Range(min, max));
+        }
+
+        /// <summary>
         /// Generate a random Vector 2
         /// </summary>
         /// <param name="xMin"> X minimum value </param>
@@ -28,6 +38,18 @@ namespace JoaoSant0s.CommonWrapper
         public static Vector2 RandomVector2(float xMin, float xMax, float yMin, float yMax)
         {
             return new Vector2(Random.Range(xMin, xMax), Random.Range(yMin, yMax));
+        }
+
+        /// <summary>
+        /// Generate a random Vector 2 Int
+        /// </summary>
+        /// <param name="xMin"> X minimum value </param>
+        /// <param name="xMax"> X maximum value </param>
+        /// <param name="yMin"> Y minimum value </param>
+        /// <param name="yMax"> Y maximum value </param>
+        public static Vector2Int RandomVector2(int xMin, int xMax, int yMin, int yMax)
+        {
+            return new Vector2Int(Random.Range(xMin, xMax), Random.Range(yMin, yMax));
         }
 
         /// <summary>
@@ -69,6 +91,16 @@ namespace JoaoSant0s.CommonWrapper
         }
 
         /// <summary>
+        /// Generate a random Vector 3 Int
+        /// </summary>
+        /// <param name="min"> minimum value </param>
+        /// <param name="max"> maximum value </param>
+        public static Vector3Int RandomVector3(int min, int max)
+        {
+            return new Vector3Int(Random.Range(min, max), Random.Range(min, max), Random.Range(min, max));
+        }
+
+        /// <summary>
         /// Generate a random Vector 3
         /// </summary>
         /// <param name="xMin"> X minimum value </param>
@@ -80,6 +112,20 @@ namespace JoaoSant0s.CommonWrapper
         public static Vector3 RandomVector3(float xMin, float xMax, float yMin, float yMax, float zMin, float zMax)
         {
             return new Vector3(Random.Range(xMin, xMax), Random.Range(yMin, yMax), Random.Range(zMin, zMax));
+        }
+
+        /// <summary>
+        /// Generate a random Vector 3 Int
+        /// </summary>
+        /// <param name="xMin"> X minimum value </param>
+        /// <param name="xMax"> X maximum value </param>
+        /// <param name="yMin"> Y minimum value </param>
+        /// <param name="yMax"> Y maximum value </param>
+        /// <param name="zMin"> Z minimum value </param>
+        /// <param name="zMax"> Z maximum value </param>
+        public static Vector3Int RandomVector3Int(int xMin, int xMax, int yMin, int yMax, int zMin, int zMax)
+        {
+            return new Vector3Int(Random.Range(xMin, xMax), Random.Range(yMin, yMax), Random.Range(zMin, zMax));
         }
 
         #endregion

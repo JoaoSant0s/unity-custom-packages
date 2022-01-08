@@ -152,6 +152,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e78037d80ab27b48a8a08491e5bf755, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  elementsAmount: {x: 1, y: 5}
+  elementsTime: {x: 0, y: 50}
   texts:
   - {fileID: 1605998480}
   - {fileID: 2134044721}
