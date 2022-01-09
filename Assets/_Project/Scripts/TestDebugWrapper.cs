@@ -34,14 +34,23 @@ public class TestDebugWrapper : MonoBehaviour
 
         Debugs.Log(testDeg.Deg2Rad(), testRad.Rad2Deg());
         Debugs.Log(elementsAmount.RandomInterval(), elementsTime.RandomInterval(), VectorWrapper.RandomVector2(2, 5), VectorWrapper.RandomVector2(2f, 5f));
-        var array = new int[3] { 5, 45, 81 };
-        var list = new List<int>() { 5, 45, 81 };
+        var array = new int[4] { 5, 45, 81, 32 };
+        var list = new List<int>() { 5, 45, 81, 32 };
+        var dictionary = new Dictionary<int, string>();
+
+        dictionary.Add(0, "a");
+        dictionary.Add(2, "b");
+        dictionary.Add(3, "c");
 
         Debugs.Log(array);
         Debugs.Log(array.Random());
 
         Debugs.Log(list);
         Debugs.Log(list.Random());
+
+        Debugs.Log(array.ToSubsetArray(1));
+        Debugs.Log(list.ToSubsetList(1, 3));
+        Debugs.Log(dictionary.ToSubsetArray(1));
 
         Debugs.DrawRectangle(new Vector2(10, 10), new Vector2(20, 20), 20);
         Debugs.DrawRectangle(new Vector2(-10, -10), -30, -20, Color.red, 20);
