@@ -21,6 +21,9 @@ namespace JoaoSant0s.ServicePackage.Pool
         public override void Init()
         {
             config = Resources.Load<PoolConfig>("Configs/PoolConfig");
+            Debug.Assert(config != null, "Create the PoolConfig asset inside the path: Resources/Configs");
+            Debug.Assert(config != null, "RightClick/Create/JoaoSant0s/ServicePackage/Pool/PoolConfig");
+
             Setup();
         }
 
