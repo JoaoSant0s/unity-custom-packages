@@ -8,6 +8,7 @@ using JoaoSant0s.CommonWrapper;
 using JoaoSant0s.Extensions.Strings;
 using JoaoSant0s.Extensions.Numbers;
 using JoaoSant0s.Extensions.Vectors;
+using JoaoSant0s.Extensions.Collections;
 
 public class TestDebugWrapper : MonoBehaviour
 {
@@ -33,8 +34,14 @@ public class TestDebugWrapper : MonoBehaviour
 
         Debugs.Log(testDeg.Deg2Rad(), testRad.Rad2Deg());
         Debugs.Log(elementsAmount.RandomInterval(), elementsTime.RandomInterval(), VectorWrapper.RandomVector2(2, 5), VectorWrapper.RandomVector2(2f, 5f));
+        var array = new int[3] { 5, 45, 81 };
+        var list = new List<int>() { 5, 45, 81 };
 
-        Debugs.Log(new int[3] { 5, 45, 81 });
+        Debugs.Log(array);
+        Debugs.Log(array.Random());
+
+        Debugs.Log(list);
+        Debugs.Log(list.Random());
 
         Debugs.DrawRectangle(new Vector2(10, 10), new Vector2(20, 20), 20);
         Debugs.DrawRectangle(new Vector2(-10, -10), -30, -20, Color.red, 20);
