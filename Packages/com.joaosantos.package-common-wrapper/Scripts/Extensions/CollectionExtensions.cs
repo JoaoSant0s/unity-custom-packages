@@ -1,61 +1,80 @@
 using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Events;
 using RandomRange = UnityEngine.Random;
+using JoaoSant0s.CommonWrapper;
 
 namespace JoaoSant0s.Extensions.Collections
 {
     public static class CollectionExtensions
     {
-        public delegate bool PredicateCondition<T>(T parameter);
-
         /// <summary>
-        /// Find in an array an element based on a Predicate Condition      
-        /// </summary>
-        /// <param name="conditionAction"> the action condition to check ele element condition</param>
-        public static T Find<T>(this T[] array, PredicateCondition<T> conditionAction)
-        {
-            for (int i = 0; i < array.Length; i++)
-            {
-                if (conditionAction(array[i])) return array[i];
-            }
-            return default(T);
-        }
-
-        /// <summary>
-        /// Get a random element from a List     
-        /// </summary>        
-        public static T Random<T>(this List<T> array)
+        /// Get a random element from a ICollection     
+        /// </summary>                
+        public static T Random<T>(this ICollection<T> array)
         {
             return array.Random(array.Count);
         }
 
         /// <summary>
-        /// Get a random element from a List with the specific size     
+        /// Get a random element from a ICollection with the specific size     
         /// </summary>
-        /// <param name="amount"> number of elements that will be analyzed in the list </param>
-        public static T Random<T>(this List<T> array, int amount)
+        /// <param name="amount"> number of elements that will be analyzed in the list </param>        
+        public static T Random<T>(this ICollection<T> collection, int amount)
         {
-            return array[RandomRange.Range(0, amount)];
+            return collection.ElementAt(RandomRange.Range(0, amount));
         }
 
         /// <summary>
-        /// Get a random element from an array     
-        /// </summary>   
-        public static T Random<T>(this T[] array)
+        /// Get a subset list:
+        /// var collection = [2, 3, 4, 5]
+        /// collection.Subset(1) => {2, 4, 5}
+        /// </summary>
+        /// <param name="start"> from the start index: inclusive </param>
+        public static List<T> ToSubsetList<T>(this ICollection<T> collection, int start)
         {
-            return array.Random(array.Length);
+            return collection.Subset<T>(start, collection.Count()).ToList();
         }
 
         /// <summary>
-        /// Get a random element from an array with the specific size     
+        /// Get a subset list 
+        /// var collection = [2, 3, 4, 5]
+        /// collection.Subset(0, 2) => {2, 3}
         /// </summary>
-        /// <param name="amount"> number of elements that will be analyzed in the array </param>
-        public static T Random<T>(this T[] array, int amount)
+        /// <param name="start"> from the start index: inclusive </param>             
+        /// <param name="end"> until the end index: exclusive </param>          
+        public static List<T> ToSubsetList<T>(this ICollection<T> collection, int start, int end)
         {
-            return array[RandomRange.Range(0, amount)];
+            return collection.Subset<T>(start, end).ToList();
+        }
+
+        /// <summary>
+        /// Get a subset list:
+        /// var collection = [2, 3, 4, 5]
+        /// collection.Subset(1) => [2, 4, 5]
+        /// </summary>
+        /// <param name="start"> from the start index: inclusive </param>
+        public static T[] ToSubsetArray<T>(this ICollection<T> collection, int start)
+        {
+            return collection.Subset<T>(start, collection.Count()).ToArray();
+        }
+
+        /// <summary>
+        /// Get a subset list 
+        /// var collection = [2, 3, 4, 5]
+        /// collection.Subset(0, 2) => [2, 3]
+        /// </summary>
+        /// <param name="start"> from the start index: inclusive </param>             
+        /// <param name="end"> until the end index: exclusive </param>          
+        public static T[] ToSubsetArray<T>(this ICollection<T> collection, int start, int end)
+        {
+            return collection.Subset<T>(start, end).ToArray();
+        }
+
+        private static IEnumerable<T> Subset<T>(this ICollection<T> collection, int start, int end)
+        {
+            return collection.Where((c, index) => start <= index && index < end);
         }
     }
 }

@@ -10,29 +10,7 @@ namespace JoaoSant0s.Extensions.Vectors
         #region Vector 2
 
         /// <summary>
-        /// Generate a random Vector 2
-        /// </summary>
-        /// <param name="min"> minimum value </param>
-        /// <param name="max"> maximum value </param>
-        public static Vector2 RandomVector2(float min, float max)
-        {
-            return new Vector2(Random.Range(min, max), Random.Range(min, max));
-        }
-
-        /// <summary>
-        /// Generate a random Vector 2
-        /// </summary>
-        /// <param name="xMin"> X minimum value </param>
-        /// <param name="xMax"> X maximum value </param>
-        /// <param name="yMin"> Y minimum value </param>
-        /// <param name="yMax"> Y maximum value </param>
-        public static Vector2 RandomVector2(float xMin, float xMax, float yMin, float yMax)
-        {
-            return new Vector2(Random.Range(xMin, xMax), Random.Range(yMin, yMax));
-        }
-
-        /// <summary>
-        /// Negate vector
+        /// Negate axis values
         /// </summary>    
         public static Vector2 NegateVector(this Vector2 value)
         {
@@ -41,36 +19,28 @@ namespace JoaoSant0s.Extensions.Vectors
             return value;
         }
 
+        /// <summary>
+        /// Return a random int within [x..y)
+        /// </summary>    
+        public static int RandomInterval(this Vector2Int value)
+        {
+            return Random.Range(value.x, value.y);
+        }
+
+        /// <summary>
+        /// Return a random float within [x..y)
+        /// </summary>    
+        public static float RandomInterval(this Vector2 value)
+        {
+            return Random.Range(value.x, value.y);
+        }
+
         #endregion
 
         #region Vector 3
 
         /// <summary>
-        /// Generate a random Vector 3
-        /// </summary>
-        /// <param name="min"> minimum value </param>
-        /// <param name="max"> maximum value </param>
-        public static Vector3 RandomVector3(float min, float max)
-        {
-            return new Vector3(Random.Range(min, max), Random.Range(min, max), Random.Range(min, max));
-        }
-
-        /// <summary>
-        /// Generate a random Vector 3
-        /// </summary>
-        /// <param name="xMin"> X minimum value </param>
-        /// <param name="xMax"> X maximum value </param>
-        /// <param name="yMin"> Y minimum value </param>
-        /// <param name="yMax"> Y maximum value </param>
-        /// <param name="zMin"> Z minimum value </param>
-        /// <param name="zMax"> Z maximum value </param>
-        public static Vector3 RandomVector3(float xMin, float xMax, float yMin, float yMax, float zMin, float zMax)
-        {
-            return new Vector3(Random.Range(xMin, xMax), Random.Range(yMin, yMax), Random.Range(zMin, zMax));
-        }
-
-        /// <summary>
-        /// Negate vector
+        /// Negate axis values
         /// </summary>    
         public static Vector3 NegateVector(this Vector3 value)
         {

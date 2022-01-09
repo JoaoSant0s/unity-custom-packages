@@ -5,6 +5,8 @@ using UnityEngine;
 using JoaoSant0s.ServicePackage.General;
 using JoaoSant0s.ServicePackage.Flag;
 
+using JoaoSant0s.Extensions.Vectors;
+
 public class TestService : MonoBehaviour
 {
     [SerializeField]

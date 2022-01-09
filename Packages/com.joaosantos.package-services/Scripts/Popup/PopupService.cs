@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -23,7 +24,10 @@ namespace JoaoSant0s.ServicePackage.Popup
         public override void Init()
         {
             config = Resources.Load<PopupConfig>("Configs/PopupConfig");
-            this.popupArea = UtilWrapper.FindRectTransformWithTag(config.mainPopupTag);
+            Debug.Assert(config != null, "Create the PopupConfig asset inside the path: Resources/Configs");
+            Debug.Assert(config != null, "RightClick/Create/JoaoSant0s/ServicePackage/Popup/PopupConfig");
+
+            this.popupArea = TransformWrapper.FindRectTransformWithTag(config.mainPopupTag);
         }
 
         #endregion
@@ -35,13 +39,7 @@ namespace JoaoSant0s.ServicePackage.Popup
         /// </summary>        
         public T Show<T>() where T : BasePopup
         {
-            var info = PopupsInfos.Find(info => info.prefab is T);
-
-            T popup = Instantiate((T)info.prefab);
-
-            ((RectTransform)popup.transform).SetParent(this.popupArea, false);
-
-            return popup;
+            return PreparePopup<T>(this.popupArea);
         }
 
         /// <summary>
@@ -50,13 +48,7 @@ namespace JoaoSant0s.ServicePackage.Popup
         /// <param name="popupArea"> parent of the popup </param>
         public T Show<T>(RectTransform popupArea) where T : BasePopup
         {
-            var info = PopupsInfos.Find(info => info.prefab is T);
-
-            T popup = Instantiate((T)info.prefab);
-
-            ((RectTransform)popup.transform).SetParent(popupArea, false);
-
-            return popup;
+            return PreparePopup<T>(popupArea);
         }
 
         /// <summary>
@@ -67,6 +59,22 @@ namespace JoaoSant0s.ServicePackage.Popup
             var instantiatedPopup = GameObject.FindObjectOfType<T>();
 
             return instantiatedPopup != null;
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private T PreparePopup<T>(RectTransform popupArea) where T : BasePopup
+        {
+            var info = PopupsInfos.FirstOrDefault(info => info.prefab is T);
+            Debug.Assert(info.prefab != null, string.Format("The pop-up {0} wasn't found inside the PopupConfig", typeof(T)));
+
+            T popup = Instantiate((T)info.prefab);
+
+            ((RectTransform)popup.transform).SetParent(popupArea, false);
+
+            return popup;
         }
 
         #endregion

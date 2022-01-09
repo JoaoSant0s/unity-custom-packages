@@ -34,6 +34,9 @@ namespace JoaoSant0s.ServicePackage.Audio
         public override void Init()
         {
             Config = Resources.Load<AudioConfig>("Configs/AudioConfig");
+            Debug.Assert(Config != null, "Create the AudioConfig asset inside the path: Resources/Configs");
+            Debug.Assert(Config != null, "RightClick/Create/JoaoSant0s/ServicePackage/Audio/AudioConfig");
+            
             audioObjects = new List<AudioObject>();
             audioSourceController = new AudioSourceController(this);
         }
