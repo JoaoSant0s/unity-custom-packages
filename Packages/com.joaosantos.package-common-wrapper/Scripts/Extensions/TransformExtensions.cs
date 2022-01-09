@@ -25,12 +25,22 @@ namespace JoaoSant0s.Extensions.Transforms
         }
 
         /// <summary>
+        /// Set the X and Y position from a transform, maintaining the Z-axis
+        /// </summary>
+        /// <param name="xAxis"> X position value </param>
+        /// <param name="yAxis"> Y position value </param>
+        public static void SetPositionXY(this Transform main, float xAxis, float yAxis)
+        {
+            main.position = new Vector3(xAxis, yAxis, main.position.z);
+        }
+
+        /// <summary>
         /// Set the Z position from a transform, maintaining the X and Y axis
         /// </summary>
         /// <param name="zAxis"> Z Axis </param>
         public static void SetPositionZ(this Transform main, float zAxis)
         {
-            main.position = new Vector3(main.position.x,  main.position.y, zAxis);
+            main.position = new Vector3(main.position.x, main.position.y, zAxis);
         }
 
     }

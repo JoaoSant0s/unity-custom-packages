@@ -21,53 +21,25 @@ namespace JoaoSant0s.ServicePackage.Pool
         public override void Init()
         {
             config = Resources.Load<PoolConfig>("Configs/PoolConfig");
+            Debug.Assert(config != null, "Create the PoolConfig asset inside the path: Resources/Configs");
+            Debug.Assert(config != null, "RightClick/Create/JoaoSant0s/ServicePackage/Pool/PoolConfig");
+
             Setup();
         }
 
         #endregion
 
-        #region Public Methods
+        #region Public Methods       
 
         /// <summary>
         /// Get a valid Pool element of type T
-        /// </summary>
-        /// <param name="position"> position to spawn the element </param>
-        /// <param name="indexOrdering"> selection of an extra prefab of a specific Type </param>
-        public T Get<T>(Vector3 position, int indexOrdering = 0) where T : PoolBase
-        {
-            var instance = GetValidElement<T>(indexOrdering);
-            instance.transform.position = position;
-            instance.gameObject.SetActive(true);
-            instance.Show();
-
-            return instance;
-        }
-
-        /// <summary>
-        /// Get a valid Pool element of type T
-        /// </summary>
-        /// <param name="position"> position to spawn the element </param>
-        /// <param name="quaternion"> quaternion to spawn the element </param>
-        /// <param name="indexOrdering"> selection of an extra prefab of a specific Type </param>
-        public T Get<T>(Vector3 position, Quaternion quaternion, int indexOrdering = 0) where T : PoolBase
-        {
-            var instance = GetValidElement<T>(indexOrdering);
-            instance.transform.position = position;
-            instance.transform.rotation = quaternion;
-            instance.gameObject.SetActive(true);
-            instance.Show();
-
-            return instance;
-        }
-
-        /// <summary>
-        /// Get a valid Pool element of type T
-        /// </summary>
-        /// <param name="parent"> parent to spawn the element </param>
+        /// </summary>        
         /// <param name="position"> position to spawn the element </param>        
-        /// <param name="indexOrdering"> selection of an extra prefab of a specific Type </param>
-        public T Get<T>(Transform parent, Vector3 position, int indexOrdering = 0) where T : PoolBase
+        /// <param name="indexOrdering"> selection of an extra prefab of a specific Type. Default value: 0</param>
+        /// <param name="parent"> parent to spawn the element. Default value: null</param>
+        public T Get<T>(Vector3 position, Transform parent, int indexOrdering = 0) where T : PoolBase
         {
+            Debug.Assert(parent != null, "You must define a transform parent to move the object of the DontDestroyOnLoadScene");
             var instance = GetValidElement<T>(indexOrdering);
             instance.transform.SetParent(parent);
             instance.transform.position = position;
@@ -80,12 +52,13 @@ namespace JoaoSant0s.ServicePackage.Pool
         /// <summary>
         /// Get a valid Pool element of type T
         /// </summary>
-        /// <param name="parent"> parent to spawn the element </param>
         /// <param name="position"> position to spawn the element </param>
         /// <param name="quaternion"> quaternion to spawn the element </param>
-        /// <param name="indexOrdering"> selection of an extra prefab of a specific Type </param>
-        public T Get<T>(Transform parent, Vector3 position, Quaternion quaternion, int indexOrdering = 0) where T : PoolBase
+        /// <param name="indexOrdering"> selection of an extra prefab of a specific Type. Default value: 0 </param>
+        /// <param name="parent"> parent to spawn the element. Default value: null</param>
+        public T Get<T>(Vector3 position, Quaternion quaternion, Transform parent, int indexOrdering = 0) where T : PoolBase
         {
+            Debug.Assert(parent != null, "You must define a transform parent to move the object of the DontDestroyOnLoadScene");
             var instance = GetValidElement<T>(indexOrdering);
             instance.transform.SetParent(parent);
             instance.transform.position = position;
