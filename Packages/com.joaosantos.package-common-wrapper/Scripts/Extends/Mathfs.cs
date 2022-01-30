@@ -8,6 +8,9 @@ namespace JoaoSant0s.CommonWrapper
 {
     public static class Mathfs
     {
+        /// <summary> Equivalent to 2*pi </summary>
+        public const float TAU = Mathf.PI * 2;
+
         /// <summary>
         /// Exponential interpolation, the multiplicative version of lerp, useful for values such as scaling or zooming
         /// </summary>
