@@ -13,7 +13,7 @@ using NUnit.Framework;
 
 namespace JoaoSant0s.CustomVariable.Tests
 {
-    public class CustomVariableInitializationTests
+    public class CustomFloatVariableTests
     {
         [Test]
         [TestCase(4f)]
