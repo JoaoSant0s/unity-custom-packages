@@ -13,7 +13,7 @@ namespace JoaoSant0s.ServicePackage.Save
 
         #region Override Methods
 
-        public override void Init()
+        public override void OnInit()
         {
             config = Resources.Load<SaveLocalConfig>("Configs/SaveLocalConfig");
             Debug.Assert(config != null, "Create the SaveLocalConfig asset inside the path: Resources/Configs");

@@ -12,6 +12,12 @@ namespace JoaoSant0s.ServicePackage.Flag
     public class FlagService : Service
     {
         private Dictionary<FlagAsset, FlagObject> flagDictionary = new Dictionary<FlagAsset, FlagObject>();
+        
+        #region Override Methods
+
+        public override void OnInit() { }
+
+        #endregion
 
         /// <summary>
         /// Raise a flag asset

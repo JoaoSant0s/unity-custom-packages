@@ -21,7 +21,7 @@ namespace JoaoSant0s.ServicePackage.Popup
 
         #region Override Methods
 
-        public override void Init()
+        public override void OnInit()
         {
             config = Resources.Load<PopupConfig>("Configs/PopupConfig");
             Debug.Assert(config != null, "Create the PopupConfig asset inside the path: Resources/Configs");

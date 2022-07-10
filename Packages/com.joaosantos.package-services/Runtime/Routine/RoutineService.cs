@@ -19,8 +19,16 @@ namespace JoaoSant0s.ServicePackage.Routine
 
     public class RoutineService : Service
     {
+
+        #region Override Methods
+
+        public override void OnInit() { }
+
+        #endregion
+
+
         #region Public Methods
-        
+
         /// <summary>
         /// Create a coroutine after a specific time to execute a action
         /// </summary>

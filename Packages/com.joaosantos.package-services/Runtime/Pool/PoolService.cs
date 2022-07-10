@@ -18,7 +18,7 @@ namespace JoaoSant0s.ServicePackage.Pool
 
         #region Override Methods
 
-        public override void Init()
+        public override void OnInit()
         {
             config = Resources.Load<PoolConfig>("Configs/PoolConfig");
             Debug.Assert(config != null, "Create the PoolConfig asset inside the path: Resources/Configs");

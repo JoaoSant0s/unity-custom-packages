@@ -53,7 +53,7 @@ namespace JoaoSant0s.ServicePackage.General
             var newService = newGameObject.AddComponent<T>();
             newGameObject.transform.SetParent(staticTransform);
             newGameObject.name = newService.GetType().Name;
-            newService.Init();
+            newService.OnInit();
 
             AllServices.Add(newService);
 

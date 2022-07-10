@@ -6,6 +6,6 @@ namespace JoaoSant0s.ServicePackage.General
 {
     public abstract partial class Service : MonoBehaviour
     {
-        public virtual void Init() { }
+        public abstract void OnInit();
     }
 }
