@@ -10,9 +10,18 @@ namespace JoaoSant0s.CustomVariable
     [CreateAssetMenu(fileName = "FloatVariable", menuName = "JoaoSant0s/CustomVariablePackage/FloatVariable")]
     public class FloatVariable : Variable<float>
     {
+        #region Public Override Methods
+
+        public override void OnModifyImplementation(float newValue)
+        {
+            Value = newValue;
+        }
+
         public override string ToString()
         {
-            return string.Format("{0} {1}", typeof(FloatVariable), value);
+            return string.Format("{0} {1}", typeof(FloatVariable), Value);
         }
+
+        #endregion
     }
 }

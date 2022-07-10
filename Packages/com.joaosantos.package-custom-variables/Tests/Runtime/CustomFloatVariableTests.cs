@@ -20,39 +20,27 @@ namespace JoaoSant0s.CustomVariable.Tests
         [TestCase(-4f)]
         [TestCase(-40000f)]
         [TestCase(-1.223f)]
-        public void CreateFloatVariableWithValue(float testValue)
+        public void CreateFloatVariableAndSetValue(float testValue)
         {
             var floatVariable = ScriptableObject.CreateInstance<FloatVariable>();
-            floatVariable.value = testValue;
+            floatVariable.Set(testValue);
 
-            Assert.AreEqual(testValue, floatVariable.value, "This values must be equals");
+            Assert.AreEqual(testValue, floatVariable.Value, "This values must be equals");
         }
 
         [Test]
-        [TestCase(4f, 4f)]
-        [TestCase(-22.24f, -22.24f)]
-        public void TwoDiferentFloatVariablesAreNotEquals(float firstValue, float secondValue)
+        [TestCase(0f, 4f)]
+        [TestCase(88542f, -22.24f)]
+        public void ModifyFloatVariablesToNewValue(float startValue, float nextValue)
         {
-            var firstVariable = ScriptableObject.CreateInstance<FloatVariable>();
-            firstVariable.value = firstValue;
+            var floatVariable = ScriptableObject.CreateInstance<FloatVariable>();
+            floatVariable.Set(startValue);
+            floatVariable.OnValueModified += (float previousValue, float newValue) =>
+            {
+                Assert.AreEqual(true, nextValue == newValue, "The next value must be equals to new value");
+            };
 
-            var secondVariable = ScriptableObject.CreateInstance<FloatVariable>();
-            secondVariable.value = secondValue;
-
-            Assert.AreNotEqual(true, firstVariable == secondVariable, "Two different FloatVariables must be differents");
-        }
-
-        [Test]
-        [TestCase(4f)]
-        [TestCase(-22.24f)]
-        public void TwoEqualsFloatVariablesAreEquals(float testValue)
-        {
-            var firstVariable = ScriptableObject.CreateInstance<FloatVariable>();
-            firstVariable.value = testValue;
-
-            var secondVariable = firstVariable;
-
-            Assert.AreEqual(true, firstVariable == secondVariable, "The same FloatVariable references are equals");
+            floatVariable.Modify(nextValue);
         }
     }
 }
