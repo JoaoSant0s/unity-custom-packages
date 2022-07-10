@@ -20,27 +20,57 @@ namespace JoaoSant0s.CustomVariable.Tests
         [TestCase(-4f)]
         [TestCase(-40000f)]
         [TestCase(-1.223f)]
-        public void CreateFloatVariableAndSetValue(float testValue)
+        public void CreateFloatVariable(float testValue)
+        {
+            var floatVariable = ScriptableObject.CreateInstance<FloatVariable>();            
+
+            Assert.AreEqual(true, floatVariable != null, "The created instance can't be null");
+        }
+
+        [Test]
+        [TestCase(4f)]
+        [TestCase(-4f)]
+        [TestCase(-40000f)]
+        [TestCase(-1.223f)]
+        public void SetValueOnFloatVariable(float testValue)
         {
             var floatVariable = ScriptableObject.CreateInstance<FloatVariable>();
             floatVariable.Set(testValue);
 
-            Assert.AreEqual(testValue, floatVariable.Value, "This values must be equals");
+            Assert.AreEqual(testValue, floatVariable.Value, "The value must be equals to Setted value");
         }
 
         [Test]
         [TestCase(0f, 4f)]
         [TestCase(88542f, -22.24f)]
-        public void ModifyFloatVariablesToNewValue(float startValue, float nextValue)
+        public void ModifyFloatVariableToNewValue(float startValue, float nextValue)
         {
             var floatVariable = ScriptableObject.CreateInstance<FloatVariable>();
             floatVariable.Set(startValue);
             floatVariable.OnValueModified += (float previousValue, float newValue) =>
             {
-                Assert.AreEqual(true, nextValue == newValue, "The next value must be equals to new value");
+                Assert.AreEqual(nextValue, newValue, "The next value must be equals to new value");
             };
 
             floatVariable.Modify(nextValue);
+        }
+
+        [Test]
+        [TestCase(0f, 4f, 4f)]
+        [TestCase(88542f, -22f, 88520f)]
+        [TestCase(-10f, -22f, -32f)]
+        [TestCase(-25f, 15f, -10f)]
+        public void AddValueOnFloatVariable(float startValue, float addValue, float result)
+        {
+            var floatVariable = ScriptableObject.CreateInstance<FloatVariable>();
+            floatVariable.Set(startValue);
+
+            floatVariable.OnValueModified += (float previousValue, float newValue) =>
+            {
+                Assert.AreEqual(result, newValue, "The new Value must be equals the result value");
+            };
+
+            floatVariable.Add(addValue);
         }
     }
 }
