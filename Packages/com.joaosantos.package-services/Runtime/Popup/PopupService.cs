@@ -54,7 +54,7 @@ namespace JoaoSant0s.ServicePackage.Popup
         /// <summary>
         /// Check if the popup of type T is a instance
         /// </summary>
-        public bool Contains<T>() where T : BasePopup
+        public bool IsPopupOpen<T>() where T : BasePopup
         {
             var instantiatedPopup = GameObject.FindObjectOfType<T>();
 

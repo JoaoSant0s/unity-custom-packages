@@ -8,28 +8,14 @@ namespace JoaoSant0s.ServicePackage.Popup
 {
     public abstract partial class BasePopup : MonoBehaviour
     {
-        public UnityAction OnBeforeHide;
+        public UnityAction OnBeforeClose;
 
-        private CanvasGroup canvasGroup;
+        protected virtual void BeforeClose() { }
 
-        protected virtual void Awake()
+        public virtual void Close()
         {
-            this.canvasGroup = GetComponent<CanvasGroup>();
-        }
-
-        protected virtual void BeforeHide()
-        {
-            OnBeforeHide?.Invoke();
-        }
-
-        public virtual void Hide()
-        {
-            Close();
-        }
-
-        private void Close()
-        {
-            BeforeHide();
+            BeforeClose();
+            OnBeforeClose?.Invoke();
 
             Destroy(gameObject);
         }

@@ -21,13 +21,15 @@ public class TestPopupService : MonoBehaviour
 
     public void ShowExternalPopup()
     {
-        popupService.Show<ExternalPopup>();
+        var popup = popupService.Show<ExternalPopup>();
+        popup.OnBeforeClose += () => { Debug.Log("Closing External Popup"); };
     }
 
     public void ShowInternalPopup()
     {
-        if (popupService.Contains<InternalPopup>()) return;
-        popupService.Show<InternalPopup>((RectTransform)internalPopupArea);
+        if (popupService.IsPopupOpen<InternalPopup>()) return;
+        var popup = popupService.Show<InternalPopup>((RectTransform)internalPopupArea);
+        popup.OnBeforeClose += () => { Debug.Log("Closing Internal Popup"); };
     }
 
     #endregion
