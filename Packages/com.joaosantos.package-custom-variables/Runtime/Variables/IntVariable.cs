@@ -1,13 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
 
-using JoaoSant0s.CustomVariable;
+using UnityEngine;
 
 namespace JoaoSant0s.CustomVariable
 {
+    [CreateAssetMenu(fileName = "IntVariable", menuName = "JoaoSant0s/CustomVariablePackage/IntVariable")]
     public class IntVariable : Variable<int>
     {
         #region Protected Override Methods
