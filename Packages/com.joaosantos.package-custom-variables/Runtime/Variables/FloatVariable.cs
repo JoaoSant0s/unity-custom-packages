@@ -16,16 +16,7 @@ namespace JoaoSant0s.CustomVariable
             Value = newValue;
         }
 
-        #endregion
-
-        #region Public Override Methods
-
-        public override string ToString()
-        {
-            return string.Format("{0} {1}", typeof(FloatVariable), Value);
-        }
-
-        #endregion
+        #endregion        
 
         #region Public Methods
 

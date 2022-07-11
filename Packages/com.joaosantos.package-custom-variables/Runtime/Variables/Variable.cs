@@ -14,11 +14,27 @@ namespace JoaoSant0s.CustomVariable
         /// </summary>
         public event Action<T, T> OnValueModified;
 
-        public T Value { get; protected set; }
+        [SerializeField]
+        private T value;
+
+        public T Value
+        {
+            get => this.value;
+            protected set => this.value = value;
+        }
 
         #region Protected Abstract Methods
 
         protected abstract void OnModify(T newValue);
+
+        #endregion
+
+        #region Public Override Methods
+
+        public override string ToString()
+        {
+            return string.Format("{0}: Value = {1}", this.GetType(), Value);
+        }
 
         #endregion
 
@@ -30,7 +46,7 @@ namespace JoaoSant0s.CustomVariable
         /// <param name="newValue"> the new value to be assign to Custom Variable </param>
         public virtual void Set(T newValue)
         {
-            Value = newValue;
+            value = newValue;
         }
 
         /// <summary>

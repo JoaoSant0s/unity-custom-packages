@@ -18,15 +18,6 @@ namespace JoaoSant0s.CustomVariable
 
         #endregion
 
-        #region Public Override Methods
-
-        public override string ToString()
-        {
-            return string.Format("{0} {1}", typeof(IntVariable), Value);
-        }
-
-        #endregion
-
         #region Public Methods
 
         public void Add(int increment)
