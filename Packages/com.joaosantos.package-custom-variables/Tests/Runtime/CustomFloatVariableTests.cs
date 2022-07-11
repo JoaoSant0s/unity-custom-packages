@@ -16,11 +16,7 @@ namespace JoaoSant0s.CustomVariable.Tests
     public class CustomFloatVariableTests
     {
         [Test]
-        [TestCase(4f)]
-        [TestCase(-4f)]
-        [TestCase(-40000f)]
-        [TestCase(-1.223f)]
-        public void CreateFloatVariable(float testValue)
+        public void CreateFloatVariable()
         {
             var floatVariable = ScriptableObject.CreateInstance<FloatVariable>();            
 
@@ -29,8 +25,8 @@ namespace JoaoSant0s.CustomVariable.Tests
 
         [Test]
         [TestCase(4f)]
-        [TestCase(-4f)]
-        [TestCase(-40000f)]
+        [TestCase(-4.54f)]
+        [TestCase(-4000.3320f)]
         [TestCase(-1.223f)]
         public void SetValueOnFloatVariable(float testValue)
         {
@@ -41,8 +37,8 @@ namespace JoaoSant0s.CustomVariable.Tests
         }
 
         [Test]
-        [TestCase(0f, 4f)]
-        [TestCase(88542f, -22.24f)]
+        [TestCase(123.123f, 0.4f)]
+        [TestCase(88.542f, -22.24f)]
         public void ModifyFloatVariableToNewValue(float startValue, float nextValue)
         {
             var floatVariable = ScriptableObject.CreateInstance<FloatVariable>();
