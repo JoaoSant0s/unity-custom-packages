@@ -3,14 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace JoaoSant0s.CustomVariable
 {
     [CreateAssetMenu(fileName = "FloatVariable", menuName = "JoaoSant0s/CustomVariablePackage/FloatVariable")]
     public class FloatVariable : Variable<float>
     {
-
         #region Protected Override Methods
 
         protected sealed override void OnModify(float newValue)
