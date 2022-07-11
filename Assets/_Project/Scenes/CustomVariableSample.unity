@@ -236,6 +236,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   floatVariable: {fileID: 11400000, guid: e17badbd75f209c49a53d69b6336ac3e, type: 2}
+  intVariable: {fileID: 11400000, guid: d6366857ad0002a4c82ac80680b1cd2e, type: 2}
+  stringVariable: {fileID: 11400000, guid: 9d0ab2c05cc04114098fc04232846b9f, type: 2}
 --- !u!4 &620634579
 Transform:
   m_ObjectHideFlags: 0

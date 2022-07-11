@@ -10,11 +10,20 @@ namespace Namespace
 {
     public class TestCustomVariables : MonoBehaviour
     {
-        [SerializeField] FloatVariable floatVariable;
+        [SerializeField]
+        private FloatVariable floatVariable;
+
+        [SerializeField]
+        private IntVariable intVariable;
+
+        [SerializeField]
+        private StringVariable stringVariable;
 
         private void Start()
         {
             Debug.Log(floatVariable);
+            Debug.Log(intVariable);
+            Debug.Log(stringVariable);
         }
     }
 }
