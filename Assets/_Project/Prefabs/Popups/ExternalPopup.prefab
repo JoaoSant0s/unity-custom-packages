@@ -371,7 +371,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5446014173083935235}
         m_TargetAssemblyTypeName: JoaoSant0s.ServicePackage.Popup.BasePopup, com.joaosantos.package-services.Runtime
-        m_MethodName: Hide
+        m_MethodName: Close
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
