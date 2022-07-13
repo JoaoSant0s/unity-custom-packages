@@ -6,6 +6,12 @@
       "source": "embedded",
       "dependencies": {}
     },
+    "com.joaosantos.package-custom-variables": {
+      "version": "file:com.joaosantos.package-custom-variables",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
     "com.joaosantos.package-services": {
       "version": "file:com.joaosantos.package-services",
       "depth": 0,

@@ -1,0 +1,19 @@
+{
+  "name": "com.joaosantos.package-custom-variables",
+  "version": "0.0.1",
+  "displayName": "JS Custom Variable",
+  "description": "Package with new variable formats using ScriptableObjects",
+  "unity": "2020.3",
+  "documentationUrl": "",
+  "changelogUrl": "",
+  "licensesUrl": "",
+  "keywords": [
+    "Package",
+    "Variables",
+    "ScriptableObject"
+  ],
+  "author": {
+    "name": "JoaoSant0s",
+    "email": "ricardoelric@gmail.com"
+  }
+}

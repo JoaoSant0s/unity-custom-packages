@@ -32,6 +32,20 @@ public class TestDebugWrapper : MonoBehaviour
         var testDeg = 180;
         var testRad = Mathf.PI;
 
+        Debug.Log("Mathfs Start");
+
+        Debugs.Log("Eerp", 2, 8, Mathfs.Eerp(2, 8, 0.5f));
+        Debugs.Log("InverseEerp", 2, 8, Mathfs.InverseEerp(2, 8, 4));
+
+        Debugs.Log("Lerp", 2, 8, Mathf.Lerp(2, 8, 0.5f));
+        Debugs.Log("InverseLerp", 2, 8, Mathf.InverseLerp(2, 8, 4));
+
+        Debugs.Log("Sum", Mathfs.Sum(2, 4, 6, 8));
+        Debugs.Log("Product", Mathfs.Product(2, 4, 6, 8));
+        Debugs.Log("Avarage", Mathfs.Avarage(2, 4, 6, 8));
+
+        Debug.Log("Mathfs End");
+
         Debugs.Log(testDeg.Deg2Rad(), testRad.Rad2Deg());
         Debugs.Log(elementsAmount.RandomInterval(), elementsTime.RandomInterval(), VectorWrapper.RandomVector2(2, 5), VectorWrapper.RandomVector2(2f, 5f));
         var array = new int[4] { 5, 45, 81, 32 };
