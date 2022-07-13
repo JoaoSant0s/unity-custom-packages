@@ -11,7 +11,7 @@ namespace JoaoSant0s.CustomVariable
     {
         #region Protected Override Methods
 
-        protected sealed override void OnModify(int newValue)
+        protected override void OnModify(int newValue)
         {
             Value = newValue;
         }
