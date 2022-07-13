@@ -13,7 +13,7 @@ using NUnit.Framework;
 
 namespace JoaoSant0s.CustomVariable.Tests
 {
-    public class CustomIntVariableTests : MonoBehaviour
+    public class CustomIntVariableTests
     {
         [Test]
         public void CreateIntVariable()
