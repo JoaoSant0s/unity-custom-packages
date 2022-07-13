@@ -4,10 +4,6 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
-
 using NUnit.Framework;
 
 namespace JoaoSant0s.CustomVariable.Tests
