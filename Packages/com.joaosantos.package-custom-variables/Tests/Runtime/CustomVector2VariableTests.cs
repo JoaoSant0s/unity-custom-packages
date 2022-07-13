@@ -9,7 +9,7 @@ using NUnit.Framework;
 
 namespace JoaoSant0s.CustomVariable.Tests
 {
-    public class CustomVector2VariableTests : MonoBehaviour
+    public class CustomVector2VariableTests
     {
         [Test]
         public void CreateVector2Variable()
@@ -69,6 +69,90 @@ namespace JoaoSant0s.CustomVariable.Tests
 
             var addValue = new Vector2(addXValue, addYValue);
             vector2Variable.Add(addValue);
+        }
+
+        [Test]
+        [TestCase(0f, 4f, 4f, 4f, 4f)]
+        [TestCase(88542f, -22f, 885.2f, 89427.2f, -22f)]
+        [TestCase(-10f, -0.22f, -32f, -42f, -0.22f)]
+        [TestCase(-2.5f, 15f, 10f, 7.5f, 15f)]
+        public void AddXValueOnVector2Variable(float startXValue, float startYValue, float addXValue, float resultXValue, float resultYValue)
+        {
+            var testValue = new Vector2(startXValue, startYValue);
+            var vector2Variable = ScriptableObject.CreateInstance<Vector2Variable>();
+            vector2Variable.Set(testValue);
+
+            var result = new Vector2(resultXValue, resultYValue);
+            vector2Variable.OnValueModified += (Vector2 previousValue, Vector2 newValue) =>
+            {
+                UnityAssert.AreApproximatelyEqual(result.x, newValue.x, "The new X value must be equals the result value");
+                UnityAssert.AreApproximatelyEqual(result.y, newValue.y, "The new Y value must be equals the result value");
+            };
+
+            vector2Variable.AddXAxis(addXValue);
+        }
+
+        [Test]
+        [TestCase(0f, 4f, 4f, 0f, 8f)]
+        [TestCase(88542f, -22f, 885.2f, 88542f, 863.2f)]
+        [TestCase(-10f, -0.22f, -32f, -10f, -32.22f)]
+        [TestCase(-2.5f, 15f, 10f, -2.5f, 25f)]
+        public void AddYValueOnVector2Variable(float startXValue, float startYValue, float addYValue, float resultXValue, float resultYValue)
+        {
+            var testValue = new Vector2(startXValue, startYValue);
+            var vector2Variable = ScriptableObject.CreateInstance<Vector2Variable>();
+            vector2Variable.Set(testValue);
+
+            var result = new Vector2(resultXValue, resultYValue);
+            vector2Variable.OnValueModified += (Vector2 previousValue, Vector2 newValue) =>
+            {
+                UnityAssert.AreApproximatelyEqual(result.x, newValue.x, "The new X value must be equals the result value");
+                UnityAssert.AreApproximatelyEqual(result.y, newValue.y, "The new Y value must be equals the result value");
+            };
+
+            vector2Variable.AddYAxis(addYValue);
+        }
+
+        [Test]
+        [TestCase(0f, 4f, 4f, 4f, 4f)]
+        [TestCase(88542f, -22f, 885.2f, 885.2f, -22f)]
+        [TestCase(-10f, -0.22f, -32f, -32f, -0.22f)]
+        [TestCase(-2.5f, 15f, 10f, 10f, 15f)]
+        public void SetXValueOnVector2Variable(float startXValue, float startYValue, float setXValue, float resultXValue, float resultYValue)
+        {
+            var testValue = new Vector2(startXValue, startYValue);
+            var vector2Variable = ScriptableObject.CreateInstance<Vector2Variable>();
+            vector2Variable.Set(testValue);
+
+            var result = new Vector2(resultXValue, resultYValue);
+            vector2Variable.OnValueModified += (Vector2 previousValue, Vector2 newValue) =>
+            {
+                UnityAssert.AreApproximatelyEqual(result.x, newValue.x, "The new X value must be equals the result value");
+                UnityAssert.AreApproximatelyEqual(result.y, newValue.y, "The new Y value must be equals the result value");
+            };
+
+            vector2Variable.SetXAxis(setXValue);
+        }
+
+        [Test]
+        [TestCase(0f, 4f, 4f, 0f, 4f)]
+        [TestCase(88542f, -22f, 885.2f, 88542f, 885.2f)]
+        [TestCase(-10f, -0.22f, -32f, -10f, -32f)]
+        [TestCase(-2.5f, 15f, 10f, -2.5f, 10f)]
+        public void SetYValueOnVector2Variable(float startXValue, float startYValue, float setYValue, float resultXValue, float resultYValue)
+        {
+            var testValue = new Vector2(startXValue, startYValue);
+            var vector2Variable = ScriptableObject.CreateInstance<Vector2Variable>();
+            vector2Variable.Set(testValue);
+
+            var result = new Vector2(resultXValue, resultYValue);
+            vector2Variable.OnValueModified += (Vector2 previousValue, Vector2 newValue) =>
+            {
+                UnityAssert.AreApproximatelyEqual(result.x, newValue.x, "The new X value must be equals the result value");
+                UnityAssert.AreApproximatelyEqual(result.y, newValue.y, "The new Y value must be equals the result value");
+            };
+
+            vector2Variable.SetYAxis(setYValue);
         }
     }
 }
