@@ -1,6 +1,6 @@
 {
   "name": "com.joaosantos.package-common-wrapper",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "displayName": "JS Common Wrapper",
   "description": "Package with a wrapper of auxiliar scripts.",
   "unity": "2020.3",

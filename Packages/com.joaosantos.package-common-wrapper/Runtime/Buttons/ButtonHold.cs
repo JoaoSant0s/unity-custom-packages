@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-namespace AsteroidsGame.UI
+namespace JoaoSant0s.CommonWrapper
 {
     public class ButtonHold : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
