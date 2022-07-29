@@ -21,14 +21,12 @@ namespace JoaoSant0s.CommonWrapper
 
         private bool isPressed;
 
-        public UnityEvent onHoldEvent => holdEvent;
+        public UnityEvent OnDownEvent => downEvent;
+        public UnityEvent OnHoldEvent => holdEvent;
+        public UnityEvent OnUpEvent => upEvent;
+        public bool IsPressed => isPressed;
 
-        private void OnValidate()
-        {
-            CheckButtonUse();
-        }
-
-        #region Unity Methods        
+        #region Unity Implementations Methods
 
         public void OnPointerDown(PointerEventData eventData)
         {
@@ -38,8 +36,16 @@ namespace JoaoSant0s.CommonWrapper
 
         public void OnPointerUp(PointerEventData eventData)
         {
-            isPressed = false;
-            upEvent?.Invoke();
+            ReleaseHold();
+        }
+
+        #endregion
+
+        #region Unity Methods
+
+        private void OnValidate()
+        {
+            CheckButtonUse();
         }
 
         private void Update()
@@ -53,7 +59,7 @@ namespace JoaoSant0s.CommonWrapper
 
         public void SetNotPressed()
         {
-            Reset();
+            ReleaseHold();
         }
 
         #endregion
@@ -68,7 +74,7 @@ namespace JoaoSant0s.CommonWrapper
             Debug.LogError("The Component don't need a button. Just use a simple Image the RayCast Target Enabled");
         }
 
-        private void Reset()
+        private void ReleaseHold()
         {
             isPressed = false;
             upEvent?.Invoke();
