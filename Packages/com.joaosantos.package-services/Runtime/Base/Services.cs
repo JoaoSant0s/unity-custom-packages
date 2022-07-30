@@ -11,17 +11,7 @@ namespace JoaoSant0s.ServicePackage.General
         private static Transform staticTransform;
         private static List<Service> services;
 
-        private static List<Service> AllServices
-        {
-            get
-            {
-                if (services == null)
-                {
-                    services = new List<Service>();
-                }
-                return services;
-            }
-        }
+        protected override bool IsDontDestroyOnLoad => true;
 
         #region Unity Methods
 
@@ -29,9 +19,7 @@ namespace JoaoSant0s.ServicePackage.General
         {
             base.Awake();
             staticTransform = transform;
-
             gameObject.name = this.GetType().Name;
-            DontDestroyOnLoad(gameObject);
         }
 
         #endregion
@@ -39,7 +27,7 @@ namespace JoaoSant0s.ServicePackage.General
         public static T Get<T>() where T : Service
         {
             CreateServicesSet();
-            var service = AllServices.Find(s => s is T);
+            var service = services.Find(s => s is T);
 
             if (service != null) return (T)service;
 
@@ -55,7 +43,7 @@ namespace JoaoSant0s.ServicePackage.General
             newGameObject.name = newService.GetType().Name;
             newService.OnInit();
 
-            AllServices.Add(newService);
+            services.Add(newService);
 
             return newService;
         }
@@ -67,7 +55,7 @@ namespace JoaoSant0s.ServicePackage.General
             var newGameObject = new GameObject();
 
             var newServices = newGameObject.AddComponent<Services>();
-
+            services = new List<Service>();
             newGameObject.name = newServices.GetType().Name;
         }
     }

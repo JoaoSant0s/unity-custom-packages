@@ -3,11 +3,9 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
-using JoaoSant0s.CommonWrapper;
-
 namespace JoaoSant0s.ServicePackage.Pool
 {
-    public abstract partial class PoolBase : MonoBehaviour
+    public abstract class PoolBase : MonoBehaviour
     {
         internal delegate void OnDisposePoolElement(PoolBase element);
         internal OnDisposePoolElement DisposePoolElement;

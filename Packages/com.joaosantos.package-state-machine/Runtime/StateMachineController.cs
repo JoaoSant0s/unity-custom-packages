@@ -4,20 +4,21 @@ using UnityEngine;
 
 namespace JoaoSant0s.StateMachine
 {
-    public class StateMachineController : MonoBehaviour
+    public abstract partial class StateMachineController<T> : MonoBehaviour where T : StateMachineController<T>
     {
+        [Header("State Machine Controller")]
         [SerializeField]
         private bool showDebug = true;
         public string CurrentStateName => currentState?.GetType().Name;
 
-        private IState currentState;
+        private State<T> currentState;
 
         /// <summary>
         /// Make the current state machine go to the next state
         /// </summary>
         /// <param name="state"> the next state object</param>
         /// <param name="jumpLastState"> Jump "OnFinish()" execution of the last state</param>
-        public void ChangeState(IState state, bool jumpLastState = false)
+        public void ChangeState(State<T> state, bool jumpLastState = false)
         {
             if (state == null || currentState?.GetType() == state.GetType()) return;
 
@@ -36,28 +37,18 @@ namespace JoaoSant0s.StateMachine
             currentState.OnBeging();
         }
 
-        /// <summary>
-        /// Running the Update method of the current state using the MonoBehaviour Update method
-        /// </summary>
-        protected virtual void Update()
+        protected void Update()
         {
             currentState.OnUpdate();
         }
-
-        /// <summary>
-        /// Running the LateUpdate method of the current state using the MonoBehaviour LateUpdate method
-        /// </summary>
-        protected virtual void LateUpdate()
+        protected void LateUpdate()
         {
-            currentState.LateUpdate();
+            currentState.OnLateUpdate();
         }
 
-        /// <summary>
-        /// Running the FixedUpdate method of the current state using the MonoBehaviour FixedUpdate method
-        /// </summary>
-        protected virtual void FixedUpdate()
+        protected void FixedUpdate()
         {
-            currentState.FixedUpdate();
+            currentState.OnFixedUpdate();
         }
     }
 }

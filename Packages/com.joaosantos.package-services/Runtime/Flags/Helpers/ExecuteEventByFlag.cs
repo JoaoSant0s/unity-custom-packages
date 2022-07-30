@@ -28,7 +28,6 @@ namespace JoaoSant0s.ServicePackage.Flag
         private void Start()
         {
             flagService = Services.Get<FlagService>();
-
             flagService.AddListening(enableFlag, raiseEvent, lowerEvent);
 
             StartTrigger();

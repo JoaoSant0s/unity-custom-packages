@@ -4,9 +4,14 @@ using UnityEngine;
 
 namespace JoaoSant0s.CommonWrapper
 {
-    public class SingletonBehaviour<T> : MonoBehaviour where T : SingletonBehaviour<T>
+    public abstract class SingletonBehaviour<T> : MonoBehaviour where T : SingletonBehaviour<T>
     {
         protected static T instance = null;
+
+        public static T Instance => instance;
+
+        protected abstract bool IsDontDestroyOnLoad { get; }
+
         protected virtual void Awake()
         {
             if (instance != null)
@@ -16,12 +21,8 @@ namespace JoaoSant0s.CommonWrapper
             else
             {
                 instance = GetComponent<T>();
+                if (IsDontDestroyOnLoad) DontDestroyOnLoad(gameObject);
             }
-        }
-
-        public static T Instance
-        {
-            get { return instance; }
         }
     }
 }

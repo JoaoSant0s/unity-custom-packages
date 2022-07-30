@@ -8,8 +8,9 @@ namespace JoaoSant0s.CommonWrapper
 {
     public class ButtonWrapper : MonoBehaviour
     {
+        [Header("Button Wrapper")]
         [SerializeField]
-        private ButtonTuple[] buttons;
+        protected ButtonTuple[] buttons;
 
         #region Public Methods
 
