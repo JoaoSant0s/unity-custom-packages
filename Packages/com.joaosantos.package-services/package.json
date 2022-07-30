@@ -1,6 +1,6 @@
 {
   "name": "com.joaosantos.package-services",
-  "version": "2.4.1",
+  "version": "2.4.2",
   "displayName": "JS Services",
   "description": "Package with set of services.\n\nDependencies:\n\n- Common Wrapper",
   "unity": "2020.3",
