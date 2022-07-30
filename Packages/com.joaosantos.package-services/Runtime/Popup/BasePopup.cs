@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -6,9 +7,9 @@ using UnityEngine.Events;
 
 namespace JoaoSant0s.ServicePackage.Popup
 {
-    public abstract partial class BasePopup : MonoBehaviour
+    public abstract class BasePopup : MonoBehaviour
     {
-        public UnityAction OnBeforeClose;
+        public Action OnBeforeClose;
 
         protected virtual void BeforeClose() { }
 

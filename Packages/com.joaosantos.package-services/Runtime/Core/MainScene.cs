@@ -1,14 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 
-using UnityEngine.Events;
-
 using UnityEngine;
 
 namespace JoaoSant0s.Scene
 {
-    public abstract partial class MainScene : MonoBehaviour
+    public abstract class MainScene : MonoBehaviour
     {
+        [Header("Main Scene")]
         [SerializeField]
         protected SceneComponent[] initializeComponents;
 

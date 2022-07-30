@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace JoaoSant0s.ServicePackage.General
 {
-    public abstract partial class Service : MonoBehaviour
+    public abstract class Service : MonoBehaviour
     {
         public abstract void OnInit();
     }
