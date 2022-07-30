@@ -10,16 +10,17 @@ namespace JoaoSant0s.CommonWrapper
 {
     public class ButtonHold : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
+        [Header("Button Hold")]
         [SerializeField]
-        private UnityEvent downEvent;
+        protected UnityEvent downEvent;
 
         [SerializeField]
-        private UnityEvent holdEvent;
+        protected UnityEvent holdEvent;
 
         [SerializeField]
-        private UnityEvent upEvent;
+        protected UnityEvent upEvent;
 
-        private bool isPressed;
+        protected bool isPressed;
 
         public UnityEvent OnDownEvent => downEvent;
         public UnityEvent OnHoldEvent => holdEvent;
@@ -28,13 +29,13 @@ namespace JoaoSant0s.CommonWrapper
 
         #region Unity Implementations Methods
 
-        public void OnPointerDown(PointerEventData eventData)
+        public virtual void OnPointerDown(PointerEventData eventData)
         {
             isPressed = true;
             downEvent?.Invoke();
         }
 
-        public void OnPointerUp(PointerEventData eventData)
+        public virtual void OnPointerUp(PointerEventData eventData)
         {
             ReleaseHold();
         }
@@ -42,11 +43,6 @@ namespace JoaoSant0s.CommonWrapper
         #endregion
 
         #region Unity Methods
-
-        private void OnValidate()
-        {
-            CheckButtonUse();
-        }
 
         private void Update()
         {
@@ -64,15 +60,7 @@ namespace JoaoSant0s.CommonWrapper
 
         #endregion
 
-
         #region Private Methods
-
-        private void CheckButtonUse()
-        {
-            if (!GetComponent<Button>()) return;
-
-            Debug.LogError("The Component don't need a button. Just use a simple Image the RayCast Target Enabled");
-        }
 
         private void ReleaseHold()
         {
