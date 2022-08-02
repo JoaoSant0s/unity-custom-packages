@@ -9,13 +9,6 @@ namespace JoaoSant0s.CustomVariable
     [CreateAssetMenu(fileName = "StringVariable", menuName = "JoaoSant0s/CustomVariablePackage/StringVariable")]
     public class StringVariable : Variable<string>
     {
-        #region Protected Override Methods
 
-        protected override void OnModify(string newValue)
-        {
-            Value = newValue;
-        }
-
-        #endregion
     }
 }

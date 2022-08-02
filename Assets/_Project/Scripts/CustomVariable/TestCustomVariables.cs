@@ -24,6 +24,16 @@ namespace Namespace
             Debug.Log(floatVariable);
             Debug.Log(intVariable);
             Debug.Log(stringVariable);
+
+            floatVariable.Modify(1.1f);
+
+            intVariable.Modify(1);
+
+            stringVariable.Modify("Teste 2");
+
+            Debug.Log(floatVariable);
+            Debug.Log(intVariable);
+            Debug.Log(stringVariable);
         }
     }
 }

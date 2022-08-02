@@ -9,16 +9,6 @@ namespace JoaoSant0s.CustomVariable
     [CreateAssetMenu(fileName = "Vector2Variable", menuName = "JoaoSant0s/CustomVariablePackage/Vector2Variable")]
     public class Vector2Variable : Variable<Vector2>
     {
-
-        #region Protected Override Methods
-
-        protected override void OnModify(Vector2 newValue)
-        {
-            Value = newValue;
-        }
-
-        #endregion
-
         #region Public Methods
 
         public void Add(Vector2 increment)

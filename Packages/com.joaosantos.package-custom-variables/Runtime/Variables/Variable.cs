@@ -23,12 +23,6 @@ namespace JoaoSant0s.CustomVariable
             protected set => this.value = value;
         }
 
-        #region Protected Abstract Methods
-
-        protected abstract void OnModify(T newValue);
-
-        #endregion
-
         #region Public Override Methods
 
         public override string ToString()
@@ -44,7 +38,7 @@ namespace JoaoSant0s.CustomVariable
         /// Assign the Custom Variable with a new value.
         /// </summary>
         /// <param name="newValue"> the new value to be assign to Custom Variable </param>
-        public virtual void Set(T newValue)
+        public void Set(T newValue)
         {
             value = newValue;
         }
@@ -53,11 +47,11 @@ namespace JoaoSant0s.CustomVariable
         /// Assign the Custom Variable with a new value. Trigger OnValueModified Action
         /// </summary>
         /// <param name="newValue"> the new value to be assign to Custom Variable </param>
-        public virtual void Modify(T newValue)
+        public void Modify(T newValue)
         {
             var previousValue = Value;
-            OnModify(newValue);
-            OnValueModified?.Invoke(previousValue, Value);
+            Value = newValue;
+            OnValueModified?.Invoke(previousValue, newValue);
         }
 
         #endregion
