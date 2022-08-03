@@ -26,7 +26,7 @@ namespace JoaoSant0s.CustomVariable.Tests
         public void SetValueOnIntVariable(string testValue)
         {
             var stringVariable = ScriptableObject.CreateInstance<StringVariable>();
-            stringVariable.Set(testValue);
+            stringVariable.Value = testValue;
 
             Assert.AreEqual(testValue, stringVariable.Value, "The value must be equals to Setted value");
         }
@@ -39,13 +39,13 @@ namespace JoaoSant0s.CustomVariable.Tests
         public void ModifyIntVariableToNewValue(string startValue, string nextValue)
         {
             var stringVariable = ScriptableObject.CreateInstance<StringVariable>();
-            stringVariable.Set(startValue);
-            stringVariable.OnValueModified += (string previousValue, string newValue) =>
+            stringVariable.Value = startValue;
+            stringVariable.AddChangeListener((string previousValue, string newValue) =>
             {
                 Assert.AreEqual(nextValue, newValue, "The next value must be equals to new value");
-            };
+            });
 
-            stringVariable.Modify(nextValue);
+            stringVariable.Value = nextValue;
         }
     }
 }

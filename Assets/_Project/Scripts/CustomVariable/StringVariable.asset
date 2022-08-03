@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a639ce77cf0fae4f95e1ba08d626eca, type: 3}
   m_Name: StringVariable
   m_EditorClassIdentifier: 
-  value: teste
+  startValue: Teste

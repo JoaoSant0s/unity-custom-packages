@@ -11,29 +11,29 @@ namespace JoaoSant0s.CustomVariable
     {
         #region Public Methods
 
-        public void Add(Vector2 increment)
+        public void Increment(Vector2 increment)
         {
-            Modify(Value + increment);
+            Value += increment;
         }
 
-        public void AddXAxis(float xIncrementValue)
+        public void IncrementXAxis(float xIncrementValue)
         {
-            Modify(Value + new Vector2(xIncrementValue, 0));
+            Value += new Vector2(xIncrementValue, 0);
         }
 
-        public void AddYAxis(float yIncrementValue)
+        public void IncrementYAxis(float yIncrementValue)
         {
-            Modify(Value + new Vector2(0, yIncrementValue));
+            Value += new Vector2(0, yIncrementValue);
         }
 
         public void SetXAxis(float newXValue)
         {
-            Modify(new Vector2(newXValue, Value.y));
+            Value = new Vector2(newXValue, Value.y);
         }
 
         public void SetYAxis(float newYValue)
         {
-            Modify(new Vector2(Value.x, newYValue));
+            Value = new Vector2(Value.x, newYValue);
         }
 
         #endregion

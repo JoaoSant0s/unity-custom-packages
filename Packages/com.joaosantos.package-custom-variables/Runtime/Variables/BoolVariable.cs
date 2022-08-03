@@ -9,17 +9,17 @@ namespace JoaoSant0s.CustomVariable
     [CreateAssetMenu(fileName = "BoolVariable", menuName = "JoaoSant0s/CustomVariablePackage/BoolVariable")]
 
     public class BoolVariable : Variable<bool>
-    {      
+    {
         #region Public Methods
 
         public void OperationAnd(bool value)
         {
-            Modify(Value && value);
+            Value &= value;
         }
 
         public void OperationOr(bool value)
         {
-            Modify(Value || value);
+            Value |= value;
         }
 
         #endregion

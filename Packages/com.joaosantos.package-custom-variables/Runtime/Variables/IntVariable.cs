@@ -11,9 +11,9 @@ namespace JoaoSant0s.CustomVariable
     {
         #region Public Methods
 
-        public void Add(int increment)
+        public void Increment(int value)
         {
-            Modify(Value + increment);
+            Value += value;
         }
 
         #endregion

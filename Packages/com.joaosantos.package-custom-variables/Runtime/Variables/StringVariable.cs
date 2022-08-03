@@ -7,8 +7,5 @@ using UnityEngine;
 namespace JoaoSant0s.CustomVariable
 {
     [CreateAssetMenu(fileName = "StringVariable", menuName = "JoaoSant0s/CustomVariablePackage/StringVariable")]
-    public class StringVariable : Variable<string>
-    {
-
-    }
+    public class StringVariable : Variable<string> { }
 }

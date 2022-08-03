@@ -8,12 +8,12 @@ namespace JoaoSant0s.CustomVariable
 {
     [CreateAssetMenu(fileName = "FloatVariable", menuName = "JoaoSant0s/CustomVariablePackage/FloatVariable")]
     public class FloatVariable : Variable<float>
-    {     
+    {
         #region Public Methods
 
-        public void Add(float increment)
+        public void Increment(float value)
         {
-            Modify(Value + increment);
+            Value += value;
         }
 
         #endregion
