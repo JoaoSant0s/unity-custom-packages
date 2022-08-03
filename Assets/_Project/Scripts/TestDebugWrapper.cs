@@ -23,6 +23,11 @@ public class TestDebugWrapper : MonoBehaviour
 
     void Start()
     {
+        var asset = TesteScriptableObject.Get();
+        Debug.Log(asset);
+        asset = TesteScriptableObject.Get();
+        Debug.Log(asset);
+
         texts[0].text = "Text".ToBold();
         texts[1].text = "Text".ToItalic();
 
