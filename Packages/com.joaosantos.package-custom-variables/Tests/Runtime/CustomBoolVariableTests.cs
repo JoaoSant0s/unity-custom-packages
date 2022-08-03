@@ -25,7 +25,7 @@ namespace JoaoSant0s.CustomVariable.Tests
         public void SetValueOnBoolVariable(bool testValue)
         {
             var boolVariable = ScriptableObject.CreateInstance<BoolVariable>();
-            boolVariable.Set(testValue);
+            boolVariable.Value = testValue;
 
             Assert.AreEqual(testValue, boolVariable.Value, "The value must be equals to Setted value");
         }
@@ -37,13 +37,13 @@ namespace JoaoSant0s.CustomVariable.Tests
         public void ModifyBoolVariableToNewValue(bool startValue, bool nextValue)
         {
             var boolVariable = ScriptableObject.CreateInstance<BoolVariable>();
-            boolVariable.Set(startValue);
-            boolVariable.OnValueModified += (bool previousValue, bool newValue) =>
+            boolVariable.Value = startValue;
+            boolVariable.AddChangeListener((bool previousValue, bool newValue) =>
             {
                 Assert.AreEqual(nextValue, newValue, "The next value must be equals to new value");
-            };
+            });
 
-            boolVariable.Modify(nextValue);
+            boolVariable.Value = nextValue;
         }
 
         [Test]
@@ -53,11 +53,11 @@ namespace JoaoSant0s.CustomVariable.Tests
         public void OperationAndOnBoolVariable(bool startValue, bool operation, bool result)
         {
             var boolVariable = ScriptableObject.CreateInstance<BoolVariable>();
-            boolVariable.Set(startValue);
-            boolVariable.OnValueModified += (bool previousValue, bool newValue) =>
+            boolVariable.Value = startValue;
+            boolVariable.AddChangeListener((bool previousValue, bool newValue) =>
             {
                 Assert.AreEqual(result, newValue, "The next value must be equals to new value");
-            };
+            });
 
             boolVariable.OperationAnd(operation);
         }
@@ -69,11 +69,11 @@ namespace JoaoSant0s.CustomVariable.Tests
         public void OperationOrOnBoolVariable(bool startValue, bool operation, bool result)
         {
             var boolVariable = ScriptableObject.CreateInstance<BoolVariable>();
-            boolVariable.Set(startValue);
-            boolVariable.OnValueModified += (bool previousValue, bool newValue) =>
+            boolVariable.Value = startValue;
+            boolVariable.AddChangeListener((bool previousValue, bool newValue) =>
             {
                 Assert.AreEqual(result, newValue, "The next value must be equals to new value");
-            };
+            });
 
             boolVariable.OperationOr(operation);
         }

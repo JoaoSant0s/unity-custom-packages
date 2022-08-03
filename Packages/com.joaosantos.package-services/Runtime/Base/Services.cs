@@ -8,25 +8,30 @@ namespace JoaoSant0s.ServicePackage.General
 {
     public class Services : SingletonBehaviour<Services>
     {
-        private static Transform staticTransform;
-        private static List<Service> services;
+        private Transform staticTransform;
+        private List<Service> services;
 
         protected override bool IsDontDestroyOnLoad => true;
 
-        #region Unity Methods
+        #region Protected Methods
 
-        protected override void Awake()
+        protected override void Init()
         {
-            base.Awake();
+            services = new List<Service>();
             staticTransform = transform;
-            gameObject.name = this.GetType().Name;
         }
 
         #endregion
 
+        #region Public Methods
+
         public static T Get<T>() where T : Service
         {
-            CreateServicesSet();
+            return Instance.GetOrCreate<T>();
+        }
+
+        public T GetOrCreate<T>() where T : Service
+        {
             var service = services.Find(s => s is T);
 
             if (service != null) return (T)service;
@@ -34,7 +39,9 @@ namespace JoaoSant0s.ServicePackage.General
             return CreateService<T>();
         }
 
-        private static T CreateService<T>() where T : Service
+        #endregion
+
+        private T CreateService<T>() where T : Service
         {
             var newGameObject = new GameObject();
 
@@ -46,17 +53,6 @@ namespace JoaoSant0s.ServicePackage.General
             services.Add(newService);
 
             return newService;
-        }
-
-        private static void CreateServicesSet()
-        {
-            if (staticTransform != null) return;
-
-            var newGameObject = new GameObject();
-
-            var newServices = newGameObject.AddComponent<Services>();
-            services = new List<Service>();
-            newGameObject.name = newServices.GetType().Name;
         }
     }
 }

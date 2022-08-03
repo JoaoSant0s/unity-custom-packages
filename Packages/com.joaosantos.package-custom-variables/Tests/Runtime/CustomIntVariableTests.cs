@@ -13,7 +13,7 @@ namespace JoaoSant0s.CustomVariable.Tests
         [Test]
         public void CreateIntVariable()
         {
-            var intVariable = ScriptableObject.CreateInstance<IntVariable>();            
+            var intVariable = ScriptableObject.CreateInstance<IntVariable>();
 
             Assert.AreEqual(true, intVariable != null, "The created instance can't be null");
         }
@@ -26,7 +26,7 @@ namespace JoaoSant0s.CustomVariable.Tests
         public void SetValueOnIntVariable(int testValue)
         {
             var intVariable = ScriptableObject.CreateInstance<IntVariable>();
-            intVariable.Set(testValue);
+            intVariable.Value = testValue;
 
             Assert.AreEqual(testValue, intVariable.Value, "The value must be equals to Setted value");
         }
@@ -37,13 +37,14 @@ namespace JoaoSant0s.CustomVariable.Tests
         public void ModifyIntVariableToNewValue(int startValue, int nextValue)
         {
             var intVariable = ScriptableObject.CreateInstance<IntVariable>();
-            intVariable.Set(startValue);
-            intVariable.OnValueModified += (int previousValue, int newValue) =>
+            intVariable.Value = startValue;
+
+            intVariable.AddChangeListener((int previousValue, int newValue) =>
             {
                 Assert.AreEqual(nextValue, newValue, "The next value must be equals to new value");
-            };
+            });
 
-            intVariable.Modify(nextValue);
+            intVariable.Value = nextValue;
         }
 
         [Test]
@@ -54,14 +55,14 @@ namespace JoaoSant0s.CustomVariable.Tests
         public void AddValueOnIntVariable(int startValue, int addValue, int result)
         {
             var intVariable = ScriptableObject.CreateInstance<IntVariable>();
-            intVariable.Set(startValue);
+            intVariable.Value = startValue;
 
-            intVariable.OnValueModified += (int previousValue, int newValue) =>
+            intVariable.AddChangeListener((int previousValue, int newValue) =>
             {
                 Assert.AreEqual(result, newValue, "The new Value must be equals the result value");
-            };
+            });
 
-            intVariable.Add(addValue);
+            intVariable.Increment(addValue);
         }
 
     }
