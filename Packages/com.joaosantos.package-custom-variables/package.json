@@ -1,6 +1,6 @@
 {
   "name": "com.joaosantos.package-custom-variables",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "displayName": "JS Custom Variable",
   "description": "Package with new variable formats using ScriptableObjects",
   "unity": "2020.3",
