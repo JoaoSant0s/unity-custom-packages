@@ -3,31 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace JoaoSant0s.CustomVariable
 {
     public abstract class Variable<T> : ScriptableObject
     {
-        /// <summary>
-        /// The action is triggered after the value is Modified. Parameters: [0] Previous Value ; [1] New Value
-        /// </summary>
-        public event Action<T, T> OnValueModified;
-
         [SerializeField]
-        private T value;
+        private T startValue;
 
         public T Value
         {
-            get => this.value;
-            protected set => this.value = value;
+            get => VariableWrapper<T>.GetValue(this, startValue);
+            set => VariableWrapper<T>.SetValue(this, value);
         }
-
-        #region Protected Abstract Methods
-
-        protected abstract void OnModify(T newValue);
-
-        #endregion
 
         #region Public Override Methods
 
@@ -41,23 +29,33 @@ namespace JoaoSant0s.CustomVariable
         #region Public Methods
 
         /// <summary>
-        /// Assign the Custom Variable with a new value.
+        /// Add a Change Listiner to the Variable
         /// </summary>
-        /// <param name="newValue"> the new value to be assign to Custom Variable </param>
-        public virtual void Set(T newValue)
+        /// <param name="onChange"> the event that will be triggered if a value was updated </param>
+
+        public void AddChangeListener(Action<T, T> onChange)
         {
-            value = newValue;
+            CheckInitialized();
+            VariableWrapper<T>.AddListener(this, onChange);
         }
 
         /// <summary>
-        /// Assign the Custom Variable with a new value. Trigger OnValueModified Action
+        /// Remove a Change Listiner of the Variable
         /// </summary>
-        /// <param name="newValue"> the new value to be assign to Custom Variable </param>
-        public virtual void Modify(T newValue)
+        /// <param name="onChange"> the event that was previously added </param>
+
+        public void RemoveChangeListener(Action<T, T> onChange)
         {
-            var previousValue = Value;
-            OnModify(newValue);
-            OnValueModified?.Invoke(previousValue, Value);
+            VariableWrapper<T>.RemoveListener(this, onChange);
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private void CheckInitialized()
+        {
+            VariableWrapper<T>.SetIfUninitialized(this, startValue);
         }
 
         #endregion

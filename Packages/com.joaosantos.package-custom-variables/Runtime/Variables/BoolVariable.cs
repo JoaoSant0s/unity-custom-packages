@@ -10,25 +10,16 @@ namespace JoaoSant0s.CustomVariable
 
     public class BoolVariable : Variable<bool>
     {
-        #region Protected Override Methods
-
-        protected override void OnModify(bool newValue)
-        {
-            Value = newValue;
-        }
-
-        #endregion        
-
         #region Public Methods
 
         public void OperationAnd(bool value)
         {
-            Modify(Value && value);
+            Value &= value;
         }
 
         public void OperationOr(bool value)
         {
-            Modify(Value || value);
+            Value |= value;
         }
 
         #endregion

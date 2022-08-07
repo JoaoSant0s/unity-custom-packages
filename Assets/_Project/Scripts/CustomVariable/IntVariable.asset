@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94691957040136b4aaf184823a605e34, type: 3}
   m_Name: IntVariable
   m_EditorClassIdentifier: 
-  value: 8
+  startValue: 999

@@ -13,7 +13,7 @@ namespace JoaoSant0s.CustomVariable.Tests
         [Test]
         public void CreateFloatVariable()
         {
-            var floatVariable = ScriptableObject.CreateInstance<FloatVariable>();            
+            var floatVariable = ScriptableObject.CreateInstance<FloatVariable>();
 
             Assert.AreEqual(true, floatVariable != null, "The created instance can't be null");
         }
@@ -26,7 +26,7 @@ namespace JoaoSant0s.CustomVariable.Tests
         public void SetValueOnFloatVariable(float testValue)
         {
             var floatVariable = ScriptableObject.CreateInstance<FloatVariable>();
-            floatVariable.Set(testValue);
+            floatVariable.Value = testValue;
 
             Assert.AreEqual(testValue, floatVariable.Value, "The value must be equals to Setted value");
         }
@@ -37,13 +37,14 @@ namespace JoaoSant0s.CustomVariable.Tests
         public void ModifyFloatVariableToNewValue(float startValue, float nextValue)
         {
             var floatVariable = ScriptableObject.CreateInstance<FloatVariable>();
-            floatVariable.Set(startValue);
-            floatVariable.OnValueModified += (float previousValue, float newValue) =>
+            floatVariable.Value = startValue;
+
+            floatVariable.AddChangeListener((float previousValue, float newValue) =>
             {
                 Assert.AreEqual(nextValue, newValue, "The next value must be equals to new value");
-            };
+            });
 
-            floatVariable.Modify(nextValue);
+            floatVariable.Value = nextValue;
         }
 
         [Test]
@@ -54,14 +55,14 @@ namespace JoaoSant0s.CustomVariable.Tests
         public void AddValueOnFloatVariable(float startValue, float addValue, float result)
         {
             var floatVariable = ScriptableObject.CreateInstance<FloatVariable>();
-            floatVariable.Set(startValue);
+            floatVariable.Value = startValue;
 
-            floatVariable.OnValueModified += (float previousValue, float newValue) =>
+            floatVariable.AddChangeListener((float previousValue, float newValue) =>
             {
                 Assert.AreEqual(result, newValue, "The new Value must be equals the result value");
-            };
+            });
 
-            floatVariable.Add(addValue);
+            floatVariable.Increment(addValue);
         }
     }
 }
