@@ -36,7 +36,11 @@ namespace JoaoSant0s.CommonWrapper
 
             if (found.Length == 0)
             {
-                instance = CreateDefault();
+#if !UNITY_EDITOR
+            Debug.Assert(false, $"You must create the {typeof(T).Name} asset on Unity Editor first");
+#else
+            instance = CreateDefault();
+#endif
             }
             else
             {
