@@ -9,6 +9,7 @@ using JoaoSant0s.Extensions.Strings;
 using JoaoSant0s.Extensions.Numbers;
 using JoaoSant0s.Extensions.Vectors;
 using JoaoSant0s.Extensions.Collections;
+using JoaoSant0s.ServicePackage.Console;
 
 public class TestDebugWrapper : MonoBehaviour
 {
@@ -21,8 +22,16 @@ public class TestDebugWrapper : MonoBehaviour
     [SerializeField]
     private Text[] texts;
 
+    [SerializeField]
+    private Text consoleText;
+
+    private ConsoleManager console;
+
     void Start()
     {
+        console = ConsoleManager.Instance;
+        console.OnLogAdded += OnLogAdded;
+
         var asset = TesteScriptableObject.Get();
         Debug.Log(asset);
         asset = TesteScriptableObject.Get();
@@ -45,6 +54,8 @@ public class TestDebugWrapper : MonoBehaviour
         Debugs.Log("Lerp", 2, 8, Mathf.Lerp(2, 8, 0.5f));
         Debugs.Log("InverseLerp", 2, 8, Mathf.InverseLerp(2, 8, 4));
 
+        console.StopProcessing();
+
         Debugs.Log("Sum", Mathfs.Sum(2, 4, 6, 8));
         Debugs.Log("Product", Mathfs.Product(2, 4, 6, 8));
         Debugs.Log("Avarage", Mathfs.Avarage(2, 4, 6, 8));
@@ -61,6 +72,8 @@ public class TestDebugWrapper : MonoBehaviour
         dictionary.Add(2, "b");
         dictionary.Add(3, "c");
 
+        console.ResumeProcessing();
+
         Debugs.Log(array);
         Debugs.Log(array.Random());
 
@@ -76,5 +89,10 @@ public class TestDebugWrapper : MonoBehaviour
 
         Debugs.DrawRectangle(new Vector2(10, 10), new Vector2(20, 20), Color.green, 20, axisType: DrawAxisType.XZ);
         Debugs.DrawRectangle(new Vector2(-10, -10), -30, -20, Color.blue, 20, axisType: DrawAxisType.XZ);
+    }
+
+    private void OnLogAdded(LogObject log)
+    {
+        consoleText.text += $"{log.type.ToString()} - {log.logString} \n\n";
     }
 }
