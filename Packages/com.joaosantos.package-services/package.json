@@ -2,17 +2,26 @@
   "name": "com.joaosantos.package-services",
   "version": "2.5.0",
   "displayName": "JS Services",
-  "description": "Package with set of services.\n\nDependencies:\n\n- Common Wrapper",
+  "description": "A list of auxiliary Services to make the game development faster. The services are created in Runtime when called. Audio, Popup, Save, Routines, Flags and etc.",
   "unity": "2020.3",
   "documentationUrl": "",
   "changelogUrl": "",
   "licensesUrl": "",
   "keywords": [
     "Package",
-    "Services"
+    "Services",
+    "Pool",
+    "Audio",
+    "Flags",
+    "Popup",
+    "Routine",
+    "Save"
   ],
   "author": {
     "name": "JoaoSant0s",
     "email": "ricardoelric@gmail.com"
+  },
+  "dependencies": {
+    "com.joaosantos.package-common-wrapper": "2.4.1"
   }
 }

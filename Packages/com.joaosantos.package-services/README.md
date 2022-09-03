@@ -3,6 +3,4 @@
 
 Dependencies:
 
-- https://openupm.com/packages/com.dbrizov.naughtyattributes/
-- https://openupm.com/packages/com.demigiant.dotween/
 - https://openupm.com/packages/com.joaosantos.package-common-wrapper
