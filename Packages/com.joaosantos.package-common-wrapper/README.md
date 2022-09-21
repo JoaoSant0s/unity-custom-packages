@@ -41,6 +41,7 @@ TransformExtensions
 - CustomScriptableObject
 - SingletonBehaviour
 - TriggerEvent
+- MainScene and SceneComponent
 
 # See Too
 
