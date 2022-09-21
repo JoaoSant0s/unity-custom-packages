@@ -8,7 +8,7 @@ A proposal of paradigm that uses events during variable modifications, using Scr
 
 ## Variables
 
-We have a <b>Variable</b> abstract class that can be used as a base class to create Custom Variables Asset.
+We have a **Variable** abstract class that can be used as a base class to create Custom Variables Asset.
 
 ### Already implemented Variables
 
