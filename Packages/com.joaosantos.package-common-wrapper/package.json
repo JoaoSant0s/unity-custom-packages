@@ -1,6 +1,6 @@
 {
   "name": "com.joaosantos.package-common-wrapper",
-  "version": "2.4.1",
+  "version": "2.5.0",
   "displayName": "JS Common Wrapper",
   "description": "A collection of Extensions, Wrappers, and Scripts to make development be faster.",
   "unity": "2020.3",
