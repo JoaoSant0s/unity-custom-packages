@@ -1,6 +1,11 @@
-using System.Threading;
-using System.Collections;
-using System.Collections.Generic;
+/*
+Copyright (c) 2021, Joao Santos
+All rights reserved.
+
+This source code is licensed under the BSD-style license found in the
+LICENSE file in the root directory of this source tree.
+*/
+
 using UnityEngine;
 
 using JoaoSant0s.Extensions.Collections;
@@ -10,7 +15,6 @@ namespace JoaoSant0s.ServicePackage.Audio
     public class RandomAudioObject : AudioObject
     {
         private AudioSource audioSource;
-        private Thread audioSourceThread;
 
         public RandomAudioObject(AudioSourceController controller, RandomAudioAsset asset) : base(controller, asset){ }
 
