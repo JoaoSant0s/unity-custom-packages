@@ -1,8 +1,15 @@
-using System.Collections;
+/*
+Copyright (c) 2021, Joao Santos
+All rights reserved.
+
+This source code is licensed under the BSD-style license found in the
+LICENSE file in the root directory of this source tree.
+*/
+
 using System.Collections.Generic;
+
 using UnityEngine;
 
-using JoaoSant0s.CommonWrapper;
 using JoaoSant0s.Extensions.Transforms;
 
 namespace JoaoSant0s.CommonWrapper
