@@ -16,7 +16,9 @@
       "version": "file:com.joaosantos.package-services",
       "depth": 0,
       "source": "embedded",
-      "dependencies": {}
+      "dependencies": {
+        "com.joaosantos.package-common-wrapper": "2.4.1"
+      }
     },
     "com.joaosantos.package-state-machine": {
       "version": "file:com.joaosantos.package-state-machine",

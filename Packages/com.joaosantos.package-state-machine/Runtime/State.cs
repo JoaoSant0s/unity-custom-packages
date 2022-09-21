@@ -1,8 +1,10 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+/*
+Copyright (c) 2021, Joao Santos
+All rights reserved.
 
-using UnityEngine;
+This source code is licensed under the BSD-style license found in the
+LICENSE file in the root directory of this source tree.
+*/
 
 namespace JoaoSant0s.StateMachine
 {

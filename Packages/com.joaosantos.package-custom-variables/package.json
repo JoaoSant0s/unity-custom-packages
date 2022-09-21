@@ -1,8 +1,8 @@
 {
   "name": "com.joaosantos.package-custom-variables",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "displayName": "JS Custom Variable",
-  "description": "Package with new variable formats using ScriptableObjects",
+  "description": "A way to listen to variable changes without circular dependencies. And you can create your custom Variables.",
   "unity": "2020.3",
   "documentationUrl": "",
   "changelogUrl": "",
@@ -10,7 +10,8 @@
   "keywords": [
     "Package",
     "Variables",
-    "ScriptableObject"
+    "ScriptableObject",
+    "Circular Script dependency"
   ],
   "author": {
     "name": "JoaoSant0s",
