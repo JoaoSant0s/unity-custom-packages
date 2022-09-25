@@ -8,9 +8,7 @@ LICENSE file in the root directory of this source tree.
 
 using UnityEngine;
 
-using JoaoSant0s.CommonWrapper;
-
-namespace JoaoSant0s.ServicePackage.Console
+namespace JoaoSant0s.CommonWrapper.Console
 {    
     public class ConsoleManagerConfig : CustomScriptableObject<ConsoleManagerConfig>
     {
