@@ -8,13 +8,13 @@ LICENSE file in the root directory of this source tree.
 
 using UnityEngine;
 
-using JoaoSant0s.ServicePackage.General;
+using JoaoSant0s.CommonWrapper;
 
 namespace JoaoSant0s.ServicePackage.Save
 {
     [CreateAssetMenu(fileName = "SaveLocalConfig", menuName = "JoaoSant0s/ServicePackage/Save/SaveLocalConfig")]
 
-    public class SaveLocalConfig : ServiceConfig
+    public class SaveLocalConfig : CustomScriptableObject<SaveLocalConfig>
     {
         [SerializeField]
         [Tooltip("Used as Player Prefs prefix indicator")]

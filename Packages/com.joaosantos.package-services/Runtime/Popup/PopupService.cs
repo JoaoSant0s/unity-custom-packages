@@ -27,10 +27,7 @@ namespace JoaoSant0s.ServicePackage.Popup
 
         public override void OnInit()
         {
-            config = Resources.Load<PopupConfig>("Configs/PopupConfig");
-            Debug.Assert(config != null, "Create the PopupConfig asset inside the path: Resources/Configs");
-            Debug.Assert(config != null, "RightClick/Create/JoaoSant0s/ServicePackage/Popup/PopupConfig");
-
+            config = PopupConfig.Get();
             this.popupArea = TransformWrapper.FindRectTransformWithTag(config.mainPopupTag);
         }
 

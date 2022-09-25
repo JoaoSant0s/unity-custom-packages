@@ -10,12 +10,12 @@ using System;
 
 using UnityEngine;
 
-using JoaoSant0s.ServicePackage.General;
+using JoaoSant0s.CommonWrapper;
 
 namespace JoaoSant0s.ServicePackage.Popup
 {
     [CreateAssetMenu(fileName = "PopupConfig", menuName = "JoaoSant0s/ServicePackage/Popup/PopupConfig")]
-    public class PopupConfig : ServiceConfig
+    public class PopupConfig : CustomScriptableObject<PopupConfig>
     {
         public string mainPopupTag;
         public PopupInfo[] popupsInfos;
