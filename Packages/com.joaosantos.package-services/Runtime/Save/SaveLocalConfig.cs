@@ -16,6 +16,8 @@ namespace JoaoSant0s.ServicePackage.Save
 
     public class SaveLocalConfig : CustomScriptableObject<SaveLocalConfig>
     {
+        [Header("Save Local Config")]
+
         [SerializeField]
         [Tooltip("Used as Player Prefs prefix indicator")]
         private string savePrefix;

@@ -19,6 +19,7 @@ namespace JoaoSant0s.ServicePackage.Pool
     [CreateAssetMenu(fileName = "PoolConfig", menuName = "JoaoSant0s/ServicePackage/Pool/PoolConfig")]
     public class PoolConfig : CustomScriptableObject<PoolConfig>
     {
+        [Header("Pool Config")]
         [SerializeField]
         private PoolInfo[] poolBaseInfos;
 

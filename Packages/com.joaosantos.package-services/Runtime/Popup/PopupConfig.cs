@@ -17,6 +17,7 @@ namespace JoaoSant0s.ServicePackage.Popup
     [CreateAssetMenu(fileName = "PopupConfig", menuName = "JoaoSant0s/ServicePackage/Popup/PopupConfig")]
     public class PopupConfig : CustomScriptableObject<PopupConfig>
     {
+        [Header("Popup Config")]
         public string mainPopupTag;
         public PopupInfo[] popupsInfos;
     }
