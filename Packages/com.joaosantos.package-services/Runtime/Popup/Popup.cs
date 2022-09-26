@@ -10,11 +10,23 @@ using System;
 
 using UnityEngine;
 
-namespace JoaoSant0s.ServicePackage.Popup
+using JoaoSant0s.ServicePackage.General;
+
+namespace JoaoSant0s.ServicePackage.Popups
 {
-    public abstract class BasePopup : MonoBehaviour
+    public abstract class Popup : MonoBehaviour
     {
-        public Action OnBeforeClose;
+        public event Action OnBeforeClose;
+        private PopupService popupService;
+
+        #region Unity Methods
+
+        private void Awake()
+        {
+            popupService = Services.Get<PopupService>();
+        }
+
+        #endregion
 
         protected virtual void BeforeClose() { }
 

@@ -6,6 +6,9 @@ TagManager:
   tags:
   - PopupInternal
   - PopupExternal
+  - ScreenInternal
+  - ScreenExternal
+  - Screen
   layers:
   - Default
   - TransparentFX

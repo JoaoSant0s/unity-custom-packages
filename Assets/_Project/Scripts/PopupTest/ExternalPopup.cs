@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
-using JoaoSant0s.ServicePackage.Popup;
+using JoaoSant0s.ServicePackage.Popups;
 
-public class ExternalPopup : BasePopup
+public class ExternalPopup : Popup
 {
 
 }

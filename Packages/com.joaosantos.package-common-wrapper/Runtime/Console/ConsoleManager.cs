@@ -11,9 +11,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
-using JoaoSant0s.CommonWrapper;
-
-namespace JoaoSant0s.ServicePackage.Console
+namespace JoaoSant0s.CommonWrapper.Console
 {
     public class ConsoleManager : SingletonBehaviour<ConsoleManager>
     {
