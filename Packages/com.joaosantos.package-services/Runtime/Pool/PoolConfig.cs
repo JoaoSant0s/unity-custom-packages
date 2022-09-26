@@ -12,13 +12,14 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
-using JoaoSant0s.ServicePackage.General;
+using JoaoSant0s.CommonWrapper;
 
 namespace JoaoSant0s.ServicePackage.Pool
 {
     [CreateAssetMenu(fileName = "PoolConfig", menuName = "JoaoSant0s/ServicePackage/Pool/PoolConfig")]
-    public class PoolConfig : ServiceConfig
+    public class PoolConfig : CustomScriptableObject<PoolConfig>
     {
+        [Header("Pool Config")]
         [SerializeField]
         private PoolInfo[] poolBaseInfos;
 

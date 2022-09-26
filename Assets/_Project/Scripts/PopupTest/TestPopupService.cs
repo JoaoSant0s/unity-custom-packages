@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using JoaoSant0s.ServicePackage.General;
-using JoaoSant0s.ServicePackage.Popup;
+using JoaoSant0s.ServicePackage.Popups;
 
 public class TestPopupService : MonoBehaviour
 {
@@ -27,7 +27,7 @@ public class TestPopupService : MonoBehaviour
 
     public void ShowInternalPopup()
     {
-        if (popupService.IsPopupOpen<InternalPopup>()) return;
+        if (popupService.IsOpened<InternalPopup>()) return;
         var popup = popupService.Show<InternalPopup>((RectTransform)internalPopupArea);
         popup.OnBeforeClose += () => { Debug.Log("Closing Internal Popup"); };
     }

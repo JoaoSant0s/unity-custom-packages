@@ -8,7 +8,7 @@ LICENSE file in the root directory of this source tree.
 
 using UnityEngine;
 
-namespace JoaoSant0s.Scene
+namespace JoaoSant0s.CommonWrapper.Scenes
 {
     public abstract class SceneComponent : MonoBehaviour
     {

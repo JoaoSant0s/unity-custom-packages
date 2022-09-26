@@ -9,7 +9,7 @@ using JoaoSant0s.Extensions.Strings;
 using JoaoSant0s.Extensions.Numbers;
 using JoaoSant0s.Extensions.Vectors;
 using JoaoSant0s.Extensions.Collections;
-using JoaoSant0s.ServicePackage.Console;
+using JoaoSant0s.CommonWrapper.Console;
 
 public class TestDebugWrapper : MonoBehaviour
 {

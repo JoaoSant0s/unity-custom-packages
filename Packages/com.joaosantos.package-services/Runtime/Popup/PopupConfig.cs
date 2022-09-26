@@ -10,13 +10,14 @@ using System;
 
 using UnityEngine;
 
-using JoaoSant0s.ServicePackage.General;
+using JoaoSant0s.CommonWrapper;
 
-namespace JoaoSant0s.ServicePackage.Popup
+namespace JoaoSant0s.ServicePackage.Popups
 {
     [CreateAssetMenu(fileName = "PopupConfig", menuName = "JoaoSant0s/ServicePackage/Popup/PopupConfig")]
-    public class PopupConfig : ServiceConfig
+    public class PopupConfig : CustomScriptableObject<PopupConfig>
     {
+        [Header("Popup Config")]
         public string mainPopupTag;
         public PopupInfo[] popupsInfos;
     }
@@ -24,6 +25,6 @@ namespace JoaoSant0s.ServicePackage.Popup
     [Serializable]
     public struct PopupInfo
     {
-        public BasePopup prefab;
+        public Popup prefab;
     }
 }

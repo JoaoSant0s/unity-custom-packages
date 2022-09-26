@@ -23,9 +23,7 @@ namespace JoaoSant0s.ServicePackage.Save
 
         public override void OnInit()
         {
-            config = Resources.Load<SaveLocalConfig>("Configs/SaveLocalConfig");
-            Debug.Assert(config != null, "Create the SaveLocalConfig asset inside the path: Resources/Configs");
-            Debug.Assert(config != null, "RightClick/Create/JoaoSant0s/ServicePackage/Save/SaveLocalConfig");
+            config = SaveLocalConfig.Get();
         }
 
         #endregion
