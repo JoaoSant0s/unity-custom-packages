@@ -42,6 +42,11 @@ namespace JoaoSant0s.ServicePackage.Scenes
 
         #region Public Methods
 
+        /// <summary>
+        /// Load a scene Sync
+        /// </summary>
+        /// <param name="sceneName"> the scene name </param>
+        /// <param name="mode"> load scene mode. Default is Single </param>
         public void Load(string sceneName, LoadSceneMode mode = LoadSceneMode.Single)
         {
             OnLoadStarted?.Invoke(sceneName, false);
@@ -50,16 +55,18 @@ namespace JoaoSant0s.ServicePackage.Scenes
             CurrentSceneName = sceneName;
         }
 
+        /// <summary>
+        /// Load a scene Async
+        /// </summary>
+        /// <param name="sceneName"> the scene name </param>
+        /// <param name="mode"> load scene mode. Default is Single </param>
         public void LoadAsync(string sceneName, LoadSceneMode mode = LoadSceneMode.Single)
         {
             OnLoadStarted?.Invoke(sceneName, true);
 
             AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName, mode);
+            asyncLoad.completed += (AsyncOperation operation) => CurrentSceneName = sceneName;
             asyncLoad.completed += LoadCompleteAsyncScene;
-            asyncLoad.completed += (AsyncOperation operation) =>
-            {
-                CurrentSceneName = sceneName;
-            };
         }
 
         #endregion
