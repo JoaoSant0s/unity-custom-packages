@@ -12,7 +12,7 @@ using UnityEngine;
 
 using JoaoSant0s.CommonWrapper;
 
-namespace JoaoSant0s.ServicePackage.Popup
+namespace JoaoSant0s.ServicePackage.Popups
 {
     [CreateAssetMenu(fileName = "PopupConfig", menuName = "JoaoSant0s/ServicePackage/Popup/PopupConfig")]
     public class PopupConfig : CustomScriptableObject<PopupConfig>
@@ -25,6 +25,6 @@ namespace JoaoSant0s.ServicePackage.Popup
     [Serializable]
     public struct PopupInfo
     {
-        public BasePopup prefab;
+        public Popup prefab;
     }
 }
