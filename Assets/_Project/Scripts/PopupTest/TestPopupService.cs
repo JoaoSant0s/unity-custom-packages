@@ -10,6 +10,10 @@ public class TestPopupService : MonoBehaviour
 {
     [SerializeField]
     private Transform internalPopupArea;
+
+    [SerializeField]
+    private InternalPopup internalPopup;
+
     private PopupService popupService;
 
     void Start()
@@ -29,6 +33,13 @@ public class TestPopupService : MonoBehaviour
     {
         if (popupService.IsOpened<InternalPopup>()) return;
         var popup = popupService.Show<InternalPopup>((RectTransform)internalPopupArea);
+        popup.OnBeforeClose += () => { Debug.Log("Closing Internal Popup"); };
+    }
+
+    public void ShowReferenceInternalPopup()
+    {
+        if (popupService.IsOpened<InternalPopup>()) return;
+        var popup = popupService.Show<InternalPopup>(internalPopup, (RectTransform)internalPopupArea);
         popup.OnBeforeClose += () => { Debug.Log("Closing Internal Popup"); };
     }
 

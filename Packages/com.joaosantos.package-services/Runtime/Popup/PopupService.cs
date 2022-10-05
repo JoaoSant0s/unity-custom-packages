@@ -47,12 +47,31 @@ namespace JoaoSant0s.ServicePackage.Popups
         }
 
         /// <summary>
+        /// You can pass a Popup prefab reference
+        /// </summary>
+        /// <param name="popupPrefab"> the basePrefab Popup </param>
+        public T Show<T>(T popupPrefab) where T : Popup
+        {
+            return CreatePopup<T>(popupPrefab, this.popupArea);
+        }
+
+        /// <summary>
         /// Instantiate a popup of a specific Type
         /// </summary>
         /// <param name="popupArea"> parent of the popup </param>
         public T Show<T>(RectTransform popupArea) where T : Popup
         {
             return PreparePopup<T>(popupArea);
+        }
+
+        /// <summary>
+        /// You can pass a Popup prefab reference
+        /// </summary>
+        /// <param name="popupPrefab"> the basePrefab Popup </param>
+        /// <param name="popupArea"> parent of the popup </param>
+        public T Show<T>(T popupPrefab, RectTransform popupArea) where T : Popup
+        {
+            return CreatePopup<T>(popupPrefab, popupArea);
         }
 
         /// <summary>
@@ -72,7 +91,12 @@ namespace JoaoSant0s.ServicePackage.Popups
             var type = typeof(T);
             Debug.Assert(this.prefabs.ContainsKey(type), string.Format("The pop-up {0} wasn't found inside the PopupConfig", typeof(T)));
 
-            T popup = Instantiate((T)this.prefabs[type], popupArea, false);
+            return CreatePopup<T>(this.prefabs[type], popupArea);
+        }
+
+        private T CreatePopup<T>(Popup popupPrefab, RectTransform popupArea) where T : Popup
+        {
+            T popup = Instantiate((T)popupPrefab, popupArea, false);
 
             AddPopupCounter<T>();
             popup.OnBeforeClose += () => RemovePopupCounter<T>();
