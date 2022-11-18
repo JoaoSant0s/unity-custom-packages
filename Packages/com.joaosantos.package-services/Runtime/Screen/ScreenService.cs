@@ -15,6 +15,7 @@ using UnityEngine;
 
 using JoaoSant0s.ServicePackage.General;
 using JoaoSant0s.CommonWrapper;
+using JoaoSant0s.ServicePackage.Canvases;
 
 namespace JoaoSant0s.ServicePackage.Screens
 {
@@ -22,7 +23,7 @@ namespace JoaoSant0s.ServicePackage.Screens
     {
         public event Action<BaseScreen, BaseScreen> OnScreenChanged;
 
-        private RectTransform screenArea;
+        private Canvas screenArea;
 
         private BaseScreen current;
         private BaseScreen previous;
@@ -35,9 +36,11 @@ namespace JoaoSant0s.ServicePackage.Screens
 
         public override void OnInit()
         {
+            var canvasService = Services.Get<CanvasService>();
+
             config = ScreenConfig.Get();
-            this.screenArea = TransformWrapper.FindRectTransformWithTag(config.mainScreenTag);
-            this.prefabs = config.screensInfos.ToDictionary(info => info.prefab.GetType(), info => info.prefab);
+            this.prefabs = config.screensInfos.ToDictionary(info => info.prefab.GetType(), info => info.prefab);            
+            this.screenArea = canvasService.GetCanvas(config.mainScreenTag);
         }
 
         #endregion
@@ -49,7 +52,8 @@ namespace JoaoSant0s.ServicePackage.Screens
         /// </summary>       
         public T GoToScreen<T>() where T : BaseScreen
         {
-            return PrepareScreen<T>(this.screenArea);
+            Debug.Assert(this.screenArea, $"Can't found the Screen area of tag: {config.mainScreenTag}");
+            return PrepareScreen<T>((RectTransform)this.screenArea.transform);
         }
 
         /// <summary>
