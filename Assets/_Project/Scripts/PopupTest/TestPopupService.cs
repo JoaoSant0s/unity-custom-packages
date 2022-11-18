@@ -5,11 +5,15 @@ using UnityEngine;
 
 using JoaoSant0s.ServicePackage.General;
 using JoaoSant0s.ServicePackage.Popups;
+using JoaoSant0s.CommonWrapper;
 
 public class TestPopupService : MonoBehaviour
 {
     [SerializeField]
     private Transform internalPopupArea;
+
+    [SerializeField]
+    private Transform internalReferencePopupArea;
 
     [SerializeField]
     private InternalPopup internalPopup;
@@ -23,6 +27,14 @@ public class TestPopupService : MonoBehaviour
 
     #region UI Methods
 
+    public void ShowOpenedPopups()
+    {
+        var popups = popupService.GetOpenedPopups<InternalPopup>();
+        Debugs.Log(popups);
+        var externalPopups = popupService.GetOpenedPopups<ExternalPopup>();
+        Debugs.Log(externalPopups);
+    }
+
     public void ShowExternalPopup()
     {
         var popup = popupService.Show<ExternalPopup>();
@@ -31,15 +43,13 @@ public class TestPopupService : MonoBehaviour
 
     public void ShowInternalPopup()
     {
-        if (popupService.IsOpened<InternalPopup>()) return;
         var popup = popupService.Show<InternalPopup>((RectTransform)internalPopupArea);
         popup.OnBeforeClose += () => { Debug.Log("Closing Internal Popup"); };
     }
 
     public void ShowReferenceInternalPopup()
     {
-        if (popupService.IsOpened<InternalPopup>()) return;
-        var popup = popupService.Show<InternalPopup>(internalPopup, (RectTransform)internalPopupArea);
+        var popup = popupService.Show<InternalPopup>(internalPopup, (RectTransform)internalReferencePopupArea);
         popup.OnBeforeClose += () => { Debug.Log("Closing Internal Popup"); };
     }
 

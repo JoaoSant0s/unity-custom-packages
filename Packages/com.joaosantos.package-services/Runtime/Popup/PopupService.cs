@@ -14,24 +14,26 @@ using JoaoSant0s.CommonWrapper;
 using JoaoSant0s.ServicePackage.General;
 using System;
 using System.Collections.Generic;
+using JoaoSant0s.ServicePackage.Canvases;
 
 namespace JoaoSant0s.ServicePackage.Popups
 {
     public class PopupService : Service
     {
-        private RectTransform popupArea;
+        private Canvas popupArea;
         private PopupConfig config;
-        private Dictionary<Type, int> popupsCounter;
+        private Dictionary<Type, List<Popup>> instantiatedPopups;
         private Dictionary<Type, Popup> prefabs;
 
         #region Override Methods
 
         public override void OnInit()
         {
+            var canvasService = Services.Get<CanvasService>();
             config = PopupConfig.Get();
-            this.popupsCounter = new Dictionary<Type, int>();
+            this.instantiatedPopups = new Dictionary<Type, List<Popup>>();
             this.prefabs = config.popupsInfos.ToDictionary(info => info.prefab.GetType(), info => info.prefab);
-            this.popupArea = TransformWrapper.FindRectTransformWithTag(config.mainPopupTag);
+            this.popupArea = canvasService.GetCanvas(config.mainPopupTag);
         }
 
         #endregion
@@ -43,7 +45,8 @@ namespace JoaoSant0s.ServicePackage.Popups
         /// </summary>        
         public T Show<T>() where T : Popup
         {
-            return PreparePopup<T>(this.popupArea);
+            Debug.Assert(this.popupArea, $"Can't found the Popup area of tag: {config.mainPopupTag}");
+            return PreparePopup<T>((RectTransform)this.popupArea.transform);
         }
 
         /// <summary>
@@ -52,7 +55,8 @@ namespace JoaoSant0s.ServicePackage.Popups
         /// <param name="popupPrefab"> the basePrefab Popup </param>
         public T Show<T>(T popupPrefab) where T : Popup
         {
-            return CreatePopup<T>(popupPrefab, this.popupArea);
+            Debug.Assert(this.popupArea, $"Can't found the Popup area of tag: {config.mainPopupTag}");
+            return CreatePopup<T>(popupPrefab, (RectTransform)this.popupArea.transform);
         }
 
         /// <summary>
@@ -79,8 +83,17 @@ namespace JoaoSant0s.ServicePackage.Popups
         /// </summary>
         public bool IsOpened<T>() where T : Popup
         {
-            return popupsCounter.ContainsKey(typeof(T));
+            return instantiatedPopups.ContainsKey(typeof(T));
         }
+
+        /// <summary>
+        /// Get all the popup instances of type T
+        /// </summary>
+        public List<T> GetOpenedPopups<T>() where T : Popup
+        {
+            var type = typeof(T);
+            return instantiatedPopups.ContainsKey(type) ? instantiatedPopups[type].Select(popup => (T)popup).ToList() : new List<T>();
+        }        
 
         #endregion
 
@@ -98,25 +111,25 @@ namespace JoaoSant0s.ServicePackage.Popups
         {
             T popup = Instantiate((T)popupPrefab, popupArea, false);
 
-            AddPopupCounter<T>();
-            popup.OnBeforeClose += () => RemovePopupCounter<T>();
+            AddPopupCounter<T>(popup);
+            popup.OnBeforeClose += () => RemovePopupCounter<T>(popup);
             return popup;
         }
 
-        private void AddPopupCounter<T>() where T : Popup
+        private void AddPopupCounter<T>(T popup) where T : Popup
         {
             var type = typeof(T);
-            if (!popupsCounter.ContainsKey(type)) popupsCounter.Add(typeof(T), 0);
-            popupsCounter[type] += 1;
+            if (!instantiatedPopups.ContainsKey(type)) instantiatedPopups.Add(typeof(T), new List<Popup>());
+            instantiatedPopups[type].Add(popup);
         }
 
-        private void RemovePopupCounter<T>() where T : Popup
+        private void RemovePopupCounter<T>(T popup) where T : Popup
         {
             var type = typeof(T);
-            if (!popupsCounter.ContainsKey(type)) return;
+            if (!instantiatedPopups.ContainsKey(type)) return;
 
-            popupsCounter[type] -= 1;
-            if (popupsCounter[type] <= 0) popupsCounter.Remove(type);
+            instantiatedPopups[type].Remove(popup);
+            if (instantiatedPopups[type].Count <= 0) instantiatedPopups.Remove(type);
         }
 
         #endregion
