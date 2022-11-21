@@ -16,6 +16,8 @@ MonoBehaviour:
   defaultCanvasPrefab: {fileID: 6190444053378600038, guid: d0378a57a695bb34b8304764ce8024f0, type: 3}
   canvasInfos:
   - id: ScreenExternal
+    sortOrder: 0
     overrideCanvasPrefab: {fileID: 0}
   - id: PopupExternal
+    sortOrder: 1
     overrideCanvasPrefab: {fileID: 0}

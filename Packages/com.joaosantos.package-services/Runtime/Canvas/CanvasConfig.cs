@@ -44,6 +44,7 @@ namespace JoaoSant0s.ServicePackage.Canvases
     public struct CanvasInfo
     {
         public string id;
+        public int sortOrder;
         public Canvas overrideCanvasPrefab;
     }
 }
