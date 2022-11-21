@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using JoaoSant0s.ServicePackage.General;
+using System;
 
 namespace JoaoSant0s.ServicePackage.Canvases
 {
@@ -56,8 +57,14 @@ namespace JoaoSant0s.ServicePackage.Canvases
                 var prefab = info.overrideCanvasPrefab != null ? info.overrideCanvasPrefab : config.DefaultCanvasPrefab;
                 var canvas = Instantiate(prefab, transform);
                 canvas.name += $" - {info.id}";
+                UpdateVisual(canvas, info);
                 canvases.Add(info.id, canvas);
             }
+        }
+
+        private void UpdateVisual(Canvas canvas, CanvasInfo info)
+        {
+            canvas.sortingOrder = info.sortOrder;
         }
 
         #endregion
