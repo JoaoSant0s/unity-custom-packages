@@ -14,7 +14,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using JoaoSant0s.ServicePackage.General;
-using JoaoSant0s.CommonWrapper;
 using JoaoSant0s.ServicePackage.Canvases;
 
 namespace JoaoSant0s.ServicePackage.Screens
@@ -23,24 +22,22 @@ namespace JoaoSant0s.ServicePackage.Screens
     {
         public event Action<BaseScreen, BaseScreen> OnScreenChanged;
 
-        private Canvas screenArea;
-
         private BaseScreen current;
         private BaseScreen previous;
 
         public BaseScreen CurrentScreen => current;
         private ScreenConfig config;
         private Dictionary<Type, BaseScreen> prefabs;
+        private CanvasService canvasService;
 
         #region Override Methods
 
         public override void OnInit()
         {
-            var canvasService = Services.Get<CanvasService>();
+            this.canvasService = Services.Get<CanvasService>();
 
             config = ScreenConfig.Get();
-            this.prefabs = config.screensInfos.ToDictionary(info => info.prefab.GetType(), info => info.prefab);            
-            this.screenArea = canvasService.GetCanvas(config.mainScreenTag);
+            this.prefabs = config.screenPrefabs.ToDictionary(prefab => prefab.GetType(), prefab => prefab);
         }
 
         #endregion
@@ -52,8 +49,7 @@ namespace JoaoSant0s.ServicePackage.Screens
         /// </summary>       
         public T GoToScreen<T>() where T : BaseScreen
         {
-            Debug.Assert(this.screenArea, $"Can't found the Screen area of tag: {config.mainScreenTag}");
-            return PrepareScreen<T>((RectTransform)this.screenArea.transform);
+            return PrepareScreen<T>();
         }
 
         /// <summary>
@@ -87,9 +83,27 @@ namespace JoaoSant0s.ServicePackage.Screens
 
             Debug.Assert(this.prefabs.ContainsKey(type), string.Format("No prefab for screen of type {0}", type.Name));
 
+            return CreateScreen(this.prefabs[type], area) as T;
+        }
+
+        private T PrepareScreen<T>() where T : BaseScreen
+        {
+            var type = typeof(T);
+            if (current is T) return current as T;
+
+            Debug.Assert(this.prefabs.ContainsKey(type), string.Format("No prefab for screen of type {0}", type.Name));
+
+            var screenPrefab = this.prefabs[type];
+            var canvas = this.canvasService.GetCanvas(screenPrefab.CanvasId);
+
+            return CreateScreen(screenPrefab, (RectTransform)canvas.transform) as T;
+        }
+
+        private T CreateScreen<T>(T screenPrefab, RectTransform area) where T : BaseScreen
+        {
             previous = current;
             if (config.debugLog) Debug.Log($"Moving {previous?.GetType()} to {typeof(T)}");
-            current = Instantiate<T>(this.prefabs[type] as T, area, false);
+            current = Instantiate<T>(screenPrefab as T, area, false);
 
             current.Prepare();
             previous?.Release();

@@ -6,34 +6,32 @@ This source code is licensed under the BSD-style license found in the
 LICENSE file in the root directory of this source tree.
 */
 
+using System;
 using System.Linq;
+using System.Collections.Generic;
 
 using UnityEngine;
 
-using JoaoSant0s.CommonWrapper;
 using JoaoSant0s.ServicePackage.General;
-using System;
-using System.Collections.Generic;
 using JoaoSant0s.ServicePackage.Canvases;
 
 namespace JoaoSant0s.ServicePackage.Popups
 {
     public class PopupService : Service
     {
-        private Canvas popupArea;
         private PopupConfig config;
         private Dictionary<Type, List<Popup>> instantiatedPopups;
         private Dictionary<Type, Popup> prefabs;
+        private CanvasService canvasService;
 
         #region Override Methods
 
         public override void OnInit()
         {
-            var canvasService = Services.Get<CanvasService>();
             config = PopupConfig.Get();
+            this.canvasService = Services.Get<CanvasService>();
             this.instantiatedPopups = new Dictionary<Type, List<Popup>>();
-            this.prefabs = config.popupsInfos.ToDictionary(info => info.prefab.GetType(), info => info.prefab);
-            this.popupArea = canvasService.GetCanvas(config.mainPopupTag);
+            this.prefabs = config.popupPrefabs.ToDictionary(prefab => prefab.GetType(), prefab => prefab);
         }
 
         #endregion
@@ -45,8 +43,7 @@ namespace JoaoSant0s.ServicePackage.Popups
         /// </summary>        
         public T Show<T>() where T : Popup
         {
-            Debug.Assert(this.popupArea, $"Can't found the Popup area of tag: {config.mainPopupTag}");
-            return PreparePopup<T>((RectTransform)this.popupArea.transform);
+            return PreparePopup<T>();
         }
 
         /// <summary>
@@ -55,27 +52,26 @@ namespace JoaoSant0s.ServicePackage.Popups
         /// <param name="popupPrefab"> the basePrefab Popup </param>
         public T Show<T>(T popupPrefab) where T : Popup
         {
-            Debug.Assert(this.popupArea, $"Can't found the Popup area of tag: {config.mainPopupTag}");
-            return CreatePopup<T>(popupPrefab, (RectTransform)this.popupArea.transform);
+            return PreparePopup<T>(popupPrefab);
         }
 
         /// <summary>
         /// Instantiate a popup of a specific Type
         /// </summary>
-        /// <param name="popupArea"> parent of the popup </param>
-        public T Show<T>(RectTransform popupArea) where T : Popup
+        /// <param name="overridePopupArea"> override the parent of the popup </param>
+        public T Show<T>(RectTransform overridePopupArea) where T : Popup
         {
-            return PreparePopup<T>(popupArea);
+            return PreparePopup<T>(overridePopupArea);
         }
 
         /// <summary>
         /// You can pass a Popup prefab reference
         /// </summary>
         /// <param name="popupPrefab"> the basePrefab Popup </param>
-        /// <param name="popupArea"> parent of the popup </param>
-        public T Show<T>(T popupPrefab, RectTransform popupArea) where T : Popup
+        /// <param name="overridePopupArea"> override the parent of the popup </param>
+        public T Show<T>(T popupPrefab, RectTransform overridePopupArea) where T : Popup
         {
-            return CreatePopup<T>(popupPrefab, popupArea);
+            return CreatePopup<T>(popupPrefab, overridePopupArea);
         }
 
         /// <summary>
@@ -93,18 +89,37 @@ namespace JoaoSant0s.ServicePackage.Popups
         {
             var type = typeof(T);
             return instantiatedPopups.ContainsKey(type) ? instantiatedPopups[type].Select(popup => (T)popup).ToList() : new List<T>();
-        }        
+        }
 
         #endregion
 
         #region Private Methods
 
-        private T PreparePopup<T>(RectTransform popupArea) where T : Popup
+        private T PreparePopup<T>() where T : Popup
         {
             var type = typeof(T);
             Debug.Assert(this.prefabs.ContainsKey(type), string.Format("The pop-up {0} wasn't found inside the PopupConfig", typeof(T)));
 
-            return CreatePopup<T>(this.prefabs[type], popupArea);
+            var popupPrefab = this.prefabs[type];
+
+            var canvas = this.canvasService.GetCanvas(popupPrefab.CanvasId);
+            return CreatePopup<T>(popupPrefab, ((RectTransform)canvas.transform));
+        }
+
+        private T PreparePopup<T>(Popup popupPrefab) where T : Popup
+        {
+            var canvas = this.canvasService.GetCanvas(popupPrefab.CanvasId);
+            return CreatePopup<T>(popupPrefab, ((RectTransform)canvas.transform));
+        }
+
+        private T PreparePopup<T>(RectTransform overridePopupArea) where T : Popup
+        {
+            var type = typeof(T);
+            Debug.Assert(this.prefabs.ContainsKey(type), string.Format("The pop-up {0} wasn't found inside the PopupConfig", typeof(T)));
+
+            var popupPrefab = this.prefabs[type];
+
+            return CreatePopup<T>(popupPrefab, overridePopupArea);
         }
 
         private T CreatePopup<T>(Popup popupPrefab, RectTransform popupArea) where T : Popup

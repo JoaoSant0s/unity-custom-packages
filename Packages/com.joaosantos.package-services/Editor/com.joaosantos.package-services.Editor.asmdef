@@ -1,0 +1,17 @@
+{
+    "name": "com.joaosantos.package-services.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:453bddd653b4eae49b1fb1fe24c07cb5",
+        "GUID:d1c97dd0014cbdf4fb63cdad4c842dfb"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

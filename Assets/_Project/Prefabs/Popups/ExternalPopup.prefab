@@ -248,6 +248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b33889c3585f09444a8ccf32652714af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvasId: PopupExternal
 --- !u!1 &5446014174029866370
 GameObject:
   m_ObjectHideFlags: 0

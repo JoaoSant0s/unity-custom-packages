@@ -78,7 +78,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: External Popup
+  m_Text: External Screen
 --- !u!1 &5446014173083935245
 GameObject:
   m_ObjectHideFlags: 0
@@ -168,3 +168,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e34da597c5f65cc41a4e90dde3be314c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvasId: ScreenExternal

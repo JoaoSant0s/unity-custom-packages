@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using JoaoSant0s.CommonWrapper;
+using JoaoSant0s.ServicePackage.Canvases;
 
 namespace JoaoSant0s.ServicePackage.Screens
 {
@@ -21,14 +22,6 @@ namespace JoaoSant0s.ServicePackage.Screens
     {
         [Header("Screen Config")]
         public bool debugLog = true;
-
-        public string mainScreenTag;
-        public ScreenInfo[] screensInfos;
-    }
-
-    [Serializable]
-    public struct ScreenInfo
-    {
-        public BaseScreen prefab;
+        public BaseScreen[] screenPrefabs;
     }
 }

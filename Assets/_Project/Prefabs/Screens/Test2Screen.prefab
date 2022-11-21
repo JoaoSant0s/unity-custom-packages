@@ -78,7 +78,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Internal Popup
+  m_Text: Internal Screen
 --- !u!1 &5446014173083935245
 GameObject:
   m_ObjectHideFlags: 0
@@ -168,3 +168,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0256f0f924c1a949a58e64098eea964, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvasId: 

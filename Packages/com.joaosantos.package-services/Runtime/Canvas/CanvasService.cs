@@ -1,8 +1,17 @@
+/*
+Copyright (c) 2021, Joao Santos
+All rights reserved.
+
+This source code is licensed under the BSD-style license found in the
+LICENSE file in the root directory of this source tree.
+*/
+
 using System.Collections;
 using System.Collections.Generic;
-using JoaoSant0s.ServicePackage.General;
+
 using UnityEngine;
-using UnityEngine.UI;
+
+using JoaoSant0s.ServicePackage.General;
 
 namespace JoaoSant0s.ServicePackage.Canvases
 {
@@ -32,8 +41,8 @@ namespace JoaoSant0s.ServicePackage.Canvases
 
         public Canvas GetCanvas(string canvasId)
         {
-            if (this.canvases.ContainsKey(canvasId)) return this.canvases[canvasId];
-            return GameObject.FindObjectOfType<Canvas>();
+            Debug.Assert(this.canvases.ContainsKey(canvasId), $"Can't found a Canvas with id {canvasId}");
+            return this.canvases[canvasId];
         }
 
         #endregion
@@ -46,7 +55,7 @@ namespace JoaoSant0s.ServicePackage.Canvases
             {
                 var prefab = info.overrideCanvasPrefab != null ? info.overrideCanvasPrefab : config.DefaultCanvasPrefab;
                 var canvas = Instantiate(prefab, transform);
-                canvas.name += $"{info.id}";
+                canvas.name += $" - {info.id}";
                 canvases.Add(info.id, canvas);
             }
         }
