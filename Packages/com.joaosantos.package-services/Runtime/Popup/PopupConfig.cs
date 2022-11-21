@@ -11,6 +11,7 @@ using System;
 using UnityEngine;
 
 using JoaoSant0s.CommonWrapper;
+using JoaoSant0s.ServicePackage.Canvases;
 
 namespace JoaoSant0s.ServicePackage.Popups
 {
@@ -18,13 +19,6 @@ namespace JoaoSant0s.ServicePackage.Popups
     public class PopupConfig : CustomScriptableObject<PopupConfig>
     {
         [Header("Popup Config")]
-        public string mainPopupTag;
-        public PopupInfo[] popupsInfos;
-    }
-
-    [Serializable]
-    public struct PopupInfo
-    {
-        public Popup prefab;
+        public Popup[] popupPrefabs;
     }
 }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 299e3b4ed8d7c454bb0a14193d50c3f1, type: 3}
   m_Name: PopupConfig
   m_EditorClassIdentifier: 
-  mainPopupTag: PopupExternal
-  popupsInfos:
-  - prefab: {fileID: 5446014173083935235, guid: 1bea7db4d4f1258409678b90d047956d, type: 3}
-  - prefab: {fileID: 5811720265824611053, guid: a9c716f2612467044ac2a8a88c7081ca, type: 3}
+  priority: 0
+  popupPrefabs:
+  - {fileID: 5811720265824611053, guid: a9c716f2612467044ac2a8a88c7081ca, type: 3}
+  - {fileID: 5446014173083935235, guid: 1bea7db4d4f1258409678b90d047956d, type: 3}

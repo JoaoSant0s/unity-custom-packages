@@ -7,13 +7,20 @@ LICENSE file in the root directory of this source tree.
 */
 
 using System;
-
 using UnityEngine;
+
+using JoaoSant0s.ServicePackage.Canvases;
 
 namespace JoaoSant0s.ServicePackage.Popups
 {
     public abstract class Popup : MonoBehaviour
     {
+        [CanvasIdAttribute]
+        [SerializeField]
+        private string canvasId;
+
+        public string CanvasId => canvasId;
+
         public event Action OnBeforeClose;
 
         protected virtual void BeforeClose() { }

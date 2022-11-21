@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   priority: 0
   debugLog: 1
-  mainScreenTag: ScreenExternal
-  screensInfos:
-  - prefab: {fileID: 260022854552533545, guid: c708ace931c3d724e90bb5e61364e8fb, type: 3}
-  - prefab: {fileID: 4264582297834665517, guid: 3f42590089078e54781ba827e98d2cbc, type: 3}
+  screenPrefabs:
+  - {fileID: 260022854552533545, guid: c708ace931c3d724e90bb5e61364e8fb, type: 3}
+  - {fileID: 4264582297834665517, guid: 3f42590089078e54781ba827e98d2cbc, type: 3}
