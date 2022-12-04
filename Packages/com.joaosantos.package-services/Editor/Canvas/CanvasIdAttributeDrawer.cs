@@ -1,12 +1,26 @@
+/*
+Copyright (c) 2022, Joao Santos
+All rights reserved.
+
+This source code is licensed under the BSD-style license found in the
+LICENSE file in the root directory of this source tree.
+*/
+
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 
 using UnityEngine;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 using JoaoSant0s.ServicePackage.Canvases;
 
 namespace JoaoSant0s.ServicePackage.CanvasesEditor
 {
+
+#if UNITY_EDITOR
     [CustomPropertyDrawer(typeof(CanvasIdAttribute))]
     public class CanvasIdAttributeDrawer : PropertyDrawer
     {
@@ -47,4 +61,6 @@ namespace JoaoSant0s.ServicePackage.CanvasesEditor
                 }, temp);
         }
     }
+#endif
+
 }
