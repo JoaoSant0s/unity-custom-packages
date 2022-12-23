@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using JoaoSant0s.StateMachine;
 using UnityEngine;
 
-public class State1 : State<TesteStateMachine>
+public class State1 : BehaviourState<TesteStateMachine>
 {
     public State1(TesteStateMachine controller) : base(controller) { }
 

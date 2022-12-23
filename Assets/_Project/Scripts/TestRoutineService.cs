@@ -5,13 +5,17 @@ using UnityEngine;
 
 using JoaoSant0s.ServicePackage.General;
 using JoaoSant0s.ServicePackage.Routine;
+using JoaoSant0s.CommonWrapper;
 
 public class TestRoutineService : MonoBehaviour
 {
-
     private RoutineService routineService;
 
     private bool condition;
+
+    private bool condition2;
+
+    private int counter;
 
     void Awake()
     {
@@ -25,10 +29,19 @@ public class TestRoutineService : MonoBehaviour
         });
 
         Debug.Log("Checking when condition will be true");
-        
+
         routineService.WaitUntilThenDo(() => condition, () =>
         {
             Debug.Log("Executed if condition true");
-        }, WaitRoutineOptions.SkipFirstFrame);
+            condition2 = true;
+        });
+
+        Debug.Log("Checking when condition will be true");
+
+        routineService.RepeatActionUntilDuringIntervalTime(() =>
+        {
+            Debugs.Log("Repeat action", counter);
+            counter++;
+        }, () => condition2, 1, WaitRoutineOptions.SkipFrame);
     }
 }

@@ -10,21 +10,21 @@ using UnityEngine;
 
 namespace JoaoSant0s.StateMachine
 {
-    public abstract partial class StateMachineController<T> : MonoBehaviour where T : StateMachineController<T>
+    public abstract class BehaviourStateMachineController<T> : MonoBehaviour where T : BehaviourStateMachineController<T>
     {
         [Header("State Machine Controller")]
         [SerializeField]
-        private bool showDebug = true;
+        protected bool showDebug = true;
         public string CurrentStateName => currentState?.GetType().Name;
 
-        private State<T> currentState;
+        protected BehaviourState<T> currentState;
 
         /// <summary>
         /// Make the current state machine go to the next state
         /// </summary>
         /// <param name="state"> the next state object</param>
         /// <param name="jumpLastState"> Jump "OnFinish()" execution of the last state</param>
-        public void ChangeState(State<T> state, bool jumpLastState = false)
+        public void ChangeState(BehaviourState<T> state, bool jumpLastState = false)
         {
             if (state == null || currentState?.GetType() == state.GetType()) return;
 
