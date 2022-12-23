@@ -8,11 +8,11 @@ LICENSE file in the root directory of this source tree.
 
 namespace JoaoSant0s.StateMachine
 {
-    public abstract partial class State<T> where T: StateMachineController<T>
+    public abstract class BehaviourState<T> where T : BehaviourStateMachineController<T>
     {
         protected T machineController;
 
-        public State(T controller)
+        public BehaviourState(T controller)
         {
             this.machineController = controller;
         }
@@ -31,7 +31,7 @@ namespace JoaoSant0s.StateMachine
         /// Make the current state machine go to the next state
         /// </summary>
         /// <param name="nextState"> the next state object</param>
-        protected void ChangeState(State<T> nextState)
+        protected void ChangeState(BehaviourState<T> nextState)
         {
             this.machineController.ChangeState(nextState);
         }

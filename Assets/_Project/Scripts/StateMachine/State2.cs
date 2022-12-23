@@ -6,7 +6,7 @@ using UnityEngine;
 
 using JoaoSant0s.StateMachine;
 
-public class State2 : State<TesteStateMachine>
+public class State2 : BehaviourState<TesteStateMachine>
 {
     public State2(TesteStateMachine controller) : base(controller) { }
 
