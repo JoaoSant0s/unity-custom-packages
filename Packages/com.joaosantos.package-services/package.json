@@ -24,6 +24,6 @@
     "email": "ricardoelric@gmail.com"
   },
   "dependencies": {
-    "com.joaosantos.package-common-wrapper": "2.6.0"
+    "com.joaosantos.package-common-wrapper": "2.7.0"
   }
 }
