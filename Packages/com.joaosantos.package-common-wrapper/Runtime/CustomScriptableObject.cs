@@ -22,9 +22,13 @@ namespace JoaoSant0s.CommonWrapper
 
         #region Public Methods
 
-        public static T Get()
+        /// <summary>
+        /// Get and Cache the asset reference
+        /// </summary>
+        /// <param name="path"> select a custom path to search assets from. The '/' path search inside all Resources folders</param>
+        public static T Get(string path = "/")
         {
-            if (instance == null) SearchOrCreateInstance();
+            if (instance == null) SearchAndCacheInstance(path);
             return instance;
         }
 
@@ -32,9 +36,9 @@ namespace JoaoSant0s.CommonWrapper
 
         #region Private Methods
 
-        private static void SearchOrCreateInstance()
+        private static void SearchAndCacheInstance(string path)
         {
-            var found = Resources.LoadAll<T>("/");
+            var found = Resources.LoadAll<T>(path);
 
             Debug.Assert(found.Length != 0, $"You must first create an asset of type {typeof(T).Name}. Place inside a Resources folder.");
 
