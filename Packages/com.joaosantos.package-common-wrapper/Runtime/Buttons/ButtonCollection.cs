@@ -13,7 +13,7 @@ using UnityEngine.UI;
 
 namespace JoaoSant0s.CommonWrapper
 {
-    public class ButtonWrapper : MonoBehaviour
+    public class ButtonCollection : MonoBehaviour
     {
         [Header("Button Wrapper")]
         [SerializeField]
@@ -22,14 +22,26 @@ namespace JoaoSant0s.CommonWrapper
         #region Public Methods
 
         /// <summary>
-        /// Active a Button on the list based on an id
+        /// Active a Button on the list based on an id and disable the rest
         /// </summary>
         /// <param name="id"> id of a button </param>
         public void ActiveButton(string id)
         {
             for (int i = 0; i < buttons.Length; i++)
             {
-                buttons[i].Enable(id);
+                buttons[i].SetActive(id);
+            }
+        }
+
+        /// <summary>
+        /// Make a button Interactable and apply the inverse for the rest
+        /// </summary>
+        /// <param name="id"> id of a button </param>
+        public void SetInteractable(string id)
+        {
+            for (int i = 0; i < buttons.Length; i++)
+            {
+                buttons[i].SetInteractable(id);
             }
         }
 
@@ -39,12 +51,17 @@ namespace JoaoSant0s.CommonWrapper
     [Serializable]
     public class ButtonTuple
     {
-        public string state;
+        public string id;
         public Button button;
 
-        public void Enable(string id)
+        public void SetActive(string id)
         {
-            button.gameObject.SetActive(id.Equals(this.state));
+            button.gameObject.SetActive(id.Equals(this.id));
+        }
+
+        public void SetInteractable(string id)
+        {
+            button.interactable = id.Equals(this.id);
         }
     }
 }

@@ -16,6 +16,10 @@ namespace JoaoSant0s.CommonWrapper
 {
     public static class TransformWrapper
     {
+        /// <summary>
+        /// Search a Transform in the Hierarchy with Tag
+        /// </summary>
+        /// <param name="tagName"> The tag name </param>
         public static Transform FindTransformWithTag(string tagName)
         {
             var popupObjectArea = GameObject.FindGameObjectWithTag(tagName);
@@ -23,9 +27,26 @@ namespace JoaoSant0s.CommonWrapper
             return popupObjectArea.transform;
         }
 
+        /// <summary>
+        /// Search a RectTransform in the Hierarchy with Tag
+        /// </summary>
+        /// <param name="tagName"> The tag name </param>
         public static RectTransform FindRectTransformWithTag(string tagName)
         {
             return (RectTransform)FindTransformWithTag(tagName);
+        }
+
+        /// <summary>
+        /// Check if the Transforms distance is less that a value
+        /// </summary>
+        /// <param name="baseTransform"> base transform to compare </param>
+        /// <param name="nextTransform"> next transform to compare </param>
+        /// <param name="distance"> the comparable distance </param>
+        public static bool IsDistanceLessThan(Transform baseTransform, Transform nextTransform, float distance)
+        {
+            if (distance < 0) return true;
+
+            return baseTransform.Distance(nextTransform) < distance;
         }
 
         /// <summary>
@@ -73,7 +94,7 @@ namespace JoaoSant0s.CommonWrapper
 
                 float distance = reference.Distance(element);
 
-                if (!UtilWrapper.ContainsAPoint(reference.position, element.position, container)) continue;
+                if (!VectorWrapper.ContainsAPoint(reference.position, element.position, container)) continue;
 
                 if (distance < minDistance)
                 {

@@ -134,6 +134,26 @@ namespace JoaoSant0s.CommonWrapper
             return new Vector3Int(Random.Range(xMin, xMax), Random.Range(yMin, yMax), Random.Range(zMin, zMax));
         }
 
+        /// <summary>
+        /// Check if a point is inside a other rectangle
+        /// </summary>
+        /// <param name="centerPoint"> the center point of the rectangle </param>
+        /// <param name="nextPoint"> the point that will check if is inside </param>
+        /// <param name="area"> the width and height of the rectangle </param>
+        public static bool ContainsAPoint(Vector2 centerPoint, Vector2 nextPoint, Vector2 area)
+        {
+            var checkLeftHorizontal = nextPoint.x >= centerPoint.x - area.x / 2f;
+            var checkRightHorizontal = nextPoint.x <= centerPoint.x + area.x / 2f;
+
+            var checkTopVertical = nextPoint.y <= centerPoint.y + area.y / 2f;
+            var checkDownVertical = nextPoint.y >= centerPoint.y - area.y / 2f;
+
+            var checkHorizontal = checkLeftHorizontal && checkRightHorizontal;
+            var checkVertical = checkTopVertical && checkDownVertical;
+
+            return checkHorizontal && checkVertical;
+        }
+
         #endregion
     }
 }
