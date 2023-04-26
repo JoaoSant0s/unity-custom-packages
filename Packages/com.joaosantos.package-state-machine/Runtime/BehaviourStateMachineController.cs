@@ -35,7 +35,7 @@ namespace JoaoSant0s.StateMachine
 
             if (showDebug)
             {
-                Debug.Log(string.Format("Change --- {0} --- {1}", currentState, state));
+                Debug.Log($"Change --- {currentState} --- {state}");
             }
 
             currentState = state;

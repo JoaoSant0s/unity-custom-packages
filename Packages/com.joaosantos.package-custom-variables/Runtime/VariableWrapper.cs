@@ -13,7 +13,7 @@ namespace JoaoSant0s.CustomVariable
 {
     public static class VariableWrapper<T>
     {
-        private static Dictionary<Variable<T>, Entry> variables = new Dictionary<Variable<T>, Entry>();
+        private static readonly Dictionary<Variable<T>, Entry> variables = new();
 
         #region Public Methods
 
