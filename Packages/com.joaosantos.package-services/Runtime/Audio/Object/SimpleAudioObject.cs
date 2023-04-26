@@ -17,10 +17,10 @@ namespace JoaoSant0s.ServicePackage.Audio
 
         #region Public Methods
         public override void Play()
-        {      
+        {
             audioSource = audioController.GetUnlockedAudioSource();
             audioController.LockAudioSource(audioSource);
-            
+
             ConfigAudioSource();
 
             audioSource.Play();
@@ -33,8 +33,8 @@ namespace JoaoSant0s.ServicePackage.Audio
             Stop();
         }
 
-        public override void Stop() 
-        { 
+        public override void Stop()
+        {
             audioSource.Stop();
             audioController.UnlockAudioSource(audioSource);
             DisposeAudio?.Invoke(this);
@@ -46,7 +46,7 @@ namespace JoaoSant0s.ServicePackage.Audio
 
         private void ConfigAudioSource()
         {
-            var asset = (SimpleAudioAsset) audioAsset;
+            var asset = (SimpleAudioAsset)audioAsset;
 
             audioSource.clip = asset.clip;
             audioSource.volume = asset.volume;

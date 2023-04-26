@@ -15,9 +15,8 @@ namespace JoaoSant0s.ServicePackage.Audio
 {
     public class AudioSourceController
     {
-        private AudioService audioService;
-
-        private Dictionary<AudioSource, bool> audioSourceInUse;
+        private readonly AudioService audioService;
+        private readonly Dictionary<AudioSource, bool> audioSourceInUse;
 
         public AudioSourceController(AudioService service)
         {
@@ -45,10 +44,7 @@ namespace JoaoSant0s.ServicePackage.Audio
             var element = audioSourceInUse.FirstOrDefault(element => !element.Value);
             AudioSource audioSource = element.Key;
 
-            if (element.Key == null)
-            {
-                audioSource = CreateAudioSourceController();
-            }
+            if (element.Key == null) audioSource = CreateAudioSourceController();
 
             return audioSource;
         }
