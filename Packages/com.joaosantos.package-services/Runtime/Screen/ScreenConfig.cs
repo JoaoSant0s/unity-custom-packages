@@ -13,7 +13,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using JoaoSant0s.CommonWrapper;
-using JoaoSant0s.ServicePackage.Canvases;
 
 namespace JoaoSant0s.ServicePackage.Screens
 {

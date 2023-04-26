@@ -17,8 +17,5 @@ namespace JoaoSant0s.ServicePackage.Flag
         None
     }
     [CreateAssetMenu(fileName = "FlagAsset", menuName = "JoaoSant0s/ServicePackage/Flag/FlagAsset")]
-    public class FlagAsset : ScriptableObject
-    {
-
-    }
+    public class FlagAsset : ScriptableObject { }
 }

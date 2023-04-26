@@ -111,114 +111,106 @@ namespace JoaoSant0s.ServicePackage.Save
 
         private object CollectionObjectFromJson<T>(Type type, string stringValue)
         {
-            object obj = null;
-
             if (type == typeof(int[]))
             {
-                obj = JsonUtility.FromJson<IntArrayValue>(stringValue).value;
+                return JsonUtility.FromJson<IntArrayValue>(stringValue).value;
             }
             else if (type == typeof(float[]))
             {
-                obj = JsonUtility.FromJson<FloatArrayValue>(stringValue).value;
+                return JsonUtility.FromJson<FloatArrayValue>(stringValue).value;
             }
             else if (type == typeof(long[]))
             {
-                obj = JsonUtility.FromJson<LongArrayValue>(stringValue).value;
-
+                return JsonUtility.FromJson<LongArrayValue>(stringValue).value;
             }
             else if (type == typeof(bool[]))
             {
-                obj = JsonUtility.FromJson<BoolArrayValue>(stringValue).value;
-
+                return JsonUtility.FromJson<BoolArrayValue>(stringValue).value;
             }
             else if (type == typeof(double[]))
             {
-                obj = JsonUtility.FromJson<DoubleArrayValue>(stringValue).value;
+                return JsonUtility.FromJson<DoubleArrayValue>(stringValue).value;
             }
             else if (type == typeof(string[]))
             {
-                obj = JsonUtility.FromJson<StringArrayValue>(stringValue).value;
+                return JsonUtility.FromJson<StringArrayValue>(stringValue).value;
             }
             else if (type == typeof(Vector2[]))
             {
-                obj = JsonUtility.FromJson<Vector2ArrayValue>(stringValue).value;
+                return JsonUtility.FromJson<Vector2ArrayValue>(stringValue).value;
             }
             else if (type == typeof(Vector3[]))
             {
-                obj = JsonUtility.FromJson<Vector3ArrayValue>(stringValue).value;
+                return JsonUtility.FromJson<Vector3ArrayValue>(stringValue).value;
             }
             else if (type == typeof(Quaternion[]))
             {
-                obj = JsonUtility.FromJson<QuaternionArrayValue>(stringValue).value;
+                return JsonUtility.FromJson<QuaternionArrayValue>(stringValue).value;
             }
             else if (type == typeof(Rect[]))
             {
-                obj = JsonUtility.FromJson<RectArrayValue>(stringValue).value;
+                return JsonUtility.FromJson<RectArrayValue>(stringValue).value;
             }
             else if (type == typeof(DateTime[]))
             {
                 var tickArray = JsonUtility.FromJson<LongArrayValue>(stringValue);
-                obj = tickArray.value.Select(t => new DateTime(t)).ToArray();
+                return tickArray.value.Select(t => new DateTime(t)).ToArray();
             }
 
-            return obj;
+            return null;
         }
 
         private object UnitObjectFromJson<T>(Type type, string stringValue)
         {
-            object obj = null;
-
             if (type == typeof(int))
             {
-                obj = JsonUtility.FromJson<IntValue>(stringValue).value;
+                return JsonUtility.FromJson<IntValue>(stringValue).value;
             }
             else if (type == typeof(float))
             {
-                obj = JsonUtility.FromJson<FloatValue>(stringValue).value;
+                return JsonUtility.FromJson<FloatValue>(stringValue).value;
             }
             else if (type == typeof(long))
             {
-                obj = JsonUtility.FromJson<LongValue>(stringValue).value;
+                return JsonUtility.FromJson<LongValue>(stringValue).value;
             }
             else if (type == typeof(bool))
             {
-                obj = JsonUtility.FromJson<BoolValue>(stringValue).value;
+                return JsonUtility.FromJson<BoolValue>(stringValue).value;
             }
             else if (type == typeof(double))
             {
-                obj = JsonUtility.FromJson<DoubleValue>(stringValue).value;
+                return JsonUtility.FromJson<DoubleValue>(stringValue).value;
             }
             else if (type == typeof(string))
             {
-                obj = JsonUtility.FromJson<StringValue>(stringValue).value;
+                return JsonUtility.FromJson<StringValue>(stringValue).value;
             }
             else if (type == typeof(Vector2))
             {
-                obj = JsonUtility.FromJson<Vector2Value>(stringValue).value;
+                return JsonUtility.FromJson<Vector2Value>(stringValue).value;
             }
             else if (type == typeof(Vector3))
             {
-                obj = JsonUtility.FromJson<Vector3Value>(stringValue).value;
+                return JsonUtility.FromJson<Vector3Value>(stringValue).value;
             }
             else if (type == typeof(Quaternion))
             {
-                obj = JsonUtility.FromJson<QuaternionValue>(stringValue).value;
+                return JsonUtility.FromJson<QuaternionValue>(stringValue).value;
             }
             else if (type == typeof(Rect))
             {
-                obj = JsonUtility.FromJson<RectValue>(stringValue).value;
+                return JsonUtility.FromJson<RectValue>(stringValue).value;
             }
             else if (type == typeof(DateTime))
             {
                 var longObj = JsonUtility.FromJson<LongValue>(stringValue);
-                obj = new DateTime(longObj.value);
+                return new DateTime(longObj.value);
             }
             else
             {
-                obj = JsonUtility.FromJson<T>(stringValue);
+                return JsonUtility.FromJson<T>(stringValue);
             }
-
-            return obj;
         }
 
         private void SetData<T>(string key, T tValue)
@@ -242,121 +234,111 @@ namespace JoaoSant0s.ServicePackage.Save
 
         private object CollectionObjectFromObjectType<T>(Type type, T tValue)
         {
-            object obj = null;
-
             if (type == typeof(int[]))
             {
-                obj = new IntArrayValue((int[])Convert.ChangeType(tValue, type));
+                return new IntArrayValue((int[])Convert.ChangeType(tValue, type));
             }
             else if (type == typeof(float[]))
             {
-                obj = new FloatArrayValue((float[])Convert.ChangeType(tValue, type));
+                return new FloatArrayValue((float[])Convert.ChangeType(tValue, type));
             }
             else if (type == typeof(long[]))
             {
-                obj = new LongArrayValue((long[])Convert.ChangeType(tValue, type));
+                return new LongArrayValue((long[])Convert.ChangeType(tValue, type));
             }
             else if (type == typeof(bool[]))
             {
-                obj = new BoolArrayValue((bool[])Convert.ChangeType(tValue, type));
+                return new BoolArrayValue((bool[])Convert.ChangeType(tValue, type));
             }
             else if (type == typeof(double[]))
             {
-                obj = new DoubleArrayValue((double[])Convert.ChangeType(tValue, type));
+                return new DoubleArrayValue((double[])Convert.ChangeType(tValue, type));
             }
             else if (type == typeof(string[]))
             {
-                obj = new StringArrayValue((string[])Convert.ChangeType(tValue, type));
+                return new StringArrayValue((string[])Convert.ChangeType(tValue, type));
             }
             else if (type == typeof(Vector2[]))
             {
-                obj = new Vector2ArrayValue((Vector2[])Convert.ChangeType(tValue, type));
+                return new Vector2ArrayValue((Vector2[])Convert.ChangeType(tValue, type));
             }
             else if (type == typeof(Vector3[]))
             {
-                obj = new Vector3ArrayValue((Vector3[])Convert.ChangeType(tValue, type));
+                return new Vector3ArrayValue((Vector3[])Convert.ChangeType(tValue, type));
             }
             else if (type == typeof(Quaternion[]))
             {
-                obj = new QuaternionArrayValue((Quaternion[])Convert.ChangeType(tValue, type));
+                return new QuaternionArrayValue((Quaternion[])Convert.ChangeType(tValue, type));
             }
             else if (type == typeof(Rect[]))
             {
-                obj = new RectArrayValue((Rect[])Convert.ChangeType(tValue, type));
+                return new RectArrayValue((Rect[])Convert.ChangeType(tValue, type));
             }
             else if (type == typeof(DateTime[]))
             {
                 var dates = (DateTime[])Convert.ChangeType(tValue, type);
 
-                obj = new LongArrayValue(dates.Select(d => d.Ticks).ToArray());
+                return new LongArrayValue(dates.Select(d => d.Ticks).ToArray());
             }
             else
             {
                 var objects = (object[])Convert.ChangeType(tValue, type);
-
                 var stringArray = objects.Select(o => JsonUtility.ToJson(o)).ToArray();
-
-                obj = new StringArrayValue(stringArray);
+                return new StringArrayValue(stringArray);
             }
-
-            return obj;
         }
 
         private object UnitObjectFromObjectType<T>(Type type, T tValue)
         {
-            object obj = null;
-
             if (type == typeof(int))
             {
-                obj = new IntValue((int)Convert.ChangeType(tValue, type));
+                return new IntValue((int)Convert.ChangeType(tValue, type));
             }
             else if (type == typeof(float))
             {
-                obj = new FloatValue((float)Convert.ChangeType(tValue, type));
+                return new FloatValue((float)Convert.ChangeType(tValue, type));
             }
             else if (type == typeof(long))
             {
-                obj = new LongValue((long)Convert.ChangeType(tValue, type));
+                return new LongValue((long)Convert.ChangeType(tValue, type));
             }
             else if (type == typeof(bool))
             {
-                obj = new BoolValue((bool)Convert.ChangeType(tValue, type));
+                return new BoolValue((bool)Convert.ChangeType(tValue, type));
             }
             else if (type == typeof(double))
             {
-                obj = new DoubleValue((double)Convert.ChangeType(tValue, type));
+                return new DoubleValue((double)Convert.ChangeType(tValue, type));
             }
             else if (type == typeof(string))
             {
-                obj = new StringValue((string)Convert.ChangeType(tValue, type));
+                return new StringValue((string)Convert.ChangeType(tValue, type));
             }
             else if (type == typeof(Vector2))
             {
-                obj = new Vector2Value((Vector2)Convert.ChangeType(tValue, type));
+                return new Vector2Value((Vector2)Convert.ChangeType(tValue, type));
             }
             else if (type == typeof(Vector3))
             {
-                obj = new Vector3Value((Vector3)Convert.ChangeType(tValue, type));
+                return new Vector3Value((Vector3)Convert.ChangeType(tValue, type));
             }
             else if (type == typeof(Quaternion))
             {
-                obj = new QuaternionValue((Quaternion)Convert.ChangeType(tValue, type));
+                return new QuaternionValue((Quaternion)Convert.ChangeType(tValue, type));
             }
             else if (type == typeof(Rect))
             {
-                obj = new RectValue((Rect)Convert.ChangeType(tValue, type));
+                return new RectValue((Rect)Convert.ChangeType(tValue, type));
             }
             else if (type == typeof(DateTime))
             {
                 var date = (DateTime)Convert.ChangeType(tValue, type);
-                obj = new LongValue(date.Ticks);
+                return new LongValue(date.Ticks);
             }
             else
             {
-                obj = tValue;
+                return tValue;
             }
-
-            return obj;
         }
 
         #endregion

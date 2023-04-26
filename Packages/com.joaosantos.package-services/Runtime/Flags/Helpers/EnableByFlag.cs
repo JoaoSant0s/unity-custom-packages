@@ -31,6 +31,7 @@ namespace JoaoSant0s.ServicePackage.Flag
 
         private FlagService flagService;
 
+        #region Unity Methods
         private void Start()
         {
             flagService = Services.Get<FlagService>();
@@ -38,6 +39,14 @@ namespace JoaoSant0s.ServicePackage.Flag
 
             StartTrigger();
         }
+
+        private void OnDestroy()
+        {
+            flagService?.RemoveListening(enableFlag);
+        }
+
+        #endregion
+
 
         private void StartTrigger()
         {
@@ -53,17 +62,12 @@ namespace JoaoSant0s.ServicePackage.Flag
 
         private void EnableTarget()
         {
-            target.SetActive(true && !invert);
+            target.SetActive(!invert);
         }
 
         private void DisableTarget()
         {
-            target.SetActive(false || invert);
-        }
-
-        private void OnDestroy()
-        {
-            flagService?.RemoveListening(enableFlag);
+            target.SetActive(invert);
         }
     }
 }
