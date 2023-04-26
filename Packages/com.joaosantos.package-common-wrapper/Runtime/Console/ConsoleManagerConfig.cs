@@ -9,10 +9,11 @@ LICENSE file in the root directory of this source tree.
 using UnityEngine;
 
 namespace JoaoSant0s.CommonWrapper.Console
-{    
+{
+    [CreateAssetMenu(fileName = "ConsoleManagerConfig", menuName = "JoaoSant0s/CommonWrapperPackage/ConsoleManagerConfig")]
     public class ConsoleManagerConfig : CustomScriptableObject<ConsoleManagerConfig>
     {
         [Header("Console Manager Config")]
         public bool IsThreaded;
-    }    
+    }
 }
