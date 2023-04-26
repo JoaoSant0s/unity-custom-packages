@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace JoaoSant0s.CommonWrapper
 {
-    public class VectorWrapper
+    public static class VectorWrapper
     {
         #region Vector 2
 
