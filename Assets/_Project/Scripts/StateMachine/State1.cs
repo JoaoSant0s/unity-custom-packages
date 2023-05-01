@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class State1 : BehaviourState<TesteStateMachine>
 {
+    public override BehaviourComponentTypes SupportedTypes => BehaviourComponentTypes.None;
+
     public State1(TesteStateMachine controller) : base(controller) { }
 
     #region Public Implemented Methods
@@ -13,7 +15,7 @@ public class State1 : BehaviourState<TesteStateMachine>
     public override void OnBeging()
     {
         Debug.Log("OnBeging State1");
-        this.machineController.StartCoroutine(ChangeState());
+        this.stateMachine.StartCoroutine(ChangeState());
     }
 
     public override void OnFixedUpdate() { }
@@ -32,7 +34,7 @@ public class State1 : BehaviourState<TesteStateMachine>
     private IEnumerator ChangeState()
     {
         yield return new WaitForSeconds(3f);
-        ChangeState(new State2(this.machineController));
+        ChangeState(new State2(this.stateMachine));
     }
 
     #endregion

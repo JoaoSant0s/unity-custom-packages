@@ -8,6 +8,8 @@ using JoaoSant0s.StateMachine;
 
 public class State2 : BehaviourState<TesteStateMachine>
 {
+    public override BehaviourComponentTypes SupportedTypes => BehaviourComponentTypes.Update;
+
     public State2(TesteStateMachine controller) : base(controller) { }
 
     #region Public Implemented Methods
@@ -15,7 +17,7 @@ public class State2 : BehaviourState<TesteStateMachine>
     public override void OnBeging()
     {
         Debug.Log("OnBeging State2");
-        this.machineController.StartCoroutine(ChangeState());
+        this.stateMachine.StartCoroutine(ChangeState());
     }
 
     public override void OnFixedUpdate() { }
@@ -34,7 +36,7 @@ public class State2 : BehaviourState<TesteStateMachine>
     private IEnumerator ChangeState()
     {
         yield return new WaitForSeconds(3f);
-        ChangeState(new State1(this.machineController));
+        ChangeState(new State1(this.stateMachine));
     }
 
     #endregion
