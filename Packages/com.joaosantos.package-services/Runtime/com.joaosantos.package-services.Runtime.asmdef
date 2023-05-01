@@ -1,6 +1,6 @@
 {
     "name": "com.joaosantos.package-services.Runtime",
-    "rootNamespace": "",
+    "rootNamespace": "JoaoSant0s.ServicePackage",
     "references": [
         "GUID:d1c97dd0014cbdf4fb63cdad4c842dfb"
     ],
