@@ -32,6 +32,6 @@ namespace JoaoSant0s.ServicePackage.Audio
         {
             return false;
         }
-        
+
     }
 }

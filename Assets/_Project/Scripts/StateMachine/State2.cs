@@ -15,12 +15,12 @@ public class State2 : BehaviourState<TesteStateMachine>
     public override void OnBeging()
     {
         Debug.Log("OnBeging State2");
-        this.machineController.StartCoroutine(ChangeState());
+        this.stateMachine.StartCoroutine(ChangeState());
     }
-
-    public override void OnFixedUpdate() { }
-    public override void OnLateUpdate() { }
-    public override void OnUpdate() { }
+    public override void OnUpdate()
+    {
+        Debug.Log("OnUpdate State2");
+    }
 
     public override void OnFinish()
     {
@@ -33,8 +33,8 @@ public class State2 : BehaviourState<TesteStateMachine>
 
     private IEnumerator ChangeState()
     {
-        yield return new WaitForSeconds(3f);
-        ChangeState(new State1(this.machineController));
+        yield return new WaitForSeconds(1f);
+        ChangeState(new State1(this.stateMachine));
     }
 
     #endregion

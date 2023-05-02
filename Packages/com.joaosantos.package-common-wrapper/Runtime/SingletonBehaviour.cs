@@ -29,7 +29,7 @@ namespace JoaoSant0s.CommonWrapper
 
         protected static void CreateInstance()
         {
-            GameObject obj = new GameObject($"{typeof(T).Name}");
+            GameObject obj = new($"{typeof(T).Name}");
 
             instance = obj.AddComponent<T>();
             instance.Init();

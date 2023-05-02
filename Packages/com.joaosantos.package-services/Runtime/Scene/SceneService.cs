@@ -65,7 +65,7 @@ namespace JoaoSant0s.ServicePackage.Scenes
             OnLoadStarted?.Invoke(sceneName, true);
 
             AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName, mode);
-            asyncLoad.completed += (AsyncOperation operation) => CurrentSceneName = sceneName;
+            asyncLoad.completed += (AsyncOperation _) => CurrentSceneName = sceneName;
             asyncLoad.completed += LoadCompleteAsyncScene;
         }
 

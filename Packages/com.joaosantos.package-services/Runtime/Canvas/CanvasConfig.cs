@@ -20,9 +20,11 @@ namespace JoaoSant0s.ServicePackage.Canvases
     [CreateAssetMenu(fileName = "CanvasConfig", menuName = "JoaoSant0s/ServicePackage/Canvas/CanvasConfig")]
     public class CanvasConfig : CustomScriptableObject<CanvasConfig>
     {
-        [SerializeField] Canvas defaultCanvasPrefab;
+        [SerializeField] 
+        Canvas defaultCanvasPrefab;
 
-        [SerializeField] List<CanvasInfo> canvasInfos;
+        [SerializeField] 
+        List<CanvasInfo> canvasInfos;
 
         public Canvas DefaultCanvasPrefab => defaultCanvasPrefab;
 

@@ -28,8 +28,8 @@ namespace JoaoSant0s.ServicePackage.Audio
             audioSource.Play();
         }
 
-        public override void Stop() 
-        { 
+        public override void Stop()
+        {
             audioSource.Stop();
             audioController.UnlockAudioSource(audioSource);
             DisposeAudio?.Invoke(this);
@@ -46,7 +46,7 @@ namespace JoaoSant0s.ServicePackage.Audio
 
         private void ConfigAudioSource()
         {
-            var asset = (LoopAudioAsset) audioAsset;
+            var asset = (LoopAudioAsset)audioAsset;
 
             audioSource.clip = asset.clip;
             audioSource.loop = true;

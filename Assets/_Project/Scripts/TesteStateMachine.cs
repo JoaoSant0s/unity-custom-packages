@@ -6,7 +6,7 @@ using UnityEngine;
 
 using JoaoSant0s.StateMachine;
 
-public class TesteStateMachine : BehaviourStateMachineController<TesteStateMachine>
+public class TesteStateMachine : BehaviourStateMachine<TesteStateMachine>
 {
     private void Start()
     {

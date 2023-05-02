@@ -6,25 +6,18 @@ This source code is licensed under the BSD-style license found in the
 LICENSE file in the root directory of this source tree.
 */
 
+using System;
+
 namespace JoaoSant0s.StateMachine
 {
-    public abstract class BehaviourState<T> where T : BehaviourStateMachineController<T>
+    public abstract class BehaviourState<T> where T : BehaviourStateMachine<T>
     {
-        protected T machineController;
+        protected T stateMachine;
 
-        public BehaviourState(T controller)
-        {
-            this.machineController = controller;
-        }
+        protected BehaviourState(T controller) => this.stateMachine = controller;
 
         public abstract void OnBeging();
-
-        public abstract void OnUpdate();
-
-        public abstract void OnLateUpdate();
-
-        public abstract void OnFixedUpdate();
-
+        public virtual void OnUpdate() { }
         public abstract void OnFinish();
 
         /// <summary>
@@ -33,7 +26,7 @@ namespace JoaoSant0s.StateMachine
         /// <param name="nextState"> the next state object</param>
         protected void ChangeState(BehaviourState<T> nextState)
         {
-            this.machineController.ChangeState(nextState);
+            this.stateMachine.ChangeState(nextState);
         }
     }
 }

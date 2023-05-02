@@ -14,15 +14,12 @@ namespace JoaoSant0s.Extensions.Strings
 {
     public static class StringExtensions
     {
-        private static string[] defaultTagsPrefix = new string[] { "<b", "<i", "<size", "<color" };
-        private static string[] defaultTagsSufix = new string[] { "</b", "</i", "</size", "</color" };
-
         /// <summary>
         /// Add to the string the bold tags: <b>        
         /// </summary>        
         public static string ToBold(this string value)
         {
-            return string.Format("<b>{0}</b>", value);
+            return string.Format($"<b>{value}</b>");
         }
 
         /// <summary>
@@ -30,7 +27,7 @@ namespace JoaoSant0s.Extensions.Strings
         /// </summary>
         public static string ToItalic(this string value)
         {
-            return string.Format("<i>{0}</i>", value);
+            return string.Format($"<i>{value}</i>");
         }
 
         /// <summary>
@@ -39,7 +36,7 @@ namespace JoaoSant0s.Extensions.Strings
         /// <param name="color"> the new color for the text</param>
         public static string ToModifiedColor(this string value, Color color)
         {
-            return string.Format("<color={0}>{1}</color>", color.ToHex(), value);
+            return string.Format($"<color={color.ToHex()}>{value}</color>");
         }
 
         /// <summary>
@@ -48,7 +45,7 @@ namespace JoaoSant0s.Extensions.Strings
         /// <param name="size"> the new size for the text</param>
         public static string ToSize(this string value, int size)
         {
-            return string.Format("<size={0}>{1}</size>", size, value);
+            return string.Format($"<size={size}>{value}</size>");
         }
     }
 }

@@ -1,3 +1,14 @@
 {
-	"name": "com.joaosantos.package-state-machine.Runtime"
+    "name": "com.joaosantos.package-state-machine.Runtime",
+    "rootNamespace": "JoaoSant0s.StateMachine",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

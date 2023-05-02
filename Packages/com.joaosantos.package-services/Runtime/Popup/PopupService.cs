@@ -103,13 +103,13 @@ namespace JoaoSant0s.ServicePackage.Popups
             var popupPrefab = this.prefabs[type];
 
             var canvas = this.canvasService.GetCanvas(popupPrefab.CanvasId);
-            return CreatePopup<T>(popupPrefab, ((RectTransform)canvas.transform));
+            return CreatePopup<T>(popupPrefab, (RectTransform)canvas.transform);
         }
 
         private T PreparePopup<T>(Popup popupPrefab) where T : Popup
         {
             var canvas = this.canvasService.GetCanvas(popupPrefab.CanvasId);
-            return CreatePopup<T>(popupPrefab, ((RectTransform)canvas.transform));
+            return CreatePopup<T>(popupPrefab, (RectTransform)canvas.transform);
         }
 
         private T PreparePopup<T>(RectTransform overridePopupArea) where T : Popup
@@ -144,7 +144,7 @@ namespace JoaoSant0s.ServicePackage.Popups
             if (!instantiatedPopups.ContainsKey(type)) return;
 
             instantiatedPopups[type].Remove(popup);
-            if (instantiatedPopups[type].Count <= 0) instantiatedPopups.Remove(type);
+            if (instantiatedPopups[type].Count == 0) instantiatedPopups.Remove(type);
         }
 
         #endregion

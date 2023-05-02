@@ -22,7 +22,7 @@ namespace JoaoSant0s.ServicePackage.Screens
         private string canvasId;
 
         public string CanvasId => canvasId;
-        
+
         protected abstract void OnPrepare();
         protected abstract void OnRelease();
 
