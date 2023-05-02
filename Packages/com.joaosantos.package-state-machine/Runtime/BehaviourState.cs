@@ -14,26 +14,11 @@ namespace JoaoSant0s.StateMachine
     {
         protected T stateMachine;
 
-        public abstract BehaviourComponentTypes SupportedTypes { get; }
+        protected BehaviourState(T controller) => this.stateMachine = controller;
 
-        public BehaviourState(T controller)
-        {
-            this.stateMachine = controller;
-        }
-
-        public virtual void OnBeging() { }
-
-        #region Update Functions
-
+        public abstract void OnBeging();
         public virtual void OnUpdate() { }
-
-        public virtual void OnLateUpdate() { }
-
-        public virtual void OnFixedUpdate() { }
-
-        #endregion
-
-        public virtual void OnFinish() { }
+        public abstract void OnFinish();
 
         /// <summary>
         /// Make the current state machine go to the next state

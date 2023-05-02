@@ -6,8 +6,6 @@ using UnityEngine;
 
 public class State1 : BehaviourState<TesteStateMachine>
 {
-    public override BehaviourComponentTypes SupportedTypes => BehaviourComponentTypes.None;
-
     public State1(TesteStateMachine controller) : base(controller) { }
 
     #region Public Implemented Methods
@@ -18,9 +16,10 @@ public class State1 : BehaviourState<TesteStateMachine>
         this.stateMachine.StartCoroutine(ChangeState());
     }
 
-    public override void OnFixedUpdate() { }
-    public override void OnLateUpdate() { }
-    public override void OnUpdate() { }
+    public override void OnUpdate()
+    {
+        Debug.Log("OnUpdate State1");
+    }
 
     public override void OnFinish()
     {
