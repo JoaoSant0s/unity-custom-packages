@@ -13,7 +13,6 @@ using JoaoSant0s.CommonWrapper;
 namespace JoaoSant0s.ServicePackage.Save
 {
     [CreateAssetMenu(fileName = "SaveLocalConfig", menuName = "JoaoSant0s/ServicePackage/Save/SaveLocalConfig")]
-
     public class SaveLocalConfig : CustomScriptableObject<SaveLocalConfig>
     {
         [Header("Save Local Config")]

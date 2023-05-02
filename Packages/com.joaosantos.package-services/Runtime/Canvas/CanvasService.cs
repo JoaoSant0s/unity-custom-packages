@@ -27,7 +27,7 @@ namespace JoaoSant0s.ServicePackage.Canvases
         public override void OnInit()
         {
             config = CanvasConfig.Get();
-            this.canvases = new Dictionary<string, Canvas>();
+            canvases = new Dictionary<string, Canvas>();
             CreateCanvases();
         }
 

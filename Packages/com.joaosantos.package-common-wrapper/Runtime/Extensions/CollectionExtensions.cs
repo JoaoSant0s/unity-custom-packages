@@ -80,7 +80,7 @@ namespace JoaoSant0s.Extensions.Collections
 
         private static IEnumerable<T> Subset<T>(this ICollection<T> collection, int start, int end)
         {
-            return collection.Where((c, index) => start <= index && index < end);
+            return collection.Where((_, index) => start <= index && index < end);
         }
     }
 }

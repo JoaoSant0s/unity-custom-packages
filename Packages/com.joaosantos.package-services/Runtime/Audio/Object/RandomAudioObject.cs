@@ -16,7 +16,7 @@ namespace JoaoSant0s.ServicePackage.Audio
     {
         private AudioSource audioSource;
 
-        public RandomAudioObject(AudioSourceController controller, RandomAudioAsset asset) : base(controller, asset){ }
+        public RandomAudioObject(AudioSourceController controller, RandomAudioAsset asset) : base(controller, asset) { }
 
         #region Public Methods
 
@@ -37,8 +37,8 @@ namespace JoaoSant0s.ServicePackage.Audio
             Stop();
         }
 
-        public override void Stop() 
-        { 
+        public override void Stop()
+        {
             audioSource.Stop();
             audioController.UnlockAudioSource(audioSource);
             DisposeAudio?.Invoke(this);
@@ -50,7 +50,7 @@ namespace JoaoSant0s.ServicePackage.Audio
 
         private void ConfigAudioSource()
         {
-            var asset = (RandomAudioAsset) audioAsset;
+            var asset = (RandomAudioAsset)audioAsset;
 
             audioSource.clip = asset.clips.Random();
             audioSource.volume = asset.volume;
