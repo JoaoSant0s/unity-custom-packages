@@ -1,6 +1,6 @@
 {
   "name": "com.joaosantos.package-state-machine",
-  "version": "4.0.0",
+  "version": "5.0.0",
   "displayName": "JS State Machine",
   "description": "A base structure to build a simple state machine",
   "unity": "2020.3",
