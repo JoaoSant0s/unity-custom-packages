@@ -1,10 +1,11 @@
 {
-    "name": "com.joaosantos.package-custom-variables.Runtime.Tests",
+    "name": "com.joaosantos.package-services.Runtime.Tests",
     "rootNamespace": "",
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
-        "com.joaosantos.package-custom-variables.Runtime"
+        "com.joaosantos.package-services.Runtime",
+        "com.joaosantos.package-common-wrapper.Runtime"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

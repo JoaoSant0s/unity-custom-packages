@@ -26,6 +26,16 @@ namespace JoaoSant0s.ServicePackage.Flag
         #endregion
 
         /// <summary>
+        /// Return the State of the flag asset. If was not used yet, will return the state Nono
+        /// </summary>
+        /// <param name="asset"> flag to be verifyed</param>
+        public FlagState State(FlagAsset asset)
+        {
+            if (!flagDictionary.ContainsKey(asset)) return FlagState.None;
+            return flagDictionary[asset].State;
+        }
+
+        /// <summary>
         /// Raise a flag asset
         /// </summary>
         /// <param name="asset"> flag to be raised </param>
