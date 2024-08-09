@@ -19,7 +19,7 @@ namespace JoaoSant0s.ServicePackage.Pool
     {
         private PoolConfig config;
 
-        private Dictionary<PoolInfo, List<PoolBase>> poolDictionary;
+        private Dictionary<PoolInfo, List<PoolBehaviour>> poolDictionary;
 
         #region Override Methods
 
@@ -39,7 +39,7 @@ namespace JoaoSant0s.ServicePackage.Pool
         /// <param name="position"> position to spawn the element </param>        
         /// <param name="indexOrdering"> selection of an extra prefab of a specific Type. Default value: 0</param>
         /// <param name="parent"> parent to spawn the element. Default value: null</param>
-        public T Get<T>(Vector3 position, Transform parent, int indexOrdering = 0) where T : PoolBase
+        public T Get<T>(Vector3 position, Transform parent, int indexOrdering = 0) where T : PoolBehaviour
         {
             Debug.Assert(parent != null, "You must define a transform parent to move the object of the DontDestroyOnLoadScene");
             var instance = GetValidElement<T>(indexOrdering);
@@ -58,7 +58,7 @@ namespace JoaoSant0s.ServicePackage.Pool
         /// <param name="quaternion"> quaternion to spawn the element </param>
         /// <param name="indexOrdering"> selection of an extra prefab of a specific Type. Default value: 0 </param>
         /// <param name="parent"> parent to spawn the element. Default value: null</param>
-        public T Get<T>(Vector3 position, Quaternion quaternion, Transform parent, int indexOrdering = 0) where T : PoolBase
+        public T Get<T>(Vector3 position, Quaternion quaternion, Transform parent, int indexOrdering = 0) where T : PoolBehaviour
         {
             Debug.Assert(parent != null, "You must define a transform parent to move the object of the DontDestroyOnLoadScene");
             var instance = GetValidElement<T>(indexOrdering);
@@ -77,7 +77,7 @@ namespace JoaoSant0s.ServicePackage.Pool
 
         private void Setup()
         {
-            poolDictionary = new Dictionary<PoolInfo, List<PoolBase>>();
+            poolDictionary = new Dictionary<PoolInfo, List<PoolBehaviour>>();
 
             foreach (var item in config.PoolConfigDictionary)
             {
@@ -87,7 +87,7 @@ namespace JoaoSant0s.ServicePackage.Pool
 
         private void CreatePoolDictionary(PoolInfo info)
         {
-            poolDictionary[info] = new List<PoolBase>();
+            poolDictionary[info] = new List<PoolBehaviour>();
 
             for (int i = 0; i < info.startPoolAmount; i++)
             {
@@ -95,7 +95,7 @@ namespace JoaoSant0s.ServicePackage.Pool
             }
         }
 
-        private T GetValidElement<T>(int indexOrdering) where T : PoolBase
+        private T GetValidElement<T>(int indexOrdering) where T : PoolBehaviour
         {
             var tuple = poolDictionary.FirstOrDefault(element =>
             {
@@ -117,7 +117,7 @@ namespace JoaoSant0s.ServicePackage.Pool
             return instance;
         }
 
-        private T GetElementFromList<T>(List<PoolBase> pool) where T : PoolBase
+        private T GetElementFromList<T>(List<PoolBehaviour> pool) where T : PoolBehaviour
         {
             T instance = null;
 
@@ -130,13 +130,17 @@ namespace JoaoSant0s.ServicePackage.Pool
             return instance;
         }
 
-        private PoolBase CreatePoolElement(PoolInfo info, bool restore = true)
+        private PoolBehaviour CreatePoolElement(PoolInfo info, bool restore = true)
         {
             var poolElement = Instantiate(info.prefab, transform);
             ResetPoolElement(info, poolElement);
-            poolElement.DisposePoolElement += ReturnToPool;
+            poolElement.DisposePoolBehaviour += ReturnToPool;
 
-            if (!IsPoolFull(info) && restore) poolDictionary[info].Add(poolElement);
+            if (!IsPoolFull(info) && restore)
+            {
+                poolElement.IndexOrdering = info.indexOrdering;
+                poolDictionary[info].Add(poolElement);
+            }
 
             return poolElement;
         }
@@ -150,12 +154,12 @@ namespace JoaoSant0s.ServicePackage.Pool
             return amount >= maxAmount;
         }
 
-        private void ReturnToPool(PoolBase pool)
+        private void ReturnToPool(PoolBehaviour pool)
         {
             var tuple = poolDictionary.FirstOrDefault(element =>
             {
                 var checkType = element.Key.prefab.GetType() == pool.GetType();
-                var checkOrdering = pool.indexOrdering == element.Key.indexOrdering;
+                var checkOrdering = pool.IndexOrdering == element.Key.indexOrdering;
 
                 return checkType && checkOrdering;
             });
@@ -172,12 +176,12 @@ namespace JoaoSant0s.ServicePackage.Pool
             ResetPoolElement(tuple.Key, pool);
         }
 
-        private void ResetPoolElement(PoolInfo info, PoolBase pool)
+        private void ResetPoolElement(PoolInfo info, PoolBehaviour pool)
         {
             pool.gameObject.SetActive(false);
             pool.transform.SetParent(transform);
             pool.transform.position = info.outsidePosition;
-            pool.indexOrdering = info.indexOrdering;
+            pool.IndexOrdering = info.indexOrdering;
         }
 
         #endregion

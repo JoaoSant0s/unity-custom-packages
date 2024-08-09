@@ -6,7 +6,7 @@ using UnityEngine;
 using JoaoSant0s.ServicePackage.Pool;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class TestPoolElement : PoolBase
+public class TestPoolElement : PoolBehaviour
 {
     [SerializeField]
     private float delayToHide;

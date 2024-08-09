@@ -23,9 +23,9 @@ namespace JoaoSant0s.ServicePackage.Pool
         [SerializeField]
         private PoolInfo[] poolBaseInfos;
 
-        private Dictionary<PoolBase, PoolInfo> poolDictionary;
+        private Dictionary<PoolBehaviour, PoolInfo> poolDictionary;
 
-        public Dictionary<PoolBase, PoolInfo> PoolConfigDictionary
+        public Dictionary<PoolBehaviour, PoolInfo> PoolConfigDictionary
         {
             get
             {
@@ -42,7 +42,7 @@ namespace JoaoSant0s.ServicePackage.Pool
     [Serializable]
     public struct PoolInfo
     {
-        public PoolBase prefab;
+        public PoolBehaviour prefab;
 
         [Header("Settings")]
         public int startPoolAmount;
