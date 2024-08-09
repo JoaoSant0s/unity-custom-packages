@@ -24,6 +24,17 @@ namespace JoaoSant0s.ServicePackage.Flag.Tests
         }
 
         [Test]
+        public void NotInitializedFlagState()
+        {
+            var flagAsset = ScriptableObject.CreateInstance<FlagAsset>();
+            var flagService = Services.Get<FlagService>();
+
+            var state = flagService.GetState(flagAsset);
+
+            Assert.AreEqual(FlagState.None, state, "The state must be None (Not Initialized)");
+        }
+
+        [Test]
         public void SetRaiseState()
         {
             var flagAsset = ScriptableObject.CreateInstance<FlagAsset>();
@@ -31,9 +42,9 @@ namespace JoaoSant0s.ServicePackage.Flag.Tests
             var flagService = Services.Get<FlagService>();
             flagService.Raise(flagAsset);
 
-            var stsate = flagService.State(flagAsset);
+            var state = flagService.GetState(flagAsset);
 
-            Assert.AreEqual(FlagState.Raise, stsate, "Must be a Raise state");
+            Assert.AreEqual(FlagState.Raise, state, "Must be a Raise state");
         }
 
         [Test]
@@ -44,9 +55,9 @@ namespace JoaoSant0s.ServicePackage.Flag.Tests
             var flagService = Services.Get<FlagService>();
             flagService.Lower(flagAsset);
 
-            var stsate = flagService.State(flagAsset);
+            var state = flagService.GetState(flagAsset);
 
-            Assert.AreEqual(FlagState.Lower, stsate, "Must be a Lower state");
+            Assert.AreEqual(FlagState.Lower, state, "Must be a Lower state");
         }
 
         [TestCase(FlagState.Lower)]
@@ -63,9 +74,9 @@ namespace JoaoSant0s.ServicePackage.Flag.Tests
             else if (testState == FlagState.Lower)
                 flagService.Lower(flagAsset);
 
-            var stsate = flagService.State(flagAsset);
+            var state = flagService.GetState(flagAsset);
 
-            Assert.AreEqual(testState, stsate, "Must Have the same state");
+            Assert.AreEqual(testState, state, "Must Have the same state");
         }
     }
 }
