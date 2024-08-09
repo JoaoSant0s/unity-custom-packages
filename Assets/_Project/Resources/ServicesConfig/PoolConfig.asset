@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 311049c68aa3bcd43aea5ad6c11c499b, type: 3}
   m_Name: PoolConfig
   m_EditorClassIdentifier: 
+  priority: 0
   poolBaseInfos:
   - prefab: {fileID: 6618037721417705418, guid: 07aa4694d059a18449ab9de4e4317192, type: 3}
     startPoolAmount: 5
