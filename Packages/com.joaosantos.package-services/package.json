@@ -1,6 +1,6 @@
 {
   "name": "com.joaosantos.package-services",
-  "version": "2.10.1",
+  "version": "3.0.0",
   "displayName": "JS Services",
   "description": "A list of auxiliary Services to make the game development faster. The services are created in Runtime when called. Audio, Popup, Save, Routines, Flags and etc.",
   "unity": "2020.3",
@@ -24,6 +24,6 @@
     "email": "ricardoelric@gmail.com"
   },
   "dependencies": {
-    "com.joaosantos.package-common-wrapper": "2.7.0"
+    "com.joaosantos.package-common-wrapper": "2.7.2"
   }
 }
