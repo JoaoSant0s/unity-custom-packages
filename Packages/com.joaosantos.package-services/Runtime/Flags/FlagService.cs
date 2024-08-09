@@ -17,7 +17,7 @@ namespace JoaoSant0s.ServicePackage.Flag
 {
     public class FlagService : Service
     {
-        private readonly Dictionary<FlagAsset, FlagObject> flagDictionary = new();
+        protected readonly Dictionary<FlagAsset, FlagObject> flagDictionary = new();
 
         #region Override Methods
 
@@ -26,15 +26,25 @@ namespace JoaoSant0s.ServicePackage.Flag
         #endregion
 
         /// <summary>
+        /// Return the State of the flag asset. If was not used yet, will return the state Nono
+        /// </summary>
+        /// <param name="asset"> flag to be verifyed</param>
+        public FlagState GetState(FlagAsset asset)
+        {
+            InitFlagObject(asset);
+            return flagDictionary[asset].State;
+        }
+
+        /// <summary>
         /// Raise a flag asset
         /// </summary>
         /// <param name="asset"> flag to be raised </param>
         public void Raise(FlagAsset asset)
         {
-            if (!flagDictionary.ContainsKey(asset)) return;
+            InitFlagObject(asset);
             if (flagDictionary[asset].State == FlagState.Raise) return;
 
-            flagDictionary[asset].State = FlagState.Raise;
+            flagDictionary[asset].SetState(FlagState.Raise);
         }
 
         /// <summary>
@@ -43,22 +53,10 @@ namespace JoaoSant0s.ServicePackage.Flag
         /// <param name="asset"> flag to be lowered </param>
         public void Lower(FlagAsset asset)
         {
-            if (!flagDictionary.ContainsKey(asset)) return;
+            InitFlagObject(asset);
             if (flagDictionary[asset].State == FlagState.Lower) return;
 
-            flagDictionary[asset].State = FlagState.Lower;
-        }
-
-        /// <summary>
-        /// Create an event listener to specific flag
-        /// </summary>
-        /// <param name="asset"> flag reference asset </param>
-        /// <param name="raiseEvent"> raise event after flag raised </param>
-        /// <param name="lowerEvent"> lower event after flag lowered </param>
-        public void AddListening(FlagAsset asset, UnityEvent raiseEvent, UnityEvent lowerEvent)
-        {
-            var flagObject = new FlagEventObject(FlagState.None, raiseEvent, lowerEvent);
-            flagDictionary.Add(asset, flagObject);
+            flagDictionary[asset].SetState(FlagState.Lower);
         }
 
         /// <summary>
@@ -67,100 +65,132 @@ namespace JoaoSant0s.ServicePackage.Flag
         /// <param name="asset"> flag reference asset </param>
         /// <param name="raiseEvent"> raise action after flag raised </param>
         /// <param name="lowerEvent"> lower action after flag lowered </param>
-        public void AddListening(FlagAsset asset, UnityAction raiseEvent, UnityAction lowerEvent)
+        public void AddListening(FlagAsset asset, FlagAction action)
         {
-            var flagObject = new FlagActionObject(FlagState.None, raiseEvent, lowerEvent);
-            flagDictionary.Add(asset, flagObject);
+            InitFlagObject(asset);
+
+            flagDictionary[asset].AddAction(action);
         }
 
         /// <summary>
         /// Remove all listenings from the asset
         /// </summary>
         /// <param name="asset"> flag asset to remove all listenings </param>
-        public void RemoveListening(FlagAsset asset)
+        public void RemoveListening(FlagAsset asset, FlagAction action)
         {
             if (!flagDictionary.ContainsKey(asset)) return;
-            flagDictionary.Remove(asset);
+
+            flagDictionary[asset].RemoveAction(action);
+        }
+
+        private void InitFlagObject(FlagAsset asset)
+        {
+            if (flagDictionary.ContainsKey(asset)) return;
+            flagDictionary.Add(asset, new FlagObject(FlagState.None));
         }
     }
 
     [Serializable]
     public class FlagObject
     {
-        protected FlagState state;
+        protected List<FlagAction> flagActions;
 
-        public FlagState State
-        {
-            get
-            {
-                return state;
-            }
-            set
-            {
-                state = value;
-
-                if (state == FlagState.Raise)
-                {
-                    Raise();
-                }
-                else if (state == FlagState.Lower)
-                {
-                    Lower();
-                }
-            }
-        }
+        public FlagState State { get; protected set; }
 
         public FlagObject(FlagState state)
         {
-            this.state = state;
+            flagActions = new();
+            SetState(state);
         }
 
-        protected virtual void Raise() { }
+        internal void AddAction(FlagAction action)
+        {
+            flagActions.Add(action);
+        }
 
-        protected virtual void Lower() { }
+        internal void RemoveAction(FlagAction action)
+        {
+            flagActions.Remove(action);
+        }
+
+        internal void SetState(FlagState state)
+        {
+            State = state;
+            if (State == FlagState.Raise)
+            {
+                Raise();
+            }
+            else if (State == FlagState.Lower)
+            {
+                Lower();
+            }
+        }
+
+        protected void Raise()
+        {
+            for (int i = flagActions.Count - 1; i >= 0; i--)
+            {
+                flagActions[i].Raise();
+            }
+        }
+
+        protected void Lower()
+        {
+            for (int i = flagActions.Count - 1; i >= 0; i--)
+            {
+                flagActions[i].Lower();
+            }
+        }
+    }
+
+    public interface FlagAction
+    {
+        public void Raise();
+
+        public void Lower();
     }
 
     [Serializable]
-    public class FlagEventObject : FlagObject
+    public class FlagEventObject : FlagAction
     {
         public UnityEvent raiseEvent;
         public UnityEvent lowerEvent;
 
-        public FlagEventObject(FlagState state, UnityEvent raiseEvent, UnityEvent lowerEvent) : base(state)
+        public FlagEventObject(UnityEvent raiseEvent, UnityEvent lowerEvent)
         {
             this.raiseEvent = raiseEvent;
             this.lowerEvent = lowerEvent;
         }
 
-        protected override void Raise()
+        public void Raise()
         {
             this.raiseEvent?.Invoke();
         }
 
-        protected override void Lower()
+        public void Lower()
         {
             this.lowerEvent?.Invoke();
         }
     }
 
     [Serializable]
-    public class FlagActionObject : FlagObject
+    public class FlagActionObject : FlagAction
     {
         public UnityAction raiseAction;
         public UnityAction lowerAction;
 
-        public FlagActionObject(FlagState state, UnityAction raiseAction, UnityAction lowerAction) : base(state)
+        public FlagActionObject(UnityAction raiseAction, UnityAction lowerAction)
         {
             this.raiseAction = raiseAction;
             this.lowerAction = lowerAction;
         }
 
-        protected override void Raise()
+        public void Raise()
         {
             this.raiseAction?.Invoke();
         }
 
-        protected override void Lower()
+        public void Lower()
         {
             this.lowerAction?.Invoke();
         }

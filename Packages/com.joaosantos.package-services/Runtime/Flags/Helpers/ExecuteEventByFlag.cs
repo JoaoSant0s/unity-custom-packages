@@ -32,19 +32,26 @@ namespace JoaoSant0s.ServicePackage.Flag
 
         private FlagService flagService;
 
+        private FlagEventObject flagEvent;
+
         #region Unity Methods
+
+        private void Awake()
+        {
+            flagService = Services.Get<FlagService>();
+            flagEvent = new(raiseEvent, lowerEvent);
+
+            flagService.AddListening(enableFlag, flagEvent);
+        }
 
         private void Start()
         {
-            flagService = Services.Get<FlagService>();
-            flagService.AddListening(enableFlag, raiseEvent, lowerEvent);
-
             StartTrigger();
         }
 
         private void OnDestroy()
         {
-            flagService.RemoveListening(enableFlag);
+            flagService.RemoveListening(enableFlag, flagEvent);
         }
 
         #endregion

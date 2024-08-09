@@ -10,17 +10,17 @@ using UnityEngine;
 
 namespace JoaoSant0s.ServicePackage.Pool
 {
-    public abstract class PoolBase : MonoBehaviour
+    public abstract class PoolBehaviour : MonoBehaviour
     {
-        internal delegate void OnDisposePoolElement(PoolBase element);
-        internal OnDisposePoolElement DisposePoolElement;
+        internal delegate void OnDisposePoolElement(PoolBehaviour element);
+        internal OnDisposePoolElement DisposePoolBehaviour;
 
-        internal int indexOrdering;
+        public int IndexOrdering { get; internal set; }
 
         public void Dispose()
         {
             OnDispose();
-            DisposePoolElement?.Invoke(this);
+            DisposePoolBehaviour?.Invoke(this);
         }
 
         public void Show()
