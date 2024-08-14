@@ -20,8 +20,8 @@ namespace JoaoSant0s.ServicePackage.Popups
     public class PopupService : Service
     {
         private PopupConfig config;
-        private Dictionary<Type, List<Popup>> instantiatedPopups;
-        private Dictionary<Type, Popup> prefabs;
+        private Dictionary<Type, List<PopupBehaviour>> instantiatedPopups;
+        private Dictionary<Type, PopupBehaviour> prefabs;
         private CanvasService canvasService;
 
         #region Override Methods
@@ -30,7 +30,7 @@ namespace JoaoSant0s.ServicePackage.Popups
         {
             config = PopupConfig.Get();
             this.canvasService = Services.Get<CanvasService>();
-            this.instantiatedPopups = new Dictionary<Type, List<Popup>>();
+            this.instantiatedPopups = new Dictionary<Type, List<PopupBehaviour>>();
             this.prefabs = config.popupPrefabs.ToDictionary(prefab => prefab.GetType(), prefab => prefab);
         }
 
@@ -41,7 +41,7 @@ namespace JoaoSant0s.ServicePackage.Popups
         /// <summary>
         /// Instantiate a popup of a specific Type
         /// </summary>        
-        public T Show<T>() where T : Popup
+        public T Show<T>() where T : PopupBehaviour
         {
             return PreparePopup<T>();
         }
@@ -50,7 +50,7 @@ namespace JoaoSant0s.ServicePackage.Popups
         /// You can pass a Popup prefab reference
         /// </summary>
         /// <param name="popupPrefab"> the basePrefab Popup </param>
-        public T Show<T>(T popupPrefab) where T : Popup
+        public T Show<T>(T popupPrefab) where T : PopupBehaviour
         {
             return PreparePopup<T>(popupPrefab);
         }
@@ -59,7 +59,7 @@ namespace JoaoSant0s.ServicePackage.Popups
         /// Instantiate a popup of a specific Type
         /// </summary>
         /// <param name="overridePopupArea"> override the parent of the popup </param>
-        public T Show<T>(RectTransform overridePopupArea) where T : Popup
+        public T Show<T>(RectTransform overridePopupArea) where T : PopupBehaviour
         {
             return PreparePopup<T>(overridePopupArea);
         }
@@ -69,7 +69,7 @@ namespace JoaoSant0s.ServicePackage.Popups
         /// </summary>
         /// <param name="popupPrefab"> the basePrefab Popup </param>
         /// <param name="overridePopupArea"> override the parent of the popup </param>
-        public T Show<T>(T popupPrefab, RectTransform overridePopupArea) where T : Popup
+        public T Show<T>(T popupPrefab, RectTransform overridePopupArea) where T : PopupBehaviour
         {
             return CreatePopup<T>(popupPrefab, overridePopupArea);
         }
@@ -77,7 +77,7 @@ namespace JoaoSant0s.ServicePackage.Popups
         /// <summary>
         /// Check if the popup of type T is a instance
         /// </summary>
-        public bool IsOpened<T>() where T : Popup
+        public bool IsOpened<T>() where T : PopupBehaviour
         {
             return instantiatedPopups.ContainsKey(typeof(T));
         }
@@ -85,7 +85,7 @@ namespace JoaoSant0s.ServicePackage.Popups
         /// <summary>
         /// Get all the popup instances of type T
         /// </summary>
-        public List<T> GetOpenedPopups<T>() where T : Popup
+        public List<T> GetOpenedPopups<T>() where T : PopupBehaviour
         {
             var type = typeof(T);
             return instantiatedPopups.ContainsKey(type) ? instantiatedPopups[type].Select(popup => (T)popup).ToList() : new List<T>();
@@ -95,7 +95,7 @@ namespace JoaoSant0s.ServicePackage.Popups
 
         #region Private Methods
 
-        private T PreparePopup<T>() where T : Popup
+        private T PreparePopup<T>() where T : PopupBehaviour
         {
             var type = typeof(T);
             Debug.Assert(this.prefabs.ContainsKey(type), string.Format("The pop-up {0} wasn't found inside the PopupConfig", typeof(T)));
@@ -106,13 +106,13 @@ namespace JoaoSant0s.ServicePackage.Popups
             return CreatePopup<T>(popupPrefab, (RectTransform)canvas.transform);
         }
 
-        private T PreparePopup<T>(Popup popupPrefab) where T : Popup
+        private T PreparePopup<T>(PopupBehaviour popupPrefab) where T : PopupBehaviour
         {
             var canvas = this.canvasService.GetCanvas(popupPrefab.CanvasId);
             return CreatePopup<T>(popupPrefab, (RectTransform)canvas.transform);
         }
 
-        private T PreparePopup<T>(RectTransform overridePopupArea) where T : Popup
+        private T PreparePopup<T>(RectTransform overridePopupArea) where T : PopupBehaviour
         {
             var type = typeof(T);
             Debug.Assert(this.prefabs.ContainsKey(type), string.Format("The pop-up {0} wasn't found inside the PopupConfig", typeof(T)));
@@ -122,7 +122,7 @@ namespace JoaoSant0s.ServicePackage.Popups
             return CreatePopup<T>(popupPrefab, overridePopupArea);
         }
 
-        private T CreatePopup<T>(Popup popupPrefab, RectTransform popupArea) where T : Popup
+        private T CreatePopup<T>(PopupBehaviour popupPrefab, RectTransform popupArea) where T : PopupBehaviour
         {
             T popup = Instantiate((T)popupPrefab, popupArea, false);
 
@@ -131,14 +131,14 @@ namespace JoaoSant0s.ServicePackage.Popups
             return popup;
         }
 
-        private void AddPopupCounter<T>(T popup) where T : Popup
+        private void AddPopupCounter<T>(T popup) where T : PopupBehaviour
         {
             var type = typeof(T);
-            if (!instantiatedPopups.ContainsKey(type)) instantiatedPopups.Add(typeof(T), new List<Popup>());
+            if (!instantiatedPopups.ContainsKey(type)) instantiatedPopups.Add(typeof(T), new List<PopupBehaviour>());
             instantiatedPopups[type].Add(popup);
         }
 
-        private void RemovePopupCounter<T>(T popup) where T : Popup
+        private void RemovePopupCounter<T>(T popup) where T : PopupBehaviour
         {
             var type = typeof(T);
             if (!instantiatedPopups.ContainsKey(type)) return;

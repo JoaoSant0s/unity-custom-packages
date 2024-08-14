@@ -13,7 +13,7 @@ using JoaoSant0s.ServicePackage.Canvases;
 
 namespace JoaoSant0s.ServicePackage.Popups
 {
-    public abstract class Popup : MonoBehaviour
+    public abstract class PopupBehaviour : MonoBehaviour
     {
         [CanvasIdAttribute]
         [SerializeField]
