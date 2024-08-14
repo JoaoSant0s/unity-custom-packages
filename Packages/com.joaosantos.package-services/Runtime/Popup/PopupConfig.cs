@@ -19,6 +19,6 @@ namespace JoaoSant0s.ServicePackage.Popups
     public class PopupConfig : CustomScriptableObject<PopupConfig>
     {
         [Header("Popup Config")]
-        public Popup[] popupPrefabs;
+        public PopupBehaviour[] popupPrefabs;
     }
 }

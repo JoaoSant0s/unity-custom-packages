@@ -5,7 +5,7 @@ using UnityEngine;
 
 using JoaoSant0s.ServicePackage.Popups;
 
-public class ExternalPopup : Popup
+public class ExternalPopup : PopupBehaviour
 {
 
 }
