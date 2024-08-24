@@ -7,60 +7,27 @@ LICENSE file in the root directory of this source tree.
 */
 
 using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 
-using UnityEngine;
-
-#if UNITY_EDITOR
 using UnityEditor;
-#endif
 
 using JoaoSant0s.ServicePackage.Canvases;
+using JoaoSant0s.CommonWrapper.GUIDrawerEditor;
 
 namespace JoaoSant0s.ServicePackage.CanvasesEditor
 {
-
-#if UNITY_EDITOR
     [CustomPropertyDrawer(typeof(CanvasIdAttribute))]
-    public class CanvasIdAttributeDrawer : PropertyDrawer
+    public class CanvasIdAttributeDrawer : CustomIdAttributeDrawer
     {
-        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        protected override string[] Options
         {
-            if (property.propertyType != SerializedPropertyType.String)
+            get
             {
-                base.OnGUI(position, property, label);
-                return;
+                var options = new List<string>() { "-empty-" };
+                return options.Concat(CanvasConfig.Get().Ids).ToArray();
             }
-            EditorGUI.BeginProperty(position, label, property);
-
-            position = EditorGUI.PrefixLabel(position, GUIUtility.GetControlID(FocusType.Passive), label);
-            if (EditorGUI.DropdownButton(position, new GUIContent(property.stringValue), FocusType.Passive))
-            {
-                GenericMenu menu = new GenericMenu();
-                string[] options = CanvasConfig.Get().Ids;
-
-                CreateOptionMenu(menu, "-empty-", property);
-
-                foreach (var option in options)
-                {
-                    CreateOptionMenu(menu, option, property);
-                }
-                menu.DropDown(position);
-            }
-            EditorGUI.EndProperty();
-        }
-
-        private void CreateOptionMenu(GenericMenu menu, string option, SerializedProperty property)
-        {
-            string temp = option;
-            menu.AddItem(new GUIContent(temp), temp == property.stringValue,
-                (o) =>
-                {
-                    property.stringValue = (string)o;
-                    property.serializedObject.ApplyModifiedProperties();
-                }, temp);
         }
     }
-#endif
 
 }
