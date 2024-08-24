@@ -17,7 +17,7 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "com.joaosantos.package-common-wrapper": "2.7.2"
+        "com.joaosantos.package-common-wrapper": "2.8.0"
       }
     },
     "com.joaosantos.package-state-machine": {
