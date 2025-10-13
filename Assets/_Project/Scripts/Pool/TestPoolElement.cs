@@ -25,7 +25,7 @@ public class TestPoolElement : PoolBehaviour
 
     protected override void OnDispose()
     {
-        rb2d.velocity = Vector2.zero;
+        rb2d.linearVelocity = Vector2.zero;
     }
 
     protected override void OnShow()

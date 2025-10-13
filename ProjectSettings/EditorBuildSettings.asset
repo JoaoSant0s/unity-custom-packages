@@ -6,6 +6,10 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/_Project/Scenes/ScreenSamples.unity
+    guid: 0e0ef954b7feaf6439a7c066817a1ff9
+  - enabled: 0
     path: Assets/_Project/Scenes/AudioAndFlagSamples.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0
