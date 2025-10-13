@@ -17,3 +17,4 @@ MonoBehaviour:
   screenPrefabs:
   - {fileID: 260022854552533545, guid: c708ace931c3d724e90bb5e61364e8fb, type: 3}
   - {fileID: 4264582297834665517, guid: 3f42590089078e54781ba827e98d2cbc, type: 3}
+  - {fileID: 1288284708395365258, guid: 804b5ef0be09fcc4880348816826f923, type: 3}

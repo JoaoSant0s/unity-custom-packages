@@ -6,6 +6,37 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/_Project/Scenes/Boot.unity
+    guid: 9738f147655b8af4dade9c9bc14ffbed
+  - enabled: 1
+    path: Assets/_Project/Scenes/ScreenSamples.unity
+    guid: 0e0ef954b7feaf6439a7c066817a1ff9
+  - enabled: 1
     path: Assets/_Project/Scenes/AudioAndFlagSamples.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/_Project/Scenes/CustomVariableSample.unity
+    guid: 18893764261149a46ac5f1e1e11284d0
+  - enabled: 1
+    path: Assets/_Project/Scenes/DebugSample.unity
+    guid: 9610624482be5fd43b32316f207e61e2
+  - enabled: 1
+    path: Assets/_Project/Scenes/PoolSample.unity
+    guid: ca5645b8b6716884f972f6fef0518c86
+  - enabled: 1
+    path: Assets/_Project/Scenes/PopupSamples.unity
+    guid: b208c18c0ac7ba14d9ba4590e1b3ffef
+  - enabled: 1
+    path: Assets/_Project/Scenes/RoutineSample.unity
+    guid: 7e789658930edde4c846b2b395ddbf62
+  - enabled: 1
+    path: Assets/_Project/Scenes/SaveSample.unity
+    guid: 4f5328a32dacfc24b95700541f3a48f6
+  - enabled: 1
+    path: Assets/_Project/Scenes/SceneSamples.unity
+    guid: 1a8eae198d8b2714d993aaf292f48532
+  - enabled: 1
+    path: Assets/_Project/Scenes/StateMachineSample.unity
+    guid: 9e3cb0d0c901a414ba4ad8ce8af7c1b6
   m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0

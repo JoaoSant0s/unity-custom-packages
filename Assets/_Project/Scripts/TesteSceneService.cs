@@ -20,23 +20,44 @@ public class TesteSceneService : MonoBehaviour
     [SerializeField]
     private LoadSceneMode mode;
 
+    private SceneService sceneService;
+
+    private void Awake()
+    {
+        sceneService = Services.Get<SceneService>();
+    }
+
     private void Start()
     {
-        var service = Services.Get<SceneService>();
-
-        service.OnLoadStarted += (string sceneName, bool isAsync) => { Debugs.Log("OnLoadStarted", sceneName, isAsync); };
-        service.OnSceneLoaded += (Scene scene, LoadSceneMode mode) => { Debugs.Log("OnSceneLoaded", scene, mode); };
-        service.OnActiveSceneChanged += (Scene current, Scene next) => { Debugs.Log("OnActiveSceneChanged", current, next); };
-        service.OnSceneUnloaded += (Scene current) => { Debugs.Log("OnSceneUnloaded", current); };
-        service.OnLoadCompleteAsyncScene += (AsyncOperation operation) => { Debugs.Log("OnLoadCompleteAsyncScene", operation); };
+        sceneService.OnLoadStarted += LoadStarted;
+        sceneService.OnSceneLoaded += OnSceneLoaded;
+        sceneService.OnActiveSceneChanged += OnActiveSceneChanged;
+        sceneService.OnSceneUnloaded += OnSceneUnloaded;
+        sceneService.OnLoadCompleteAsyncScene += OnLoadCompleteAsyncScene;
 
         if (isLoadAsync)
         {
-            service.LoadAsync(sceneName, mode);
+            sceneService.LoadAsync(sceneName, mode);
         }
         else
         {
-            service.Load(sceneName, mode);
+            sceneService.Load(sceneName, mode);
         }
     }
+
+    private void OnDestroy()
+    {
+        sceneService.OnLoadStarted -= LoadStarted;
+        sceneService.OnSceneLoaded -= OnSceneLoaded;
+        sceneService.OnActiveSceneChanged -= OnActiveSceneChanged;
+        sceneService.OnSceneUnloaded -= OnSceneUnloaded;
+        sceneService.OnLoadCompleteAsyncScene -= OnLoadCompleteAsyncScene;
+    }
+
+    private void LoadStarted(string sceneName, bool isAsync) => Debugs.Log("OnLoadStarted", sceneName, isAsync);
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode) => Debugs.Log("OnSceneLoaded", scene, mode);
+    private void OnActiveSceneChanged(Scene current, Scene next) => Debugs.Log("OnActiveSceneChanged", current, next);
+    private void OnSceneUnloaded(Scene current) => Debugs.Log("OnSceneUnloaded", current);
+    private void OnLoadCompleteAsyncScene(AsyncOperation operation) => Debugs.Log("OnLoadCompleteAsyncScene", operation);
+
 }
