@@ -28,13 +28,13 @@ namespace JoaoSant0s.ServicePackage.Screens
 
         #region Public Methods
 
-        public void Release()
+        internal void Release()
         {
             OnRelease();
             Destroy(gameObject);
         }
 
-        public void Prepare()
+        internal void Prepare()
         {
             OnPrepare();
         }

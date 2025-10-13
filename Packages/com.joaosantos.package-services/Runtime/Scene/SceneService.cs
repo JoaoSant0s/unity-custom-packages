@@ -69,6 +69,22 @@ namespace JoaoSant0s.ServicePackage.Scenes
             asyncLoad.completed += LoadCompleteAsyncScene;
         }
 
+        public string[] GetAvailableSceneNames()
+        {
+            int sceneCountInBuild = SceneManager.sceneCountInBuildSettings;
+
+            string[] scenes = new string[sceneCountInBuild];
+
+            for (int i = 0; i < sceneCountInBuild; i++)
+            {
+                string scenePath = SceneUtility.GetScenePathByBuildIndex(i);
+                string sceneName = System.IO.Path.GetFileNameWithoutExtension(scenePath);
+                scenes[i] = sceneName;
+            }
+
+            return scenes;
+        }
+
         #endregion
 
         #region Private Methods
