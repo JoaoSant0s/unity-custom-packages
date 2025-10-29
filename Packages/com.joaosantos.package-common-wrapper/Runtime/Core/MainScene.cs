@@ -20,7 +20,7 @@ namespace JoaoSant0s.CommonWrapper.Scenes
 
         protected virtual void Start()
         {
-            var size = FindObjectsOfType<MainScene>().Length;
+            var size = FindObjectsByType<MainScene>(FindObjectsSortMode.None).Length;
             Debug.Assert(size == 1, "Should only count one instance of the class");
             InitComponents();
         }
