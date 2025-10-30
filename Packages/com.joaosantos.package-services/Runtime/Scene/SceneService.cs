@@ -14,12 +14,14 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 using JoaoSant0s.ServicePackage.General;
+using System.Threading.Tasks;
 
 namespace JoaoSant0s.ServicePackage.Scenes
 {
     public class SceneService : Service
     {
-        public event Action<string, bool> OnLoadStarted;
+        public event Action<string> OnLoadStarted;
+        public event Action<string> OnLoadAsyncStarted;
         public event Action<Scene, LoadSceneMode> OnSceneLoaded;
         public event Action<Scene, Scene> OnActiveSceneChanged;
         public event Action<Scene> OnSceneUnloaded;
@@ -49,7 +51,7 @@ namespace JoaoSant0s.ServicePackage.Scenes
         /// <param name="mode"> load scene mode. Default is Single </param>
         public void Load(string sceneName, LoadSceneMode mode = LoadSceneMode.Single)
         {
-            OnLoadStarted?.Invoke(sceneName, false);
+            OnLoadStarted?.Invoke(sceneName);
 
             SceneManager.LoadScene(sceneName, mode);
             CurrentSceneName = sceneName;
@@ -60,15 +62,28 @@ namespace JoaoSant0s.ServicePackage.Scenes
         /// </summary>
         /// <param name="sceneName"> the scene name </param>
         /// <param name="mode"> load scene mode. Default is Single </param>
-        public void LoadAsync(string sceneName, LoadSceneMode mode = LoadSceneMode.Single)
+        /// <param name="allowSceneActivation"> Allow Scenes to be activated as soon as it is ready. Default is true </param>
+        public async Task<AsyncOperation> LoadAsync(string sceneName, LoadSceneMode mode = LoadSceneMode.Single, bool allowSceneActivation = true)
         {
-            OnLoadStarted?.Invoke(sceneName, true);
+            OnLoadAsyncStarted?.Invoke(sceneName);
+            await Task.Yield();
 
             AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName, mode);
-            asyncLoad.completed += (AsyncOperation _) => CurrentSceneName = sceneName;
-            asyncLoad.completed += LoadCompleteAsyncScene;
+            asyncLoad.allowSceneActivation = allowSceneActivation;
+
+            asyncLoad.completed += _ => CurrentSceneName = sceneName;
+            asyncLoad.completed += operation =>
+            {
+                if (!allowSceneActivation) asyncLoad.allowSceneActivation = true;
+                LoadCompleteAsyncScene(operation);
+            };
+
+            return asyncLoad;
         }
 
+        /// <summary>
+        /// Get All Available Scenes inside the Build Settings and listin order
+        /// </summary>
         public string[] GetAvailableSceneNames()
         {
             int sceneCountInBuild = SceneManager.sceneCountInBuildSettings;

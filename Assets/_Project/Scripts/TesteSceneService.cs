@@ -30,6 +30,7 @@ public class TesteSceneService : MonoBehaviour
     private void Start()
     {
         sceneService.OnLoadStarted += LoadStarted;
+        sceneService.OnLoadAsyncStarted += OnLoadAsyncStarted;
         sceneService.OnSceneLoaded += OnSceneLoaded;
         sceneService.OnActiveSceneChanged += OnActiveSceneChanged;
         sceneService.OnSceneUnloaded += OnSceneUnloaded;
@@ -48,13 +49,15 @@ public class TesteSceneService : MonoBehaviour
     private void OnDestroy()
     {
         sceneService.OnLoadStarted -= LoadStarted;
+        sceneService.OnLoadAsyncStarted -= OnLoadAsyncStarted;
         sceneService.OnSceneLoaded -= OnSceneLoaded;
         sceneService.OnActiveSceneChanged -= OnActiveSceneChanged;
         sceneService.OnSceneUnloaded -= OnSceneUnloaded;
         sceneService.OnLoadCompleteAsyncScene -= OnLoadCompleteAsyncScene;
     }
 
-    private void LoadStarted(string sceneName, bool isAsync) => Debugs.Log("OnLoadStarted", sceneName, isAsync);
+    private void LoadStarted(string sceneName) => Debugs.Log("OnLoadStarted", sceneName, false);
+    private void OnLoadAsyncStarted(string sceneName) => Debugs.Log("OnLoadStarted", sceneName, true);    
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode) => Debugs.Log("OnSceneLoaded", scene, mode);
     private void OnActiveSceneChanged(Scene current, Scene next) => Debugs.Log("OnActiveSceneChanged", current, next);
     private void OnSceneUnloaded(Scene current) => Debugs.Log("OnSceneUnloaded", current);
