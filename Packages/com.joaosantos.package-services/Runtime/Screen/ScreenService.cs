@@ -102,8 +102,8 @@ namespace JoaoSant0s.ServicePackage.Screens
         private T CreateScreen<T>(T screenPrefab, RectTransform area) where T : BaseScreen
         {
             previous = current;
-            if (config.debugLog) Debug.Log($"Moving {previous?.GetType()} to {typeof(T)}");
             current = Instantiate<T>(screenPrefab as T, area, false);
+            if (config.debugLog) Debug.Log($"Moving {previous?.GetType()} to {current.GetType()}");
 
             current.Prepare();
             previous?.Release();

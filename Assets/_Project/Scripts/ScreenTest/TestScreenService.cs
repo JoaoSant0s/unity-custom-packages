@@ -1,11 +1,8 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using UnityEngine;
+
 using JoaoSant0s.CommonWrapper;
 using JoaoSant0s.ServicePackage.General;
 using JoaoSant0s.ServicePackage.Screens;
-using UnityEngine;
-using UnityEngine.UI;
 
 namespace Namespace
 {
@@ -15,10 +12,15 @@ namespace Namespace
         private RectTransform internalScreen;
         private ScreenService screenService;
 
-        void Start()
+        private void Start()
         {
             screenService = Services.Get<ScreenService>();
             screenService.OnScreenChanged += ScreenChanged;
+        }
+
+        private void OnDestroy()
+        {
+            screenService.OnScreenChanged -= ScreenChanged;
         }
 
         private void ScreenChanged(BaseScreen arg1, BaseScreen arg2)

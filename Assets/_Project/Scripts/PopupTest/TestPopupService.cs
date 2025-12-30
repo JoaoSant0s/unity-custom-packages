@@ -49,7 +49,7 @@ public class TestPopupService : MonoBehaviour
 
     public void ShowReferenceInternalPopup()
     {
-        var popup = popupService.Show<InternalPopup>(internalPopup, (RectTransform)internalReferencePopupArea);
+        var popup = popupService.Show(internalPopup, (RectTransform)internalReferencePopupArea);
         popup.OnBeforeClose += () => { Debug.Log("Closing Internal Popup"); };
     }
 

@@ -17,31 +17,40 @@ public class TestRoutineService : MonoBehaviour
 
     private int counter;
 
-    void Awake()
+    private List<Coroutine> coroutines;
+
+    private void Awake()
     {
+        coroutines = new();
         routineService = Services.Get<RoutineService>();
         Debug.Log("Execute the function after 5 seconds");
 
-        routineService.WaitTimeThenDo(5, () =>
+        coroutines.Add(routineService.WaitTimeThenDo(5, () =>
         {
             Debug.Log("Executed after 5 seconds");
             condition = true;
-        });
+        }));
 
         Debug.Log("Checking when condition will be true");
 
-        routineService.WaitUntilThenDo(() => condition, () =>
+        coroutines.Add(routineService.WaitUntilThenDo(() => condition, () =>
         {
             Debug.Log("Executed if condition true");
             condition2 = true;
-        });
+        }));
 
         Debug.Log("Checking when condition will be true");
 
-        routineService.RepeatActionUntilDuringIntervalTime(() =>
+        coroutines.Add(routineService.RepeatActionUntilDuringIntervalTime(() =>
         {
             Debugs.Log("Repeat action", counter);
             counter++;
-        }, () => condition2, 1, WaitRoutineOptions.SkipFrame);
+        }, () => condition2, 1, WaitRoutineOptions.SkipFrame));   
+        
+    }
+
+    private void OnDestroy()
+    {
+        routineService.Stop(coroutines);
     }
 }

@@ -7,7 +7,7 @@ using JoaoSant0s.ServicePackage.Flag;
 
 using JoaoSant0s.CommonWrapper;
 
-public class TestService : MonoBehaviour
+public class TestFlagService : MonoBehaviour
 {
     [SerializeField]
     private FlagAsset assetFlag;

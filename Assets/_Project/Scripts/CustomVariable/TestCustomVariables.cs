@@ -35,6 +35,13 @@ namespace Namespace
             stringVariable.Value = "Teste 2";
         }
 
+        private void OnDestroy()
+        {
+            floatVariable.RemoveChangeListener(OnValueChanged);
+            intVariable.RemoveChangeListener(OnValueChanged);
+            stringVariable.RemoveChangeListener(OnValueChanged);
+        }
+
         private void OnValueChanged(float previous, float newValue)
         {
             Debugs.Log(previous, newValue);
