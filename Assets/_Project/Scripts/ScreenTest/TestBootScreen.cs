@@ -23,17 +23,20 @@ public class TestBootScreen : BaseScreen
     {
         var sceneService = Services.Get<SceneService>();
         var screenService = Services.Get<ScreenService>();
+        var packageService = Services.Get<PackageService>();
 
         var scenesName = sceneService.GetAvailableSceneNames();
 
         for (int i = 0; i < scenesName.Length; i++)
         {
             var sceneName = scenesName[i];
+            if (packageService.IsStartScene(sceneName)) continue;
+
             var button = Instantiate(baseButton, content);
 
             button.onClick.AddListener(() =>
             {
-                sceneService.Load(sceneName, LoadSceneMode.Single);
+                sceneService.Load(sceneName);
                 screenService.CloseScreen();
             });
 

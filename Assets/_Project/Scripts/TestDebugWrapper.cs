@@ -91,6 +91,11 @@ public class TestDebugWrapper : MonoBehaviour
         Debugs.DrawRectangle(new Vector2(-10, -10), -30, -20, Color.blue, 20, axisType: DrawAxisType.XZ);
     }
 
+    void OnDestroy()
+    {
+        console.OnLogAdded -= OnLogAdded;
+    }
+
     private void OnLogAdded(LogObject log)
     {
         consoleText.text += $"{log.type.ToString()} - {log.logString} \n\n";

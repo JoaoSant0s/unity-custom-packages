@@ -58,9 +58,9 @@ public class TesteSceneService : MonoBehaviour
 
     private void LoadStarted(string sceneName) => Debugs.Log("OnLoadStarted", sceneName, false);
     private void OnLoadAsyncStarted(string sceneName) => Debugs.Log("OnLoadStarted", sceneName, true);    
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode) => Debugs.Log("OnSceneLoaded", scene, mode);
-    private void OnActiveSceneChanged(Scene current, Scene next) => Debugs.Log("OnActiveSceneChanged", current, next);
-    private void OnSceneUnloaded(Scene current) => Debugs.Log("OnSceneUnloaded", current);
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode) => Debugs.Log("OnSceneLoaded", scene.name, mode);
+    private void OnActiveSceneChanged(Scene current, Scene next) => Debugs.Log("OnActiveSceneChanged", current.name, next.name);
+    private void OnSceneUnloaded(Scene current) => Debugs.Log("OnSceneUnloaded", current.name);
     private void OnLoadCompleteAsyncScene(AsyncOperation operation) => Debugs.Log("OnLoadCompleteAsyncScene", operation);
 
 }

@@ -126,7 +126,7 @@ namespace JoaoSant0s.ServicePackage.Popups
         {
             T popup = Instantiate((T)popupPrefab, popupArea, false);
 
-            AddPopupCounter<T>(popup);
+            AddPopupCounter(popup);
             popup.OnBeforeClose += () => RemovePopupCounter<T>(popup);
             return popup;
         }
